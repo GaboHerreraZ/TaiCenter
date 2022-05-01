@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "taicenter": {
+      "hosting": {
+        "TaiCenter": [
+          "taicenter"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "taicenter"
+  }
+}

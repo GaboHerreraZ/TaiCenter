@@ -1,0 +1,56 @@
+<div class="container">
+  <p-card>
+    <h3>Bienvenidos a TaiCenter</h3>
+    <div class="card-container">
+      <div class="input-login">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText autocomplete="off" />
+          <label for="float-input">Usuario</label>
+        </span>
+        <span class="p-float-label">
+          <input id="float-input" type="password" pInputText />
+          <label for="float-input">Contraseña</label>
+        </span>
+        <button
+          pButton
+          pRipple
+          type="button"
+          class="p-button-rounded btn-h btn-primary"
+          label="Acceder"
+          icon="pi pi-user"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          class="p-button-rounded btn-h btn-secondary"
+          label="Registrarse"
+          icon="pi pi-user-edit"
+          routerLink="/registro"
+        ></button>
+      </div>
+      <p-divider class="divider-v" layout="vertical">Ó</p-divider>
+      <p-divider class="divider-h" align="center" layout="horizontal"
+        >Ó</p-divider
+      >
+      <div class="button-social">
+        <button
+          pButton
+          pRipple
+          type="button"
+          class="p-button-rounded btn-h btn-google"
+          label="Google"
+          icon="pi pi-google"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          class="p-button-rounded btn-h"
+          label="Facebook"
+          icon="pi pi-facebook"
+        ></button>
+      </div>
+    </div>
+  </p-card>
+</div>

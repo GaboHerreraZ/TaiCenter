@@ -1,0 +1,143 @@
+<div class="container">
+  <p-card>
+    <p>
+      A continuación es necesario que ingrese los datos para crear tu perfil en
+      Tai Center
+    </p>
+    <div class="register-container">
+      <div class="perfil">
+        <figure>
+          <img class="img-size" [src]="imageUrl" />
+        </figure>
+        <label class="perfil-label">
+          <input
+            type="file"
+            name="file"
+            #fileInput
+            (change)="myUploader(fileInput)"
+          />
+          Agregar foto
+        </label>
+      </div>
+      <form [formGroup]="formGroup">
+        <p-divider layout="horizontal">
+          <h4>Datos Personales</h4>
+        </p-divider>
+        <div class="form-personal">
+          <span class="p-float-label">
+            <input
+              formControlName="name"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Nombre</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="lastName"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Apellidos</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="number"
+              pInputText
+              autocomplete="off"
+              formControlName="age"
+            />
+            <label for="float-input">Edad</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="phoneNumber"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Teléfono</label>
+          </span>
+          <span class="p-float-label">
+            <p-dropdown
+              inputId="dropdown"
+              [autoDisplayFirst]="false"
+              [options]="gender"
+              optionLabel="name"
+              formControlName="gender"
+            ></p-dropdown>
+            <label for="dropdown">Género</label>
+          </span>
+        </div>
+        <p-divider layout="horizontal">
+          <h4>Datos de contacto</h4>
+        </p-divider>
+        <div class="form-personal">
+          <span class="p-float-label">
+            <input
+              formControlName="email"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Correo</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="repeatEmail"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Confirmar correo</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="password"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Contraseña</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="repeatPassword"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Confirmar contraseña</label>
+          </span>
+        </div>
+        <div class="form-button">
+          <button
+            pButton
+            pRipple
+            type="button"
+            class="p-button-rounded btn-h btn-primary"
+            label="Guardar"
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            class="p-button-rounded btn-h btn-secondary"
+            label="Regresar"
+            routerLink="/login"
+          ></button>
+        </div>
+      </form>
+    </div>
+  </p-card>
+</div>

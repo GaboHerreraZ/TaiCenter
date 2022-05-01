@@ -1,0 +1,81 @@
+:host {
+  ::ng-deep .fieldset-custom {
+    border: 1px solid black;
+    &::ng-deep.p-fieldset-legend {
+      border: 1px solid #ce5505;
+      & a {
+        color: #ce5505;
+        font-weight: 700;
+        &:focus {
+          box-shadow: 0 0 0 0.1rem #ce5505;
+        }
+      }
+    }
+  }
+  ::ng-deep .large {
+    width: 7rem;
+    height: 7rem;
+  }
+}
+.register-container {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-content: center;
+  gap: 20px;
+  justify-content: center;
+}
+.perfil {
+  text-align: center;
+}
+
+.img-size {
+  border-radius: 100%;
+  width: 116px;
+  height: 116px;
+}
+
+figure {
+  margin: 0;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.perfil-label {
+  font-size: 11x;
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover {
+    color: #ce5505;
+  }
+}
+
+.form-personal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+h4 {
+  margin: 0;
+}
+
+.form-button {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 100px;
+}
+
+::ng-deep .p-card .p-card-body {
+  padding: 2rem;
+}
+
+@media (max-width: 600px) {
+  .register-container {
+    grid-template-columns: 1fr;
+  }
+}

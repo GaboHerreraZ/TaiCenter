@@ -1,0 +1,42 @@
+:host {
+  ::ng-deep .p-card {
+    padding: 20px;
+    text-align: center;
+  }
+  .card-container {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr;
+  }
+
+  .button-social {
+    display: grid;
+    gap: 30px;
+    align-content: center;
+  }
+
+  .input-login {
+    display: grid;
+    gap: 30px;
+  }
+  .divider-v {
+    display: block;
+  }
+
+  .divider-h {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .card-container {
+      grid-template-columns: 1fr;
+    }
+
+    .divider-v {
+      display: none;
+    }
+
+    .divider-h {
+      display: block;
+    }
+  }
+}

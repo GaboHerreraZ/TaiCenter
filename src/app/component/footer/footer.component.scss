@@ -1,0 +1,56 @@
+@import "variable";
+
+.footer-container {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  background-image: url("../../../assets/img/tai-center-footer-1024x403.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 1;
+  background-size: cover;
+
+  &-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-around;
+    padding-bottom: 20px;
+
+    .footer-social-media {
+      text-align: center;
+      ::ng-deep .pi-instagram {
+        color: white;
+        font-size: 2rem;
+      }
+    }
+
+    .footer-address {
+      text-align: center;
+    }
+  }
+}
+
+::ng-deep .divider {
+  &.p-divider-horizontal {
+    color: red;
+    margin: 0;
+
+    &:before {
+      border-top: 1px red;
+    }
+  }
+}
+
+.footer-bottom {
+  text-align: center;
+}
+
+@media (max-width: 780px) {
+  .footer-container {
+    &-body {
+      grid-template-columns: 1fr;
+      justify-content: center;
+      align-content: center;
+    }
+  }
+}
