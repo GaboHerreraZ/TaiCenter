@@ -1,5 +1,3 @@
-@import "variable";
-
 .footer-container {
   position: relative;
   bottom: 0;
@@ -27,16 +25,27 @@
     .footer-address {
       text-align: center;
     }
+
+    .footer-description {
+      text-align: center;
+      img {
+        width: 150px;
+      }
+      P {
+        text-align: center;
+        padding: 0 50px;
+      }
+    }
   }
 }
 
 ::ng-deep .divider {
   &.p-divider-horizontal {
-    color: red;
+    color: var(--color-text-principal);
     margin: 0;
 
     &:before {
-      border-top: 1px red;
+      border-top: 1px solid var(--color-text-principal);
     }
   }
 }

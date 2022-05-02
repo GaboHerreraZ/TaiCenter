@@ -4,5 +4,21 @@
   background-repeat: no-repeat;
   z-index: 1;
   background-size: cover;
-  height: 700px;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+
+  &-container {
+    text-align: center;
+
+    img {
+      width: 350px;
+    }
+  }
+}
+
+.content-secondary {
+  width: 460px;
+  font-family: var(--font-family-secondary);
 }

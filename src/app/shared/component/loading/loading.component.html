@@ -1,0 +1,9 @@
+<div class="loading-container" *ngIf="loadingService.loading$ | async">
+  <div>
+    <img src="../../../../assets/icons/tai-center-logo-third.svg" />
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+    ></p-progressBar>
+  </div>
+</div>

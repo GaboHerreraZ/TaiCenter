@@ -2,19 +2,37 @@
 
 body {
   margin: 0;
+  font-family: var(--font-family-secondary);
+  font-size: var(--size-content-small);
+}
+
+.s-25 {
+  font-size: var(--size-content);
 }
 
 .container {
   display: grid;
-  align-content: center;
   justify-content: center;
-  height: 100vh;
+  text-align: center;
+  margin: 10px 10px;
 }
 
 .title {
   color: var(--color-text-principal);
   margin: 0;
-  padding: 10px 0;
+}
+
+.hard-title {
+  font-family: var(--font-family-secondary);
+  color: black;
+}
+
+.text-style-principal {
+  font-family: var(--font-family-principal);
+}
+
+.mt-10 {
+  margin-top: 10px !important;
 }
 
 .title-secondary {
@@ -30,15 +48,18 @@ body {
   border: 1px solid var(--color-text-principal) !important;
 }
 
+.btn-social {
+  font-family: var(--font-family-secondary) !important;
+}
+
 .btn-google:focus {
   box-shadow: 0 0 0 0.1rem var(--color-text-principal) !important;
 }
 
 .btn-primary {
   background: var(--color-text-principal) !important;
-  color: black !important;
-  font-weight: 700 !important;
   border: 1px solid var(--color-text-principal) !important;
+  font-family: var(--font-family-secondary) !important;
 
   &:focus {
     box-shadow: 0 0 0 0.1rem var(--color-text-principal) !important;
@@ -47,16 +68,22 @@ body {
 
 .btn-secondary {
   background: black !important;
-  color: var(--color-text-principal) !important;
   border: 1px solid black !important;
+  font-family: var(--font-family-secondary) !important;
 
   &:focus {
     box-shadow: 0 0 0 0.1rem black !important;
   }
 }
 
+.p-float-label label {
+  font-family: var(--font-family-principal) !important;
+}
+
 .p-inputtext {
   width: 100%;
+  font-family: var(--font-family-principal) !important;
+
   &:enabled:hover {
     border-color: var(--color-text-principal) !important;
   }
@@ -83,4 +110,5 @@ body {
   color: var(--color-text-content);
   margin: 0;
   padding: 5px 0;
+  text-align: center;
 }

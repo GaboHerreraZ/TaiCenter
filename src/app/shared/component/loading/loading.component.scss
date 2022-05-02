@@ -1,0 +1,21 @@
+::ng-deep .p-progressbar .p-progressbar-value {
+  background: var(--color-text-principal);
+}
+
+.loading-container {
+  background: rgba(0, 38, 132, 0.4);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-container img {
+  display: block;
+  align-self: flex-end;
+  justify-content: center;
+  width: 350px;
+}

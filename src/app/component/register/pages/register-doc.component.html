@@ -1,15 +1,16 @@
 <div class="container">
+  <h5 class="hard-title s-25">Registro</h5>
   <p-card>
-    <p>
+    <p class="text-style-principal">
       A continuación es necesario que ingrese los datos para crear tu perfil en
-      Tai Center
+      Tai Center.
     </p>
     <div class="register-container">
       <div class="perfil">
         <figure>
           <img class="img-size" [src]="imageUrl" />
         </figure>
-        <label class="perfil-label">
+        <label class="perfil-label text-style-principal">
           <input
             type="file"
             name="file"
@@ -21,19 +22,21 @@
       </div>
       <form [formGroup]="formGroup">
         <p-divider layout="horizontal">
-          <h4>Datos Personales</h4>
+          <h4 class="hard-title">Datos Personales</h4>
         </p-divider>
         <div class="form-personal">
           <span class="p-float-label">
             <input
               formControlName="name"
-              id="float-input"
+              id="name"
               type="text"
               pInputText
               autocomplete="off"
+              aria-describedby="name"
             />
-            <label for="float-input">Nombre</label>
+            <label for="name">Nombre</label>
           </span>
+
           <span class="p-float-label">
             <input
               formControlName="lastName"
@@ -76,7 +79,7 @@
           </span>
         </div>
         <p-divider layout="horizontal">
-          <h4>Datos de contacto</h4>
+          <h4 class="hard-title">Datos de contacto</h4>
         </p-divider>
         <div class="form-personal">
           <span class="p-float-label">
@@ -127,6 +130,7 @@
             type="button"
             class="p-button-rounded btn-h btn-primary"
             label="Guardar"
+            (click)="save()"
           ></button>
           <button
             pButton
@@ -134,7 +138,7 @@
             type="button"
             class="p-button-rounded btn-h btn-secondary"
             label="Regresar"
-            routerLink="/login"
+            routerLink="/tc/login"
           ></button>
         </div>
       </form>

@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterDocComponent } from './register-doc.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { PrimeModule } from 'src/app/shared/modules/prime/prime.module';
 import { CustomCommonModule } from 'src/app/shared/modules/custom-common/custom-common.module';
+const registerRoutes: Routes = [
+  {
+    path: '',
+    component: RegisterDocComponent,
+  },
+];
 
 @NgModule({
   declarations: [RegisterDocComponent],
@@ -11,12 +17,7 @@ import { CustomCommonModule } from 'src/app/shared/modules/custom-common/custom-
     CommonModule,
     PrimeModule,
     CustomCommonModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: RegisterDocComponent,
-      },
-    ]),
+    RouterModule.forChild(registerRoutes),
   ],
   exports: [RegisterDocComponent],
 })

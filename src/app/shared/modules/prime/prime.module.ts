@@ -9,6 +9,8 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { AvatarModule } from 'primeng/avatar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
+import { ProgressBarModule } from 'primeng/progressbar';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -22,6 +24,7 @@ import { DropdownModule } from 'primeng/dropdown';
     AvatarModule,
     FileUploadModule,
     DropdownModule,
+    ProgressBarModule,
   ],
   exports: [
     MenubarModule,
@@ -34,6 +37,7 @@ import { DropdownModule } from 'primeng/dropdown';
     AvatarModule,
     FileUploadModule,
     DropdownModule,
+    ProgressBarModule,
   ],
 })
 export class PrimeModule {}

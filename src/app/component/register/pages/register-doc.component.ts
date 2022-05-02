@@ -50,4 +50,6 @@ export class RegisterDocComponent implements OnInit {
       repeatPassword: [null, Validators.required],
     });
   }
+
+  save() {}
 }
