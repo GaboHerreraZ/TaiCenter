@@ -19,6 +19,7 @@
           class="p-button-rounded btn-h btn-primary"
           label="Acceder"
           icon="pi pi-user"
+          (click)="login()"
         ></button>
         <button
           pButton
@@ -42,6 +43,7 @@
           class="p-button-rounded btn-h btn-google btn-social"
           label="Google"
           icon="pi pi-google"
+          (click)="loginGoogle()"
         ></button>
         <button
           pButton
@@ -50,6 +52,7 @@
           class="p-button-rounded btn-h btn-social"
           label="Facebook"
           icon="pi pi-facebook"
+          (click)="loginFacebook()"
         ></button>
       </div>
     </div>

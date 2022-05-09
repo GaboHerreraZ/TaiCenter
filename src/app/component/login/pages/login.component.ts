@@ -1,7 +1,7 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import firebase from 'firebase/compat/app';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, public auth: AngularFireAuth) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {}
 
@@ -17,11 +17,16 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['persona']);
   }
 
+  loginGoogle() {
+    this.loginService.loginGoogle();
+  }
+
+  loginFacebook() {
+    this.loginService.loginFacebook();
+  }
+
   login() {
-    this.auth
-      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then((c) => {
-        console.log('c', c);
-      });
+    //TODO WHEN ALL IS OK, GO TO PERSONA
+    this.router.navigate(['tc/persona']);
   }
 }

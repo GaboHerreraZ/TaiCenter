@@ -18,6 +18,13 @@ export const AppHomeRoutes: Routes = [
             (r) => r.RegisterDocModule
           ),
       },
+      {
+        path: 'persona',
+        loadChildren: () =>
+          import('../person/pages/person-doc/person-doc.module').then(
+            (p) => p.PersonDocModule
+          ),
+      },
     ],
   },
 ];

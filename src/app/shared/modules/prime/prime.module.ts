@@ -10,6 +10,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [],
@@ -25,6 +27,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
     FileUploadModule,
     DropdownModule,
     ProgressBarModule,
+    TableModule,
+    ToolbarModule,
   ],
   exports: [
     MenubarModule,
@@ -38,6 +42,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
     FileUploadModule,
     DropdownModule,
     ProgressBarModule,
+    TableModule,
+    ToolbarModule,
   ],
 })
 export class PrimeModule {}

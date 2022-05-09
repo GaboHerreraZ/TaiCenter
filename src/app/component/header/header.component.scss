@@ -4,21 +4,19 @@
   background-repeat: no-repeat;
   z-index: 1;
   background-size: cover;
-  height: 100vh;
   display: grid;
-  justify-content: center;
+  height: 100vh;
   align-content: center;
+  padding-bottom: 10px;
 
+  img {
+    width: 60%;
+  }
   &-container {
     text-align: center;
-
-    img {
-      width: 350px;
-    }
   }
 }
 
 .content-secondary {
-  width: 460px;
   font-family: var(--font-family-secondary);
 }
