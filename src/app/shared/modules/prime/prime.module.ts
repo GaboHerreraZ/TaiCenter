@@ -12,6 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     ProgressBarModule,
     TableModule,
     ToolbarModule,
+    ToastModule,
   ],
   exports: [
     MenubarModule,
@@ -44,6 +46,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     ProgressBarModule,
     TableModule,
     ToolbarModule,
+    ToastModule,
   ],
 })
 export class PrimeModule {}

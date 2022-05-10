@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingModule } from './shared/component/loading/loading.module';
+import { NotificationModule } from './shared/component/notification/notification.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -19,6 +20,7 @@ import { LoadingModule } from './shared/component/loading/loading.module';
     LoadingModule,
     RouterModule.forRoot(AppRoutes, { useHash: true }),
     AngularFireModule.initializeApp(environment.firebase),
+    NotificationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

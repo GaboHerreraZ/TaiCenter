@@ -25,6 +25,13 @@ export const AppHomeRoutes: Routes = [
             (p) => p.PersonDocModule
           ),
       },
+      {
+        path: 'calendario',
+        loadChildren: () =>
+          import('../calendar/pages/calendar-doc/calendar.module').then(
+            (c) => c.CalendarDocModule
+          ),
+      },
     ],
   },
 ];

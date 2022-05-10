@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-person',
@@ -49,7 +50,7 @@ export class PersonDocComponent implements OnInit {
 
   cols: any[];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     console.log('persona');
@@ -90,7 +91,9 @@ export class PersonDocComponent implements OnInit {
 
   save() {}
 
-  reservar() {}
+  reservar() {
+    this.router.navigate(['tc/calendario']);
+  }
 
   delete(row: any) {}
 }
