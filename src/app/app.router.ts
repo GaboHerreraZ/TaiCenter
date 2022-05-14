@@ -4,12 +4,12 @@ export const AppRoutes: Routes = [
   {
     path: 'tc',
     loadChildren: () =>
-      import('../app/component/home/home.module').then((m) => m.HomeModule),
+      import('./component/root/root.module').then((m) => m.RootModule),
   },
   {
     path: 'inicio',
     loadChildren: () =>
-      import('./component/header/header.module').then((m) => m.HeaderModule),
+      import('./component/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: '',

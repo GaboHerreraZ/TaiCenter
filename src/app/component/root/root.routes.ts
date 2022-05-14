@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home.component';
+import { RootComponent } from './root.component';
 
 export const AppHomeRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: RootComponent,
     children: [
       {
         path: 'login',

@@ -13,6 +13,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [],
@@ -31,6 +34,9 @@ import { ToastModule } from 'primeng/toast';
     TableModule,
     ToolbarModule,
     ToastModule,
+    DialogModule,
+    ColorPickerModule,
+    TooltipModule,
   ],
   exports: [
     MenubarModule,
@@ -47,6 +53,9 @@ import { ToastModule } from 'primeng/toast';
     TableModule,
     ToolbarModule,
     ToastModule,
+    DialogModule,
+    ColorPickerModule,
+    TooltipModule,
   ],
 })
 export class PrimeModule {}

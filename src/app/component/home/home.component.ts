@@ -6,9 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  back = {
+    'background-color': 'black',
+  };
+
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('home component');
-  }
+  ngOnInit(): void {}
 }

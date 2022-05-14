@@ -1,7 +1,89 @@
-.header-login {
-  background-color: black;
-  text-align: center;
+.header {
+  background-image: url("../../../assets/img/tai-center-header.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 1;
+  background-size: cover;
+  display: grid;
+  align-content: center;
+  padding-bottom: 10px;
+  height: 100vh;
+
   img {
-    width: 30%;
+    width: 60%;
+  }
+  &-container {
+    text-align: center;
+  }
+}
+
+.content-secondary {
+  font-family: var(--font-family-secondary);
+}
+
+.plan-container {
+  text-align: center;
+  padding: 0 50px;
+
+  &-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+::ng-deep .p-card .p-card-content {
+  padding: 0;
+}
+
+::ng-deep .p-card-title {
+  font-family: var(--font-family-secondary);
+  color: var(--color-text-principal);
+}
+
+::ng-deep .p-card .p-card-subtitle {
+  font-family: var(--font-family-principal);
+  color: var(--color-text-content-secondary);
+}
+
+::ng-deep .p-card-header img {
+  height: 90px;
+  width: 129px !important;
+}
+
+.fs-50 {
+  font-size: 50px;
+}
+
+.class {
+  background-color: var(--color-text-content-secondary);
+  font-family: var(--font-family-principal);
+  color: var(--color-text-principal);
+  border-radius: 3px;
+  padding: 10px 10px;
+  h4 {
+    margin: 0;
+    font-weight: 900;
+  }
+}
+
+@media (max-width: 900px) {
+  .plan-container {
+    padding: 0 20px;
+
+    &-cards {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .plan-container {
+    padding: 0 10px;
+
+    &-cards {
+      grid-template-columns: 1fr;
+    }
   }
 }

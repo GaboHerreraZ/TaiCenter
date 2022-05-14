@@ -117,3 +117,8 @@ body {
   padding: 5px 0;
   text-align: center;
 }
+
+.ng-touched:not(form) {
+  border: solid #e60017;
+  border-width: 1px 1px 1px 3px;
+}

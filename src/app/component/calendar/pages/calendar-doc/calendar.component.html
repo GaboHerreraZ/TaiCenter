@@ -1,13 +1,14 @@
+<app-class-editor (classValue)="setClass()"></app-class-editor>
+
 <div class="container-calendar">
   <p-card>
     <mwl-calendar-week-view
       [viewDate]="viewDate"
       [events]="events"
       [hourDuration]="60"
-      [dayEndHour]="20"
+      [dayEndHour]="24"
       [dayStartHour]="7"
       [hourSegments]="1"
-      [refresh]="refresh"
       [locale]="locale"
       [weekStartsOn]="weekStartsOn"
       [excludeDays]="excludeDays"
@@ -15,5 +16,73 @@
       (eventClicked)="eventClicked($event)"
     >
     </mwl-calendar-week-view>
+  </p-card>
+
+  <p-card>
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+        <button
+          pButton
+          pRipple
+          label="Nuevo"
+          icon="pi pi-plus"
+          class="p-button-rounded btn-h btn-primary"
+          (click)="newEvent()"
+        ></button>
+      </ng-template>
+    </p-toolbar>
+    <p-table
+      [columns]="cols"
+      [value]="recurringEvents"
+      responsiveLayout="stack"
+      styleClass="p-datatable-sm"
+      [paginator]="true"
+      [rows]="10"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <h5 class="title-2 m-0">Clases configuradas</h5>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr class="title-2">
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr class="title-2">
+          <td>
+            {{ rowData["title"] }}
+          </td>
+          <td>
+            <input type="color" />
+          </td>
+          <td>
+            <input type="color" />
+          </td>
+          <td>
+            {{ rowData["rrule"].byweekday | day }}
+          </td>
+          <td>
+            {{ rowData["date"].start | CustomDate }}
+          </td>
+          <td>
+            {{ rowData["date"].end | CustomDate }}
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-warning"
+              (click)="delete(rowData)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </p-card>
 </div>

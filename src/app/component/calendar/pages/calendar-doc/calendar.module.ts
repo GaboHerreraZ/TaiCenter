@@ -7,14 +7,19 @@ import { RouterModule } from '@angular/router';
 import { PrimeModule } from 'src/app/shared/modules/prime/prime.module';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { CustomDatePipe } from 'src/app/shared/pipes/date.pipe';
+import { DayPipe } from 'src/app/shared/pipes/day.pipe';
+import { ClassEditorComponent } from '../class-editor/class-editor.component';
+import { ClassEditorModule } from '../class-editor/class-editor.module';
 
 registerLocaleData(localeEs);
 
 @NgModule({
-  declarations: [CalendarComponent],
+  declarations: [CalendarComponent, CustomDatePipe, DayPipe],
   imports: [
     CommonModule,
     PrimeModule,
+    ClassEditorModule,
     RouterModule.forChild([
       {
         path: '',

@@ -1,0 +1,104 @@
+<p-dialog
+  header="Editor de clases"
+  [visible]="display$ | async"
+  (onHide)="onHideDialog()"
+  [closable]="false"
+>
+  <form [formGroup]="form">
+    <div class="formContainer">
+      <span class="p-float-label">
+        <input
+          formControlName="name"
+          id="float-input"
+          type="text"
+          pInputText
+          appControlError
+        />
+        <label for="float-input">Nombre clase</label>
+      </span>
+
+      <span class="color-container">
+        <label>Color primario</label>
+        <input
+          formControlName="primaryColor"
+          id="float-input"
+          type="color"
+          appControlError
+        />
+      </span>
+      <span class="color-container">
+        <label>Color secundario</label>
+        <input
+          formControlName="secondaryColor"
+          id="float-input"
+          type="color"
+          appControlError
+        />
+      </span>
+      <span class="p-float-label">
+        <p-dropdown
+          inputId="dropdown"
+          [autoDisplayFirst]="false"
+          [options]="days"
+          optionLabel="name"
+          optionValue="code"
+          formControlName="day"
+          appendTo="body"
+          appControlError
+        ></p-dropdown>
+        <label for="dropdown">Día</label>
+      </span>
+      <span class="p-float-label">
+        <input
+          id="float-input"
+          type="text"
+          pInputText
+          mwlFlatpickr
+          [altInput]="true"
+          [convertModelValue]="true"
+          [enableTime]="true"
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          formControlName="startDate"
+          appControlError
+        />
+        <label for="float-input">Fecha Inicio</label>
+      </span>
+      <span class="p-float-label">
+        <input
+          id="float-input"
+          type="text"
+          pInputText
+          mwlFlatpickr
+          [altInput]="true"
+          [convertModelValue]="true"
+          [enableTime]="true"
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          formControlName="endDate"
+          appControlError
+        />
+        <label for="float-input">Fecha Fin</label>
+      </span>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Guardar"
+      icon="pi pi-check"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="closeDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-rounded btn-h btn-secondary"
+      (click)="closeDialog()"
+    ></button>
+  </ng-template>
+</p-dialog>

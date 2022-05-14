@@ -1,6 +1,69 @@
-<div class="header-login">
-  <img src="../../../../assets/icons/tai-center-logo-third.svg" />
+<div class="header">
+  <div class="header-container">
+    <img src="../../../assets/icons/tai-center-logo-full-color.svg" />
+    <p class="content-secondary s-25">Tu centro deportivo en Bellreguard</p>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-primary mt-10"
+      label="Iniciar sesión"
+      icon="pi pi-user"
+      routerLink="/tc/login"
+    ></button>
+  </div>
 </div>
-
-<router-outlet></router-outlet>
+<div class="plan-container">
+  <h1 class="hard-title">Planes</h1>
+  <div class="plan-container-cards">
+    <p-card header="1 Semana" subheader="Una semana">
+      <ng-template pTemplate="header">
+        <span class="hard-title fs-50">22€</span>
+      </ng-template>
+      <div class="class">
+        <h4>8 días, 1 clase por día</h4>
+        <p>CROSS, G.A.P, H.I.I.T</p>
+      </div>
+    </p-card>
+    <p-card header="1/2 Mes" subheader="Medio mes">
+      <ng-template pTemplate="header">
+        <span class="hard-title fs-50">28€</span>
+      </ng-template>
+      <div class="class">
+        <h4>15 días, 1 clase por día</h4>
+        <p>CROSS, G.A.P, H.I.I.T</p>
+      </div>
+    </p-card>
+    <p-card header="Básico" subheader="Para los que están empezando">
+      <ng-template pTemplate="header">
+        <span class="hard-title fs-50">38€</span>
+      </ng-template>
+      <div class="class">
+        <h4>3 Clases por semana</h4>
+        <p>CROSS, G.A.P, H.I.I.T</p>
+      </div>
+    </p-card>
+    <p-card
+      header="Intermedio"
+      subheader="Para los que quieren ir a otro nivel"
+    >
+      <ng-template pTemplate="header">
+        <span class="hard-title fs-50">48€</span>
+      </ng-template>
+      <div class="class">
+        <h4>6 Clases por semana</h4>
+        <p>CROSS, G.A.P, H.I.I.T y OPEN CENTER</p>
+      </div>
+    </p-card>
+    <p-card header="Avanzado" subheader="Para los más fuertes">
+      <ng-template pTemplate="header">
+        <span class="hard-title fs-50">50€</span>
+      </ng-template>
+      <div class="class">
+        <h4>Ilimitado</h4>
+        <p>CROSS, G.A.P, H.I.I.T y OPEN CENTER</p>
+      </div>
+    </p-card>
+  </div>
+</div>
 <app-footer></app-footer>
