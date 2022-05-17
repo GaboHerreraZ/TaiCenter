@@ -33,7 +33,7 @@ export class RegisterDocComponent implements OnInit {
   save() {
     this.loadingService.start();
     setTimeout(() => {
-      this.router.navigate(['tc/persona']);
+      this.router.navigate(['panel/persona']);
       this.loadingService.end();
     }, 2000);
   }

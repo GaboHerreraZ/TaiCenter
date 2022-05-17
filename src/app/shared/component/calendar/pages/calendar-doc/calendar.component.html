@@ -1,0 +1,19 @@
+<div class="container-calendar">
+  <p-card>
+    <mwl-calendar-week-view
+      [viewDate]="viewDate"
+      [events]="events"
+      [hourDuration]="60"
+      [dayEndHour]="24"
+      [dayStartHour]="7"
+      [hourSegments]="1"
+      [locale]="locale"
+      [weekStartsOn]="weekStartsOn"
+      [excludeDays]="excludeDays"
+      [daysInWeek]="daysInWeek"
+      (eventClicked)="eventClicked($event)"
+      [refresh]="refresh"
+    >
+    </mwl-calendar-week-view>
+  </p-card>
+</div>

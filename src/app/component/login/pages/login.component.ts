@@ -27,6 +27,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     //TODO WHEN ALL IS OK, GO TO PERSONA
-    this.router.navigate(['tc/persona']);
+    this.router.navigate(['panel/usuario']);
   }
 }

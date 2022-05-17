@@ -1,4 +1,3 @@
-import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { TypeMessage } from './enum/message';
@@ -12,8 +11,8 @@ export class NotificationService {
 
   constructor() {}
 
-  createMessage(typeMessage: TypeMessage, message: string) {
-    this.message.next({ typeMessage, message });
+  createMessage(typeMessage: TypeMessage, messages: string[]) {
+    this.message.next({ typeMessage, messages });
   }
 
   getMessage(): Observable<any> {

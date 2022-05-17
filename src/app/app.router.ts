@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const AppRoutes: Routes = [
   {
-    path: 'tc',
+    path: 'panel',
     loadChildren: () =>
       import('./component/root/root.module').then((m) => m.RootModule),
   },

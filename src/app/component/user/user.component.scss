@@ -1,0 +1,32 @@
+.header-user {
+  background-color: rgb(204, 194, 194);
+  ::ng-deep .p-button {
+    color: var(--color-text-principal);
+    background: rgb(204, 194, 194);
+    border: 1px solid rgb(204, 194, 194);
+  }
+
+  &-content {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 50px;
+    width: 350px;
+    justify-content: center;
+    align-content: center;
+
+    p {
+      margin: auto;
+      font-size: 15px;
+    }
+  }
+}
+
+::ng-deep .p-menu {
+  border: none;
+  width: 100%;
+}
+
+::ng-deep .p-menu .p-menuitem-link {
+  font-size: 15px;
+  font-family: var(--font-family-secondary);
+}

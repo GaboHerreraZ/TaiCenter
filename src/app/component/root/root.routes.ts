@@ -17,21 +17,24 @@ export const AppHomeRoutes: Routes = [
           import('../register/pages/register-doc.module').then(
             (r) => r.RegisterDocModule
           ),
+        data: {
+          breadcrumb: [{ label: 'Registro', url: '#/panel/registro' }],
+        },
       },
       {
-        path: 'persona',
+        path: 'usuario', //TODO Cambiar a usuario/:id
         loadChildren: () =>
-          import('../person/pages/person-doc/person-doc.module').then(
-            (p) => p.PersonDocModule
-          ),
+          import('../user/user.module').then((u) => u.UserModule),
+        data: {
+          breadcrumb: [{ label: 'Usuario', url: '#/panel/user' }],
+        },
       },
       {
-        path: 'calendario',
+        path: 'administrador',
         loadChildren: () =>
-          import('../calendar/pages/calendar-doc/calendar.module').then(
-            (c) => c.CalendarDocModule
-          ),
+          import('../admin/admin.module').then((c) => c.AdminModule),
       },
+      { path: '', redirectTo: '/persona', pathMatch: 'full' },
     ],
   },
 ];

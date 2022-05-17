@@ -1,0 +1,11 @@
+::ng-deep .p-breadcrumb {
+  border: none;
+}
+
+::ng-deep .p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
+  font-family: var(--font-family-principal);
+}
+
+::ng-deep .p-breadcrumb ul li .p-menuitem-link:focus {
+  box-shadow: 0 0 0 0.2rem var(--color-text-principal);
+}

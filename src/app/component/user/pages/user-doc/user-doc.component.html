@@ -1,0 +1,181 @@
+<div class="container">
+  <h5 class="hard-title s-25">Bienvenido Pascualin</h5>
+  <p-card>
+    <p class="text-style-principal">
+      Mantén actualizada tu información, así podremos conocerte mejor
+    </p>
+    <div class="register-container">
+      <div class="perfil">
+        <figure>
+          <img class="img-size" [src]="imageUrl" />
+        </figure>
+        <label class="perfil-label text-style-principal">
+          <input
+            type="file"
+            name="file"
+            #fileInput
+            (change)="myUploader(fileInput)"
+          />
+          Actualizar foto
+        </label>
+      </div>
+      <form [formGroup]="formGroup">
+        <p-divider layout="horizontal">
+          <h4 class="title-2">Datos Personales</h4>
+        </p-divider>
+        <div class="form-personal">
+          <span class="p-float-label">
+            <input
+              formControlName="name"
+              id="name"
+              type="text"
+              pInputText
+              autocomplete="off"
+              aria-describedby="name"
+            />
+            <label for="name">Nombre</label>
+          </span>
+
+          <span class="p-float-label">
+            <input
+              formControlName="lastName"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Apellidos</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              id="float-input"
+              type="number"
+              pInputText
+              autocomplete="off"
+              formControlName="age"
+            />
+            <label for="float-input">Edad</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="phoneNumber"
+              id="float-input"
+              type="text"
+              pInputText
+              autocomplete="off"
+            />
+            <label for="float-input">Teléfono</label>
+          </span>
+          <span class="p-float-label">
+            <p-dropdown
+              inputId="dropdown"
+              [autoDisplayFirst]="false"
+              [options]="gender"
+              optionLabel="name"
+              formControlName="gender"
+            ></p-dropdown>
+            <label for="dropdown">Género</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="mote"
+              id="float-input"
+              type="text"
+              pInputText
+            />
+            <label for="float-input">Mote</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="plan"
+              id="float-input"
+              type="text"
+              pInputText
+            />
+            <label for="float-input">Plan</label>
+          </span>
+          <span class="p-float-label">
+            <input
+              formControlName="remainingLessons"
+              id="float-input"
+              type="number"
+              pInputText
+            />
+            <label for="float-input">Clases restantes</label>
+          </span>
+        </div>
+        <div class="form-button">
+          <button
+            pButton
+            pRipple
+            type="button"
+            class="p-button-rounded btn-h btn-primary"
+            label="Guardar"
+            (click)="save()"
+          ></button>
+        </div>
+      </form>
+    </div>
+    <p-table
+      [columns]="cols"
+      [value]="products"
+      responsiveLayout="stack"
+      styleClass="p-datatable-sm"
+      [paginator]="true"
+      [rows]="10"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <h5 class="title-2 m-0">Historial de clases reservadas</h5>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr class="title-2">
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr class="title-2">
+          <td *ngFor="let col of columns">
+            <ng-container *ngIf="col.field === 'status'">
+              <span
+                [ngClass]="
+                  rowData[col.field] === 'No'
+                    ? 'ko-status'
+                    : rowData[col.field] === 'Si'
+                    ? 'ok-status'
+                    : 'pending-status'
+                "
+              >
+                {{ rowData[col.field] }}
+              </span>
+            </ng-container>
+            <span *ngIf="col.field !== 'status' && col.field !== 'active'">
+              {{ rowData[col.field] }}
+            </span>
+            <ng-container *ngIf="col.field === 'active'">
+              <span
+                [ngClass]="rowData[col.field] ? 'ok-status' : 'done-status'"
+              >
+                {{ rowData[col.field] ? "Activa" : "Realizada" }}
+              </span>
+            </ng-container>
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              *ngIf="rowData['active']"
+              class="p-button-rounded p-button-warning"
+              (click)="delete(rowData)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TypeMessage } from '../../services/notification/enum/message';
 import { NotificationService } from '../../services/notification/notification.service';
 
@@ -18,64 +18,66 @@ export class NotificationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('mierda');
     this.getMessage();
   }
 
   getMessage(): void {
     this.subscription = this.notificationService
       .getMessage()
-      .subscribe(({ typeMessage, message }) => {
+      .subscribe(({ typeMessage, messages }) => {
         console.log('typeMessage', typeMessage);
-        console.log('message', message);
+        console.log('message', messages);
 
         switch (typeMessage) {
           case TypeMessage.Success:
-            console.log('que pedo');
-            this.showSuccess(message);
+            this.showSuccess(messages);
             break;
           case TypeMessage.Info:
-            this.showInfo(message);
+            this.showInfo(messages);
             break;
           case TypeMessage.Error:
-            this.showError(message);
+            this.showError(messages);
             break;
           default:
-            this.showWarn(message);
+            this.showWarn(messages);
             break;
         }
       });
   }
 
-  showSuccess(message: string) {
+  showSuccess(message: string[]) {
     this.messageService.add({
+      key: 'single',
       severity: 'success',
       summary: 'Ok',
-      detail: message,
+      data: message,
     });
   }
 
-  showInfo(message: string) {
+  showInfo(message: string[]) {
     this.messageService.add({
+      key: 'single',
       severity: 'info',
       summary: 'Info',
-      detail: message,
+      data: message,
     });
   }
 
-  showWarn(message: string) {
+  showWarn(message: string[]) {
     this.messageService.add({
+      key: 'single',
       severity: 'warn',
       summary: 'Warn',
-      detail: message,
+      data: message,
     });
   }
 
-  showError(message: string) {
+  showError(message: string[]) {
     this.messageService.add({
+      key: 'single',
       severity: 'error',
       summary: 'Error',
-      detail: message,
+      data: message,
     });
   }
 

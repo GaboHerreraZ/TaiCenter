@@ -16,6 +16,8 @@ import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { TooltipModule } from 'primeng/tooltip';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [],
@@ -37,6 +39,8 @@ import { TooltipModule } from 'primeng/tooltip';
     DialogModule,
     ColorPickerModule,
     TooltipModule,
+    SidebarModule,
+    MenuModule,
   ],
   exports: [
     MenubarModule,
@@ -56,6 +60,8 @@ import { TooltipModule } from 'primeng/tooltip';
     DialogModule,
     ColorPickerModule,
     TooltipModule,
+    SidebarModule,
+    MenuModule,
   ],
 })
 export class PrimeModule {}
