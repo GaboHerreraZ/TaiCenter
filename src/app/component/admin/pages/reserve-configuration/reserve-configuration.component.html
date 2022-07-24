@@ -1,17 +1,23 @@
-<app-calendar></app-calendar>
+<p-confirmDialog #cd key="borrar-id" styleClass="pedo">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="cd.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="cd.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
 <p-card>
-  <p-toolbar styleClass="mb-4">
-    <ng-template pTemplate="left">
-      <button
-        pButton
-        pRipple
-        label="Nuevo"
-        icon="pi pi-plus"
-        class="p-button-rounded btn-h btn-primary"
-        (click)="newEvent()"
-      ></button>
-    </ng-template>
-  </p-toolbar>
   <p-table
     [columns]="cols"
     [value]="recurringEvents"
@@ -22,7 +28,15 @@
   >
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-        <h5 class="title-2 m-0">Clases configuradas</h5>
+        <h5 class="title-2 m-0">Wods Configurados</h5>
+        <button
+          pButton
+          pRipple
+          label="Nuevo Wod"
+          icon="pi pi-plus"
+          class="p-button-rounded btn-h btn-primary"
+          (click)="newEvent()"
+        ></button>
       </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
@@ -36,28 +50,19 @@
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr class="title-2">
         <td>
-          {{ rowData["title"] }}
+          {{ rowData.recurringEvents["title"] }}
         </td>
         <td>
-          <div
-            class="color-grid"
-            [ngStyle]="{ 'background-color': rowData['color'].primary }"
-          ></div>
+          {{ rowData.recurringEvents["rrule"].byweekday[0] | day }}
         </td>
         <td>
-          <div
-            class="color-grid"
-            [ngStyle]="{ 'background-color': rowData['color'].secondary }"
-          ></div>
+          {{ rowData.recurringEvents["date"].start | CustomDate }}
         </td>
         <td>
-          {{ rowData["rrule"].byweekday[0] | day }}
+          {{ rowData.recurringEvents["date"].end | CustomDate }}
         </td>
         <td>
-          {{ rowData["date"].start | CustomDate }}
-        </td>
-        <td>
-          {{ rowData["date"].end | CustomDate }}
+          {{ rowData.recurringEvents["state"] }}
         </td>
         <td>
           <button
@@ -72,3 +77,4 @@
     </ng-template>
   </p-table>
 </p-card>
+<app-calendar (deleteEvent)="deleteEvent($event)"></app-calendar>

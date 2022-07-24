@@ -1,0 +1,13 @@
+<div class="container-reserve">
+  <h1>Normas del centro</h1>
+  <p-card>
+    <div *ngFor="let rule of rules">
+      <h3>{{ rule.title }}!!</h3>
+      <p-divider></p-divider>
+      <span class="rule-info" *ngFor="let info of rule.information">
+        <i class="pi pi-check" style="font-size: 1rem"></i>
+        {{ info }}
+      </span>
+    </div>
+  </p-card>
+</div>

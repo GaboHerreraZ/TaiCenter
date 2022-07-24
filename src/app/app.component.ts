@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { User } from '@angular/fire/auth';
 import { PrimeNGConfig } from 'primeng/api';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,14 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent implements OnInit {
   title = 'TaiCenter';
-  constructor(private primeConfig: PrimeNGConfig, private router: Router) {}
+  user: User | null;
+  constructor(
+    private primeConfig: PrimeNGConfig,
+    private authService: AuthService
+  ) {
+    this.user = this.authService.currentUser();
+    console.log(this.user);
+  }
 
   ngOnInit(): void {
     this.primeConfig.ripple = true;

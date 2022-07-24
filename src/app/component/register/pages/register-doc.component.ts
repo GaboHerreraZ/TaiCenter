@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import ValidationRegister from '../models/register.validation';
 
 @Component({
   selector: 'app-register',
@@ -11,30 +16,32 @@ import { LoadingService } from 'src/app/shared/component/loading/shared/loading.
 export class RegisterDocComponent implements OnInit {
   formGroup: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private loadingService: LoadingService,
-    private router: Router
-  ) {}
+  get f(): { [key: string]: AbstractControl } {
+    return this.formGroup.controls;
+  }
+
+  constructor(private fb: FormBuilder, public ref: DynamicDialogRef) {}
 
   ngOnInit(): void {
-    this.formGroup = this.getForm();
+    this.getForm();
   }
 
   private getForm() {
-    return this.fb.group({
-      email: [null, Validators.required],
-      repeatEmail: [null, Validators.required],
-      password: [null, Validators.required],
-      repeatPassword: [null, Validators.required],
-    });
+    this.formGroup = this.fb.group(
+      {
+        email: [null, [Validators.required, Validators.email]],
+        repeatEmail: [null, [Validators.required, Validators.email]],
+        password: [null, [Validators.required, Validators.minLength(6)]],
+        repeatPassword: [null, [Validators.required, Validators.minLength(6)]],
+      },
+      {
+        validators: [ValidationRegister.registerValidation],
+      }
+    );
   }
 
-  save() {
-    this.loadingService.start();
-    setTimeout(() => {
-      this.router.navigate(['panel/persona']);
-      this.loadingService.end();
-    }, 2000);
+  async save() {
+    const { email, password } = this.formGroup.value;
+    this.ref.close({ email, password });
   }
 }

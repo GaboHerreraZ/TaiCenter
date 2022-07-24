@@ -1,1 +1,40 @@
-<app-calendar></app-calendar>
+<p-confirmDialog #cd key="reserve-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="cd.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="cd.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
+
+<p-confirmDialog #exist key="exist-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="exist.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="exist.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
+<app-calendar (saveClass)="saveClass($event)"></app-calendar>

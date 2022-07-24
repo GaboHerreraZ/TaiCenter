@@ -1,1 +1,49 @@
-<p>customer works!</p>
+<div class="container-customer">
+  <p-table
+    [columns]="cols"
+    [value]="users"
+    responsiveLayout="stack"
+    styleClass="p-datatable-sm"
+    [paginator]="true"
+    [rows]="10"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="title-2 m-0">Personas Inscritas</h5>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr class="title-2">
+        <th *ngFor="let col of columns">
+          {{ col.header }}
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr class="title-2">
+        <td>
+          {{ rowData["name"] }}
+        </td>
+        <td>
+          {{ rowData["lastName"] }}
+        </td>
+        <td>
+          {{ rowData["mote"] }}
+        </td>
+        <td>
+          {{ rowData["age"] }}
+        </td>
+        <td>
+          {{ rowData["phoneNumber"] }}
+        </td>
+        <td>
+          {{ rowData["plan"] }}
+        </td>
+        <td>
+          {{ rowData["state"] }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

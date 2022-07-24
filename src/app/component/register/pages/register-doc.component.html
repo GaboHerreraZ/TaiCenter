@@ -1,6 +1,6 @@
 <div class="container">
-  <h5 class="hard-title s-25">Registro</h5>
   <p-card>
+    <app-error-form [form]="formGroup"></app-error-form>
     <p class="text-style-principal">
       A continuación es necesario que ingrese los datos para crear tu perfil en
       Tai Center.
@@ -10,8 +10,8 @@
         <span class="p-float-label">
           <input
             formControlName="email"
-            id="float-input"
-            type="text"
+            id="email-input"
+            type="email"
             pInputText
             autocomplete="off"
           />
@@ -20,18 +20,17 @@
         <span class="p-float-label">
           <input
             formControlName="repeatEmail"
-            id="float-input"
-            type="text"
+            id="repeatEmail-input"
+            type="email"
             pInputText
-            autocomplete="off"
           />
           <label for="float-input">Confirmar correo</label>
         </span>
         <span class="p-float-label">
           <input
             formControlName="password"
-            id="float-input"
-            type="text"
+            id="password-input"
+            type="password"
             pInputText
             autocomplete="off"
           />
@@ -40,8 +39,8 @@
         <span class="p-float-label">
           <input
             formControlName="repeatPassword"
-            id="float-input"
-            type="text"
+            id="repeatPassword-input"
+            type="password"
             pInputText
             autocomplete="off"
           />
@@ -54,16 +53,9 @@
           pRipple
           type="button"
           class="p-button-rounded btn-h btn-primary"
-          label="Guardar"
+          label="Registrarse"
+          [disabled]="formGroup.invalid"
           (click)="save()"
-        ></button>
-        <button
-          pButton
-          pRipple
-          type="button"
-          class="p-button-rounded btn-h btn-secondary"
-          label="Regresar"
-          routerLink="/panel/login"
         ></button>
       </div>
     </form>

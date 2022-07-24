@@ -1,4 +1,27 @@
+<p-sidebar [(visible)]="sidebar">
+  <p-menu [model]="items"></p-menu>
+</p-sidebar>
 <div class="header-login">
   <img src="../../../../assets/icons/tai-center-logo-third.svg" />
+  <div class="header-menu">
+    <div class="header-menu-content">
+      <label>
+        <p-button
+          type="button"
+          icon="pi pi-bars"
+          (onClick)="sidebar = true"
+        ></p-button>
+        {{ title }}
+      </label>
+      <label>
+        <p-button
+          type="button"
+          icon="pi pi-sign-out"
+          (onClick)="logOut()"
+        ></p-button>
+        Cerrar sesión
+      </label>
+    </div>
+  </div>
 </div>
 <router-outlet></router-outlet>

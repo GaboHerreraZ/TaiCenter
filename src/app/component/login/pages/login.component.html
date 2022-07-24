@@ -1,60 +1,69 @@
-<div class="header-login"></div>
-<div class="container">
-  <h5 class="hard-title s-25">Iniciar Sesión</h5>
-  <p-card>
-    <div class="card-container">
-      <div class="input-login">
-        <span class="p-float-label">
-          <input id="float-input" type="text" pInputText autocomplete="off" />
-          <label for="float-input">Usuario</label>
-        </span>
-        <span class="p-float-label">
-          <input id="float-input" type="password" pInputText />
-          <label for="float-input">Contraseña</label>
-        </span>
-        <button
-          pButton
-          pRipple
-          type="button"
-          class="p-button-rounded btn-h btn-primary"
-          label="Acceder"
-          icon="pi pi-user"
-          (click)="login()"
-        ></button>
-        <button
-          pButton
-          pRipple
-          type="button"
-          class="p-button-rounded btn-h btn-secondary"
-          label="Registrarse"
-          icon="pi pi-user-edit"
-          routerLink="/panel/registro"
-        ></button>
-      </div>
-      <p-divider class="divider-v" layout="vertical">Ó</p-divider>
-      <p-divider class="divider-h" align="center" layout="horizontal"
-        >Ó</p-divider
-      >
-      <div class="button-social">
-        <button
-          pButton
-          pRipple
-          type="button"
-          class="p-button-rounded btn-h btn-google btn-social"
-          label="Google"
-          icon="pi pi-google"
-          (click)="loginGoogle()"
-        ></button>
-        <button
-          pButton
-          pRipple
-          type="button"
-          class="p-button-rounded btn-h btn-social"
-          label="Facebook"
-          icon="pi pi-facebook"
-          (click)="loginFacebook()"
-        ></button>
-      </div>
+<div class="header">
+  <div class="header-container">
+    <div class="container">
+      <p-card>
+        <img src="../../../../assets/icons/tai-center-logo-full-color.svg" />
+        <div class="card-container">
+          <form [formGroup]="form" class="input-login">
+            <span class="p-float-label">
+              <input
+                id="user-input"
+                formControlName="email"
+                type="email"
+                pInputText
+              />
+              <label for="float-input">Email</label>
+            </span>
+            <span class="p-float-label">
+              <input
+                id="password-input"
+                formControlName="password"
+                type="password"
+                pInputText
+              />
+              <label for="float-input">Contraseña</label>
+            </span>
+            <button
+              pButton
+              pRipple
+              type="button"
+              class="p-button-rounded btn-h btn-primary"
+              label="Acceder"
+              icon="pi pi-user"
+              (click)="login()"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              class="p-button-rounded btn-h btn-secondary"
+              label="Registrarse"
+              icon="pi pi-user-edit"
+              (click)="registrarse()"
+            ></button>
+          </form>
+          <div class="button-social">
+            <button
+              pButton
+              pRipple
+              type="button"
+              class="p-button-rounded btn-h btn-google btn-social"
+              label="Google"
+              icon="pi pi-google"
+              (click)="loginGoogle()"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              class="p-button-rounded btn-h btn-social"
+              label="Facebook"
+              icon="pi pi-facebook"
+              (click)="loginFacebook()"
+            ></button>
+          </div>
+        </div>
+      </p-card>
     </div>
-  </p-card>
+  </div>
 </div>

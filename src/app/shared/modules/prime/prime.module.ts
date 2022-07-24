@@ -18,6 +18,10 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { TooltipModule } from 'primeng/tooltip';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule } from 'primeng/menu';
+import { BadgeModule } from 'primeng/badge';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [],
@@ -41,6 +45,10 @@ import { MenuModule } from 'primeng/menu';
     TooltipModule,
     SidebarModule,
     MenuModule,
+    BadgeModule,
+    DynamicDialogModule,
+    ConfirmDialogModule,
+    PanelModule,
   ],
   exports: [
     MenubarModule,
@@ -62,6 +70,10 @@ import { MenuModule } from 'primeng/menu';
     TooltipModule,
     SidebarModule,
     MenuModule,
+    BadgeModule,
+    DynamicDialogModule,
+    ConfirmDialogModule,
+    PanelModule,
   ],
 })
 export class PrimeModule {}

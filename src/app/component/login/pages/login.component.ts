@@ -1,7 +1,14 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
+import { TypeMessage } from 'src/app/shared/enum/message';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { RegisterDocComponent } from '../../register/pages/register-doc.component';
+import { AuthService } from '../../../shared/services/auth.service';
+import { Message } from './models/message';
+import { Constants } from '../models/constant';
 
 @Component({
   selector: 'app-login',
@@ -9,24 +16,75 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private loginService: LoginService) {}
+  form: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private dialogService: DialogService,
+    private loadingService: LoadingService,
+    private notificacionService: NotificationService,
+    private fb: FormBuilder
+  ) {}
 
-  navigate() {
-    this.router.navigate(['persona']);
+  ngOnInit(): void {
+    this.getForm();
   }
 
   loginGoogle() {
-    this.loginService.loginGoogle();
+    this.authService.loginGoogle().then((google) => {
+      if (google.user.email === Constants.EmailAdmin) {
+        this.router.navigate(['panel/administrador/configuracion-wods']);
+      }
+    });
   }
 
   loginFacebook() {
-    this.loginService.loginFacebook();
+    this.authService.loginFacebook();
   }
 
-  login() {
-    //TODO WHEN ALL IS OK, GO TO PERSONA
-    this.router.navigate(['panel/usuario']);
+  async login() {
+    this.loadingService.start();
+    const { email, password } = this.form.value;
+    this.authService
+      .loginByCorreoPassword(email, password)
+      .then(() => {
+        this.router.navigate(['panel/usuario/normas-del-centro']);
+        this.loadingService.end();
+      })
+      .catch(() => {
+        this.loadingService.end();
+      });
+  }
+
+  registrarse() {
+    const ref = this.dialogService.open(RegisterDocComponent, {
+      header: 'Registro Tai Center',
+      width: '50%',
+    });
+
+    ref.onClose.subscribe((result) => {
+      if (result) {
+        this.saveRegister(result.email, result.password);
+      }
+    });
+  }
+
+  async saveRegister(email: string, password: string) {
+    this.loadingService.start();
+    const response = await this.authService.registerByEmail(email, password);
+    if (response.user) {
+      this.notificacionService.createMessage(TypeMessage.Success, [
+        Message.newUserOk,
+      ]);
+    }
+    this.loadingService.end();
+  }
+
+  private getForm() {
+    this.form = this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
+    });
   }
 }

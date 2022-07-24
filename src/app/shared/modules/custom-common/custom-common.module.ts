@@ -15,5 +15,6 @@ import { DayPipe } from '../../pipes/day.pipe';
     CustomDatePipe,
     DayPipe,
   ],
+  providers: [],
 })
 export class CustomCommonModule {}

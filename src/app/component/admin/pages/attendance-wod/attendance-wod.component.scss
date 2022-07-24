@@ -1,0 +1,40 @@
+.container-wods {
+  padding: 50px;
+}
+
+::ng-deep {
+  .p-panel .p-panel-header .p-panel-title {
+    font-family: var(--font-family-secondary);
+    color: black;
+  }
+
+  .cross {
+    .p-panel-header {
+      background-color: rgb(249, 251, 121);
+    }
+  }
+
+  .hiit {
+    .p-panel-header {
+      background-color: rgb(192, 173, 48);
+    }
+  }
+
+  .open-center {
+    .p-panel-header {
+      background-color: rgb(223, 52, 52);
+    }
+  }
+
+  .tabata {
+    .p-panel-header {
+      background-color: rgb(192, 173, 48);
+    }
+  }
+
+  .gap {
+    .p-panel-header {
+      background-color: rgb(34, 195, 61);
+    }
+  }
+}

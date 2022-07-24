@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PrimeModule } from 'src/app/shared/modules/prime/prime.module';
+import { RegisterDocComponent } from '../../register/pages/register-doc.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DialogService } from 'primeng/dynamicdialog';
+import { CustomCommonModule } from 'src/app/shared/modules/custom-common/custom-common.module';
 
 const LoginRoutes: Routes = [
   {
@@ -12,7 +16,14 @@ const LoginRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent],
-  imports: [CommonModule, PrimeModule, RouterModule.forChild(LoginRoutes)],
+  declarations: [LoginComponent, RegisterDocComponent],
+  imports: [
+    CommonModule,
+    PrimeModule,
+    RouterModule.forChild(LoginRoutes),
+    CustomCommonModule,
+  ],
+  entryComponents: [RegisterDocComponent],
+  providers: [DialogService],
 })
 export class LoginModule {}

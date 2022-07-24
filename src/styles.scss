@@ -65,6 +65,8 @@ body {
   background: var(--color-text-principal) !important;
   border: 1px solid var(--color-text-principal) !important;
   font-family: var(--font-family-principal) !important;
+  min-width: 150px;
+  justify-self: center;
 
   &:focus {
     box-shadow: 0 0 0 0.1rem var(--color-text-principal) !important;
@@ -75,9 +77,22 @@ body {
   background: black !important;
   border: 1px solid black !important;
   font-family: var(--font-family-principal) !important;
-
+  min-width: 150px;
+  justify-self: center;
   &:focus {
     box-shadow: 0 0 0 0.1rem black !important;
+  }
+}
+
+.btn-third {
+  background: white !important;
+  border: 1px solid white !important;
+  font-family: var(--font-family-principal) !important;
+  min-width: 150px;
+  color: black !important;
+  justify-self: center;
+  &:focus {
+    box-shadow: 0 0 0 0.1rem white !important;
   }
 }
 
@@ -101,6 +116,7 @@ body {
 
 .p-dropdown {
   width: 100%;
+  text-align: left;
   &:hover {
     border-color: var(--color-text-principal) !important;
   }
@@ -118,7 +134,10 @@ body {
   text-align: center;
 }
 
-/*.ng-touched:not(form) {
-  border: solid #e60017;
-  border-width: 1px 1px 1px 3px;
-}*/
+p-dropdown.ng-touched.ng-invalid > .p-dropdown {
+  border-color: #e24c4c;
+}
+
+.p-inputtext.ng-touched.ng-invalid {
+  border-color: #e24c4c;
+}

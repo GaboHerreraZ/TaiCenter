@@ -1,11 +1,32 @@
 :host {
+  .header {
+    background-image: url("../../../../assets/img/tai-center-header.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    z-index: 1;
+    background-size: cover;
+    display: grid;
+    align-content: center;
+    padding-bottom: 10px;
+    height: 100vh;
+
+    img {
+      width: 60%;
+    }
+    &-container {
+      text-align: center;
+    }
+  }
+
   ::ng-deep .p-card {
     padding: 20px;
     text-align: center;
+    background: transparent;
   }
   .card-container {
     display: grid;
-    grid-template-columns: 1fr 0.5fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
   }
 
   .button-social {
@@ -17,26 +38,15 @@
   .input-login {
     display: grid;
     gap: 30px;
-  }
-  .divider-v {
-    display: block;
-  }
 
-  .divider-h {
-    display: none;
+    .p-float-label {
+      min-width: 250px;
+    }
   }
 
   @media (max-width: 600px) {
     .card-container {
       grid-template-columns: 1fr;
-    }
-
-    .divider-v {
-      display: none;
-    }
-
-    .divider-h {
-      display: block;
     }
   }
 }

@@ -1,5 +1,44 @@
+<p-confirmDialog #cd key="cancel-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="cd.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="cd.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
+
+<p-confirmDialog #activarWod key="activar-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="activarWod.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="activarWod.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
 <div class="container">
-  <h5 class="hard-title s-25">Bienvenido Pascualin</h5>
+  <h5 class="hard-title s-25">Bienvenido {{ userName }}</h5>
   <p-card>
     <p class="text-style-principal">
       Mantén actualizada tu información, así podremos conocerte mejor
@@ -20,6 +59,8 @@
         </label>
       </div>
       <form [formGroup]="formGroup">
+        <app-error-form [form]="formGroup"></app-error-form>
+
         <p-divider layout="horizontal">
           <h4 class="title-2">Datos Personales</h4>
         </p-divider>
@@ -111,14 +152,15 @@
             type="button"
             class="p-button-rounded btn-h btn-primary"
             label="Guardar"
-            (click)="save()"
+            [disabled]="formGroup.invalid"
+            (click)="saveUpdateUser()"
           ></button>
         </div>
       </form>
     </div>
     <p-table
       [columns]="cols"
-      [value]="products"
+      [value]="wods"
       responsiveLayout="stack"
       styleClass="p-datatable-sm"
       [paginator]="true"
@@ -126,7 +168,7 @@
     >
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
-          <h5 class="title-2 m-0">Historial de clases reservadas</h5>
+          <h5 class="title-2 m-0">Historial de wods reservados</h5>
         </div>
       </ng-template>
       <ng-template pTemplate="header" let-columns>
@@ -140,7 +182,7 @@
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr class="title-2">
           <td *ngFor="let col of columns">
-            <ng-container *ngIf="col.field === 'status'">
+            <ng-container *ngIf="col.field === 'attend'">
               <span
                 [ngClass]="
                   rowData[col.field] === 'No'
@@ -153,14 +195,19 @@
                 {{ rowData[col.field] }}
               </span>
             </ng-container>
-            <span *ngIf="col.field !== 'status' && col.field !== 'active'">
+            <span *ngIf="col.field === 'title'">
               {{ rowData[col.field] }}
             </span>
-            <ng-container *ngIf="col.field === 'active'">
+            <span *ngIf="col.field === 'start'">
+              {{ rowData[col.field] | CustomDate }}
+            </span>
+            <ng-container *ngIf="col.field === 'state'">
               <span
-                [ngClass]="rowData[col.field] ? 'ok-status' : 'done-status'"
+                [ngClass]="
+                  rowData[col.field] === 'Activa' ? 'ok-status' : 'done-status'
+                "
               >
-                {{ rowData[col.field] ? "Activa" : "Realizada" }}
+                {{ rowData[col.field] }}
               </span>
             </ng-container>
           </td>
@@ -168,10 +215,22 @@
             <button
               pButton
               pRipple
-              icon="pi pi-trash"
-              *ngIf="rowData['active']"
+              pTooltip="Cancelar wod"
+              icon="pi pi-times"
+              *ngIf="rowData['state'] === 'Activa' && validateTimeWod(rowData)"
               class="p-button-rounded p-button-warning"
-              (click)="delete(rowData)"
+              (click)="cancel(rowData)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              pTooltip="Activar wod"
+              icon="pi pi-check"
+              *ngIf="
+                rowData['state'] === 'Cancelada' && validateTimeWod(rowData)
+              "
+              class="p-button-rounded p-button-warning"
+              (click)="activar(rowData)"
             ></button>
           </td>
         </tr>

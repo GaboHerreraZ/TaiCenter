@@ -1,0 +1,88 @@
+<form [formGroup]="form">
+  <!--<app-error-form [form]="form"></app-error-form>-->
+  <div class="formContainer">
+    <span class="p-float-label">
+      <p-dropdown
+        inputId="dropdown"
+        [autoDisplayFirst]="false"
+        [options]="wods"
+        optionLabel="name"
+        optionValue="code"
+        formControlName="name"
+        appendTo="body"
+      ></p-dropdown>
+      <label for="dropdown">Clase</label>
+    </span>
+
+    <span class="color-container">
+      <label>Color primario</label>
+      <input formControlName="primaryColor" id="float-input" type="color" />
+    </span>
+    <span class="color-container">
+      <label>Color secundario</label>
+      <input formControlName="secondaryColor" id="float-input" type="color" />
+    </span>
+    <span class="p-float-label">
+      <p-dropdown
+        inputId="dropdown"
+        [autoDisplayFirst]="false"
+        [options]="days"
+        optionLabel="name"
+        optionValue="code"
+        formControlName="day"
+        appendTo="body"
+      ></p-dropdown>
+      <label for="dropdown">Día</label>
+    </span>
+    <span class="p-float-label">
+      <input
+        id="float-input"
+        type="text"
+        pInputText
+        mwlFlatpickr
+        [altInput]="true"
+        [convertModelValue]="true"
+        [enableTime]="true"
+        dateFormat="Y-m-dTH:i"
+        altFormat="F j, Y H:i"
+        formControlName="startDate"
+      />
+      <label for="float-input">Vigencia Inicio</label>
+    </span>
+    <span class="p-float-label">
+      <input
+        id="float-input"
+        type="text"
+        pInputText
+        mwlFlatpickr
+        [altInput]="true"
+        [convertModelValue]="true"
+        [enableTime]="true"
+        dateFormat="Y-m-dTH:i"
+        altFormat="F j, Y H:i"
+        [minDate]="minDateFechaFin"
+        formControlName="endDate"
+      />
+      <label for="float-input">Vigencia Fin</label>
+    </span>
+  </div>
+  <div class="button-container">
+    <button
+      pButton
+      pRipple
+      label="Guardar"
+      icon="pi pi-check"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="closeDialog()"
+      [disabled]="form.invalid"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-rounded btn-h btn-secondary"
+      (click)="cancelDialog()"
+    ></button>
+  </div>
+</form>

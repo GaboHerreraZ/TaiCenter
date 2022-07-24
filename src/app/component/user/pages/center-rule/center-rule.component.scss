@@ -1,0 +1,27 @@
+.container-reserve {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 20px;
+
+  .rule-info,
+  div {
+    display: block;
+    font-family: var(--font-family-principal);
+    color: var(--color-text-content-secondary);
+    margin-bottom: 10px;
+  }
+
+  h1,
+  h3 {
+    text-align: center;
+    color: var(--color-text-principal);
+  }
+
+  ::ng-deep {
+    .p-card {
+      border: 1px solid var(--color-text-principal);
+      border-radius: 3px;
+    }
+  }
+}

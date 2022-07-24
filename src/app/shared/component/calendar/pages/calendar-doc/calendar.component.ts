@@ -1,18 +1,19 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
 import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarView,
-  DAYS_OF_WEEK,
-} from 'angular-calendar';
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { map, mergeMap, Subject, takeUntil } from 'rxjs';
+import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { TypeMessage } from 'src/app/shared/services/notification/enum/message';
-import { RecurringEvent } from '../../models/recurring-Event.model';
-import { CalendarService } from '../../services/calendar.service';
-import { ActivatedRoute } from '@angular/router';
-import { BreadcrumbService } from 'src/app/shared/services/breadcrumb/breadcrumb.service';
+import { CalendarWodService } from 'src/app/shared/services/calendar-wod.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { User } from '@angular/fire/auth';
+import { Constants } from 'src/app/component/login/models/constant';
+import { LoadingService } from '../../../loading/shared/loading.service';
 
 @Component({
   selector: 'app-calendar',
@@ -28,46 +29,47 @@ export class CalendarComponent implements OnInit, OnDestroy {
   excludeDays = [DAYS_OF_WEEK.SUNDAY];
   daysInWeek = 6;
   refresh = new Subject<void>();
-
   events: CalendarEvent[] = [];
-  recurringEvents: RecurringEvent[] = [];
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="pi pi-trash"></i>',
-      a11yLabel: 'Eliminar clase',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.deleteClass(event);
-      },
+  unsubscribe = new Subject();
+  user: User | null;
+
+  @Output() deleteEvent = new EventEmitter<CalendarEvent>();
+  @Output() selectEvent = new EventEmitter<CalendarEvent>();
+
+  deleteActions = {
+    label: '<i class="pi pi-trash"></i>',
+    onClick: ({ event }: { event: CalendarEvent }): void => {
+      this.deleteEvent.emit(event);
     },
-  ];
+  };
+
+  @Output() saveClass = new EventEmitter<CalendarEvent>();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private cd: ChangeDetectorRef,
-    private notificationService: NotificationService,
-    private breadCrumbService: BreadcrumbService,
-    private activatedRoute: ActivatedRoute
+    private calendarWodService: CalendarWodService,
+    private authService: AuthService,
+    private loadingServie: LoadingService
   ) {
-    this.activatedRoute.data.subscribe((params: any) => {
-      this.breadCrumbService.setBreadCrumb(params.breadcrumb);
-    });
+    this.user = this.authService.currentUser();
   }
 
   ngOnInit(): void {
     this.resizeCalendar();
+    this.getEventsWods();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.unsubscribe.next(null);
   }
 
   eventClicked(event: any) {
-    this.notificationService.createMessage(TypeMessage.Success, [
-      'Mensaje de prueba perros',
-    ]);
+    this.saveClass.emit(event);
   }
 
-  deleteClass(event: CalendarEvent) {
-    this.events = this.events.filter((iEvent) => iEvent !== event);
-  }
-
-  resizeCalendar() {
+  private resizeCalendar() {
     const CALENDAR_RESPONSIVE = {
       small: {
         breakpoint: '(max-width: 576px)',
@@ -101,7 +103,54 @@ export class CalendarComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
+  private getEventsWods() {
+    this.loadingServie.start();
+    this.calendarWodService.consultaEvents$
+      .pipe(
+        takeUntil(this.unsubscribe),
+        mergeMap(() => {
+          return this.calendarWodService.getWods();
+        }),
+        map((events: any) => {
+          const newEvents: any = [];
+          events.forEach((e: any) => {
+            newEvents.push({ id: e.id, data: e.data() });
+          });
+          return newEvents;
+        })
+      )
+      .subscribe((s) => {
+        this.assignEventsCalendar(s);
+        this.loadingServie.end();
+      });
+  }
+
+  private assignEventsCalendar(events: any[]) {
+    const actions = this.getActionsByUser();
+    this.events = [];
+    if (events.length > 0) {
+      events.forEach((e) => {
+        this.events.push({
+          id: e.id,
+          title: e.data.title,
+          color: {
+            primary: e.data.color.primary,
+            secondary: e.data.color.secondary,
+          },
+          start: e.data.start.toDate(),
+          actions: actions,
+        });
+      });
+    } else {
+      this.events = events;
+    }
+    console.log('events', this.events);
+    this.refresh.next();
+  }
+
+  private getActionsByUser() {
+    return this.user?.email === Constants.EmailAdmin
+      ? [this.deleteActions]
+      : [];
   }
 }

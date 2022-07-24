@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { map, Observable } from 'rxjs';
 import { BreadCrumb } from '../../models/breadcrumb.model';
-import { BreadcrumbService } from '../../services/breadcrumb/breadcrumb.service';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 @Component({
   selector: 'app-breadcrumb',

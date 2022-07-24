@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReserveDocComponent } from './reserve-doc.component';
-import { RouterModule } from '@angular/router';
 import { CustomCommonModule } from 'src/app/shared/modules/custom-common/custom-common.module';
 import { CalendarDocModule } from 'src/app/shared/component/calendar/pages/calendar-doc/calendar.module';
+import { PrimeModule } from 'src/app/shared/modules/prime/prime.module';
+import { ConfirmationService } from 'primeng/api';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ReserveDocComponent],
@@ -11,12 +13,9 @@ import { CalendarDocModule } from 'src/app/shared/component/calendar/pages/calen
     CommonModule,
     CustomCommonModule,
     CalendarDocModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: ReserveDocComponent,
-      },
-    ]),
+    PrimeModule,
+    RouterModule.forChild([{ path: '', component: ReserveDocComponent }]),
   ],
+  providers: [ConfirmationService],
 })
 export class ReserveDocModule {}

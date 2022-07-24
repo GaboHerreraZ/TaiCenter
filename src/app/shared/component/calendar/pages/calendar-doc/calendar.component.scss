@@ -1,5 +1,8 @@
-.color-grid {
-  width: 50px;
-  height: 20px;
-  border: 1px solid black;
+.container-calendar {
+  margin: auto;
+}
+::ng-deep {
+  .cal-event-title {
+    color: black;
+  }
 }

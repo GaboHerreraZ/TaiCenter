@@ -6,20 +6,25 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { AppRoutes } from './app.router';
 import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire/compat';
-import { HttpClientModule } from '@angular/common/http';
 import { LoadingModule } from './shared/component/loading/loading.module';
 import { NotificationModule } from './shared/component/notification/notification.module';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HotToastModule.forRoot(),
-    HttpClientModule,
     LoadingModule,
     RouterModule.forRoot(AppRoutes, { useHash: true }),
-    AngularFireModule.initializeApp(environment.firebase),
+    provideFirestore(() => getFirestore()),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
     NotificationModule,
   ],
   providers: [],

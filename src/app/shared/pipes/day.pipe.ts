@@ -1,21 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import RRule, { Weekday } from 'rrule';
+import { WeekDay } from '../models/recurring-wod.model';
 
 @Pipe({
   name: 'day',
 })
 export class DayPipe implements PipeTransform {
-  transform(value: Weekday): string {
-    switch (value) {
-      case RRule.MO:
+  transform(value: WeekDay): string {
+    switch (value.weekDay) {
+      case 0:
         return 'Lunes';
-      case RRule.TU:
+      case 1:
         return 'Martes';
-      case RRule.WE:
+      case 2:
         return 'Miercoles';
-      case RRule.TH:
+      case 3:
         return 'Jueves';
-      case RRule.FR:
+      case 4:
         return 'Viernes';
       default:
         return 'Sábado';

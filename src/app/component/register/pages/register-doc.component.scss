@@ -5,11 +5,12 @@
 }
 
 .form-button {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
+  text-align: center;
   margin-top: 20px;
-  gap: 100px;
+}
+
+p {
+  margin-bottom: 20px;
 }
 
 @media (max-width: 600px) {
@@ -23,5 +24,21 @@
 
   .p-button {
     font-size: 12px;
+  }
+}
+
+::ng-deep {
+  .p-component-overlay {
+    z-index: 1 !important;
+  }
+
+  .p-dialog .p-dialog-header .p-dialog-title {
+    text-align: center;
+    font-family: var(--font-family-secondary);
+    width: 100%;
+  }
+
+  .p-card .p-card-content {
+    padding: 0;
   }
 }

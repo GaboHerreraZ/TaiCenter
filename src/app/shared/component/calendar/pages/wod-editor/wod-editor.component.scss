@@ -1,0 +1,40 @@
+.formContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 25px;
+}
+
+.color-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-content: center;
+  gap: 20px;
+  font-family: var(--font-family-principal);
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  padding: 20px 20px;
+  overflow: hidden;
+}
+
+.button-container {
+  margin-top: 20px;
+  text-align: center;
+  button {
+    margin: 0 20px;
+  }
+}
+@media (max-width: 600px) {
+  .formContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+}
+
+@media (max-width: 450px) {
+  .formContainer {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}

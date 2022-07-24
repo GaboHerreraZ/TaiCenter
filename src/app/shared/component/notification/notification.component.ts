@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { TypeMessage } from '../../services/notification/enum/message';
-import { NotificationService } from '../../services/notification/notification.service';
+import { TypeMessage } from '../../enum/message';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -25,9 +25,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.subscription = this.notificationService
       .getMessage()
       .subscribe(({ typeMessage, messages }) => {
-        console.log('typeMessage', typeMessage);
-        console.log('message', messages);
-
         switch (typeMessage) {
           case TypeMessage.Success:
             this.showSuccess(messages);

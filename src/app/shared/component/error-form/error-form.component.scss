@@ -4,5 +4,16 @@
   border: solid #e60017;
   border-width: 0 0 0 6px;
   color: #73000c;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: left;
+  p {
+    margin: 0;
+    font-family: var(--font-family-principal);
+    font-size: 14px;
+
+    span {
+      font-weight: 700;
+    }
+  }
 }

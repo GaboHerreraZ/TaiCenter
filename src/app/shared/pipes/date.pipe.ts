@@ -5,7 +5,8 @@ import { format } from 'date-fns';
   name: 'CustomDate',
 })
 export class CustomDatePipe implements PipeTransform {
-  transform(value: Date): string {
-    return format(value, 'dd/MM/yyyy hh:mm:00');
+  transform(value: any): string {
+    const newDate = !value['seconds'] ? new Date(value) : value.toDate();
+    return format(newDate, 'dd/MM/yyyy hh:mm:00');
   }
 }

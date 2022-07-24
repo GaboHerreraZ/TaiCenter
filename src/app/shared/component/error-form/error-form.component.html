@@ -1,1 +1,8 @@
-<div *ngIf="form?.invalid" class="error-container">Error de prueba</div>
+<div *ngIf="errors.length > 0 && form.touched" class="error-container">
+  <div *ngFor="let error of errors">
+    <p>
+      <span>{{ error.control }}:</span>
+      {{ error.message }}
+    </p>
+  </div>
+</div>

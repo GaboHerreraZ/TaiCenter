@@ -5,3 +5,58 @@
     width: 30%;
   }
 }
+
+.header-menu {
+  background-color: var(--color-text-principal);
+
+  ::ng-deep {
+    .p-button {
+      color: black;
+      background: var(--color-text-principal);
+      border: 1px solid var(--color-text-principal);
+    }
+
+    .p-button:enabled:hover {
+      color: black;
+      background: var(--color-text-principal);
+      border: 1px solid var(--color-text-principal);
+    }
+
+    .p-button:focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: none;
+    }
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 50px;
+    justify-content: space-between;
+
+    label {
+      line-height: 3;
+      display: flex;
+      align-items: center;
+      color: black;
+    }
+
+    label:nth-child(2) {
+      justify-self: flex-end;
+      margin-right: 50px;
+    }
+  }
+}
+
+::ng-deep {
+  .p-menu {
+    border: none;
+    width: 100%;
+  }
+
+  .p-menu .p-menuitem-link {
+    font-size: 15px;
+    font-family: var(--font-family-secondary);
+  }
+}

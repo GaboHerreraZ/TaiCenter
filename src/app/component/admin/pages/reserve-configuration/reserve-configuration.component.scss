@@ -1,0 +1,16 @@
+.color-grid {
+  width: 50px;
+  height: 20px;
+  border: 1px solid black;
+}
+
+::ng-deep {
+  .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+    font-family: var(--font-family-principal);
+  }
+
+  .p-dialog .p-dialog-header {
+    font-family: var(--font-family-secondary);
+    padding: 1rem 1.5rem;
+  }
+}

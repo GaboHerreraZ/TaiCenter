@@ -1,0 +1,104 @@
+<p-confirmDialog #cd key="confirm-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="cd.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="cd.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
+<p-confirmDialog #cdNo key="confirm-no-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="cdNo.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="cdNo.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
+
+<div class="container-wods">
+  <p-panel
+    [header]="getHeaderName(dataGrouped[keys][0])"
+    [toggleable]="true"
+    *ngFor="let keys of dataGroupedKeys"
+    [styleClass]="getClassHeader(dataGrouped[keys][0])"
+  >
+    <p-table
+      [columns]="cols"
+      [value]="dataGrouped[keys]"
+      responsiveLayout="stack"
+      styleClass="p-datatable-sm"
+      [paginator]="true"
+      [rows]="10"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <h5 class="title-2 m-0">Personas apuntadas al wod</h5>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr class="title-2">
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr class="title-2">
+          <td>
+            {{ rowData["userName"] }}
+          </td>
+          <td>
+            {{ rowData["lastName"] }}
+          </td>
+          <td>
+            {{ rowData["attend"] }}
+          </td>
+          <td>
+            {{ rowData["state"] }}
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              pTooltip="Confirmar asistencia"
+              icon="pi pi-check"
+              class="p-button-rounded p-button-success"
+              (click)="confirmAttend(rowData)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              pTooltip="Confirmar inasistencia"
+              icon="pi pi-times"
+              class="p-button-rounded p-button-danger"
+              (click)="confirmNoAttend(rowData)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+</div>
