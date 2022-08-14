@@ -16,7 +16,7 @@ export class RootComponent implements OnInit {
   items: MenuItem[] = [];
   itemsAdmin: MenuItem[] = [
     {
-      label: 'Clientes',
+      label: 'Usuarios',
       icon: 'pi pi-fw pi-user',
       command: () => {
         this.sidebar = false;
