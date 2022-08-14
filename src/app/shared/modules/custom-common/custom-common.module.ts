@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorFormModule } from '../../component/error-form/error-form.module';
 import { CustomDatePipe } from '../../pipes/date.pipe';
 import { DayPipe } from '../../pipes/day.pipe';
+import { DateColorDirective } from '../../directives/date-color.directive';
 
 @NgModule({
-  declarations: [CustomDatePipe, DayPipe],
+  declarations: [CustomDatePipe, DayPipe, DateColorDirective],
   imports: [CommonModule, ReactiveFormsModule, ErrorFormModule, FormsModule],
   exports: [
     ReactiveFormsModule,
@@ -14,6 +15,7 @@ import { DayPipe } from '../../pipes/day.pipe';
     FormsModule,
     CustomDatePipe,
     DayPipe,
+    DateColorDirective,
   ],
   providers: [],
 })

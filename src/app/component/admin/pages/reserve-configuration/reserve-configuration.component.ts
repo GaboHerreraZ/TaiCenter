@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Message } from '../models/message';
 import { DialogService } from 'primeng/dynamicdialog';
 import { WodEditorComponent } from 'src/app/shared/component/calendar/pages/wod-editor/wod-editor.component';
+import { WodService } from 'src/app/shared/services/wod-service.service';
 
 @Component({
   selector: 'app-reserve-configuration',
@@ -23,7 +24,8 @@ export class ReserveConfigurationComponent implements OnInit {
     private calendarWodService: CalendarWodService,
     private loadingService: LoadingService,
     private confirmationService: ConfirmationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private wodService: WodService
   ) {}
 
   ngOnInit(): void {
@@ -51,13 +53,14 @@ export class ReserveConfigurationComponent implements OnInit {
     });
     await this.calendarWodService.deleteClass(row.uid);
     this.getClasses(true);
+    this.calendarWodService.consultaEvents.next(true);
+
     this.loadingService.end();
   }
 
   async getClasses(event: boolean) {
     if (event) {
       const response = await this.calendarWodService.getConfigurationWods();
-      this.calendarWodService.consultaEvents.next(true);
       this.recurringEvents = response;
     }
   }
@@ -69,6 +72,7 @@ export class ReserveConfigurationComponent implements OnInit {
     });
     ref.onClose.subscribe(() => {
       this.getClasses(true);
+      this.calendarWodService.consultaEvents.next(true);
     });
   }
 
@@ -89,11 +93,34 @@ export class ReserveConfigurationComponent implements OnInit {
       icon: 'pi pi-info-circle',
       header: 'Confirmación',
       accept: async () => {
-        this.loadingService.start();
-        await this.calendarWodService.deleteWodById(`${event.id}`);
-        this.calendarWodService.consultaEvents.next(true);
-        this.loadingService.end();
+        const validate = await this.validateUserInWod(event);
+        if (validate.size === 0) {
+          this.deleteWodById(event);
+        }
       },
     });
+  }
+
+  async deleteWodById(event: CalendarEvent) {
+    this.loadingService.start();
+    await this.calendarWodService.deleteWodById(`${event.id}`);
+    this.calendarWodService.consultaEvents.next(true);
+    this.loadingService.end();
+  }
+
+  async validateUserInWod(event: CalendarEvent) {
+    this.loadingService.start();
+    const response = await this.wodService.getUsersInWod(`${event.id}`);
+    if (response.size > 0) {
+      this.confirmationService.confirm({
+        key: 'block-delete-id',
+        message: Message.canNotDeleteWod,
+        icon: 'pi pi-info-circle',
+        header: 'Información',
+      });
+    }
+    this.loadingService.end();
+
+    return response;
   }
 }

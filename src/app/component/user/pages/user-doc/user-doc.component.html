@@ -59,8 +59,7 @@
         </label>
       </div>
       <form [formGroup]="formGroup">
-        <app-error-form [form]="formGroup"></app-error-form>
-
+        <!-- <app-error-form [form]="formGroup"></app-error-form>-->
         <p-divider layout="horizontal">
           <h4 class="title-2">Datos Personales</h4>
         </p-divider>
@@ -127,22 +126,22 @@
             <label for="float-input">Mote</label>
           </span>
           <span class="p-float-label">
-            <input
+            <p-dropdown
+              inputId="dropdown"
+              [autoDisplayFirst]="false"
+              [options]="plans"
               formControlName="plan"
-              id="float-input"
-              type="text"
-              pInputText
-            />
+            ></p-dropdown>
             <label for="float-input">Plan</label>
           </span>
           <span class="p-float-label">
             <input
-              formControlName="remainingLessons"
+              formControlName="remainingWods"
               id="float-input"
               type="number"
               pInputText
             />
-            <label for="float-input">Clases restantes</label>
+            <label for="float-input">Wods restantes</label>
           </span>
         </div>
         <div class="form-button">

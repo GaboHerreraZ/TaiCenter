@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import {
   Attend,
   WodState,
 } from 'src/app/shared/component/calendar/models/constant';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
-import { State, TypeMessage } from 'src/app/shared/enum/message';
 import { UserDataWod } from 'src/app/shared/models/user-data-wod.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -17,17 +16,24 @@ import { Messages } from '../../models/messages';
 import { UserService } from '../../services/user.service';
 import { addHours } from 'date-fns';
 import { UserWod } from '../../models/user.model';
+import {
+  CenterPlan,
+  CenterPlanWods,
+  CenterWodsByPlan,
+  TypeMessage,
+} from 'src/app/shared/models/constants';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user-doc.component.html',
   styleUrls: ['./user-doc.component.scss'],
 })
-export class UserDocComponent implements OnInit {
+export class UserDocComponent implements OnInit, OnDestroy {
   file: File;
   authId: string;
   newUser = true;
-  userWod: UserWod | any;
+  userWod: UserWod | any = null;
 
   gender = [
     {
@@ -36,6 +42,15 @@ export class UserDocComponent implements OnInit {
     },
     { name: 'Mujer', code: 'M' },
   ];
+
+  plans = [
+    CenterPlan.Semanal,
+    CenterPlan.Quincenal,
+    CenterPlan.Basico,
+    CenterPlan.Intermedio,
+    CenterPlan.Avanzado,
+  ];
+  centerPlan = CenterWodsByPlan;
 
   imageUrl: string | ArrayBuffer | null | undefined =
     '../../../assets/img/default.png';
@@ -49,6 +64,8 @@ export class UserDocComponent implements OnInit {
 
   cols: any[];
 
+  unsubscribe: Subject<any> = new Subject<any>();
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -58,14 +75,20 @@ export class UserDocComponent implements OnInit {
     private notificationService: NotificationService,
     private storageService: StorageService,
     private confirmationService: ConfirmationService,
-    private wodService: WodService
+    private wodService: WodService,
+    private route: ActivatedRoute
   ) {
     this.authId = this.authService.currentUser()?.uid || '';
+    this.route.data.subscribe((data: any) => {
+      if (data.datoUsuario.data()) {
+        this.userWod = data.datoUsuario.data();
+        this.newUser = false;
+      }
+    });
   }
 
   ngOnInit(): void {
     this.formGroup = this.getForm();
-
     this.cols = [
       { field: 'title', header: 'Wod' },
       { field: 'start', header: 'Fecha' },
@@ -73,8 +96,13 @@ export class UserDocComponent implements OnInit {
       { field: 'state', header: 'Estado' },
     ];
 
+    this.assignForm(this.userWod);
     this.getWodsUser();
-    this.getUserById();
+    this.planChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next(null);
   }
 
   myUploader(event: any) {
@@ -106,6 +134,7 @@ export class UserDocComponent implements OnInit {
         this.notificationService.createMessage(TypeMessage.Success, [
           Messages.UserData,
         ]);
+        this.formGroup.controls['plan'].disable();
       })
       .catch(() => {
         this.loading.end();
@@ -172,7 +201,6 @@ export class UserDocComponent implements OnInit {
   private assignForm(data: any) {
     if (data) {
       this.formGroup.patchValue(data);
-      this.newUser = false;
     }
   }
 
@@ -184,28 +212,25 @@ export class UserDocComponent implements OnInit {
       phoneNumber: [null, Validators.required],
       gender: [null, Validators.required],
       mote: [],
-      remainingLessons: [{ value: 0, disabled: true }],
-      plan: [{ value: 'Básico', disabled: true }],
+      remainingWods: [{ value: 0, disabled: true }],
+      plan: [{ value: null, disabled: !this.newUser }, Validators.required],
       state: [],
+      startDate: [new Date()],
+      endDate: [new Date()],
     });
-  }
-
-  private async getUserById() {
-    this.userWod = this.userService.getUserWod();
-    console.log('ojito', this.userService.getUserWod());
-    if (!this.userWod) {
-      console.log('gonorrea');
-      this.loading.start();
-      const user = await this.userService.getUserById(this.authId);
-      this.userWod = user.data();
-      this.loading.end();
-      this.userService.setUserWod(this.userWod);
-    }
-    this.assignForm(this.userWod);
   }
 
   private async getWodsUser() {
     this.wods = await this.wodService.getUserWods(this.authId);
     this.loading.end();
+  }
+
+  private planChanges() {
+    this.formGroup.controls['plan'].valueChanges
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((value) => {
+        const wods = this.centerPlan.find((p) => p.plan === value)?.wods;
+        this.formGroup.patchValue({ remainingWods: wods });
+      });
   }
 }

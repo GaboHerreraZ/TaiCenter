@@ -14,6 +14,7 @@ import { RecurringWod } from '../models/recurring-wod.model';
 import { Wod } from '../models/wod.model';
 import { WodConfiguration } from '../models/wod-configuration.model';
 import { BehaviorSubject } from 'rxjs';
+import { addDays, getDate, getMonth, getYear } from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
@@ -45,8 +46,23 @@ export class CalendarWodService {
   }
 
   getWods() {
+    const currentDay = new Date(
+      getYear(new Date()),
+      getMonth(new Date()),
+      getDate(new Date()),
+      7,
+      0,
+      0,
+      0
+    );
+
+    const endDay = addDays(currentDay, 7);
     const dbInstance = collection(this.fireStore, 'wod');
-    const q = query(dbInstance);
+    const q = query(
+      dbInstance,
+      where('start', '>=', currentDay),
+      where('start', '<=', endDay)
+    );
     return getDocs(q);
   }
 

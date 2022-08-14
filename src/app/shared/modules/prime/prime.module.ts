@@ -22,6 +22,7 @@ import { BadgeModule } from 'primeng/badge';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PanelModule } from 'primeng/panel';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [],
@@ -49,6 +50,7 @@ import { PanelModule } from 'primeng/panel';
     DynamicDialogModule,
     ConfirmDialogModule,
     PanelModule,
+    CalendarModule,
   ],
   exports: [
     MenubarModule,
@@ -74,6 +76,7 @@ import { PanelModule } from 'primeng/panel';
     DynamicDialogModule,
     ConfirmDialogModule,
     PanelModule,
+    CalendarModule,
   ],
 })
 export class PrimeModule {}

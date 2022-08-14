@@ -15,6 +15,7 @@ import {
 } from 'src/app/shared/component/calendar/models/constant';
 import { UserService } from '../../services/user.service';
 import { UserWod } from '../../models/user.model';
+import { UserState } from 'src/app/shared/models/constants';
 
 @Component({
   selector: 'app-reserve-doc',
@@ -22,8 +23,8 @@ import { UserWod } from '../../models/user.model';
   styleUrls: ['./reserve-doc.component.scss'],
 })
 export class ReserveDocComponent implements OnInit {
-  user: User | null;
-  userWod: UserWod;
+  user: User | any;
+  userWod: UserWod | any;
 
   constructor(
     private calendarWodService: CalendarWodService,
@@ -35,12 +36,12 @@ export class ReserveDocComponent implements OnInit {
     private router: Router
   ) {
     this.user = this.authService.currentUser();
-    this.userWod = this.userWodService.getUserWod();
   }
 
   ngOnInit(): void {
     console.log(11);
     this.getClassEvents();
+    this.getUserData();
   }
 
   getClassEvents() {
@@ -48,6 +49,17 @@ export class ReserveDocComponent implements OnInit {
   }
 
   saveClass(event: any) {
+    console.log('this.userWod', this.userWod);
+    if (!this.userWod) {
+      this.validateUser();
+      return;
+    }
+
+    if (this.userWod.state === UserState.Pendiente) {
+      this.pendingUser();
+      return;
+    }
+
     const wod = event.event;
     this.confirmationService.confirm({
       key: 'reserve-id',
@@ -75,6 +87,19 @@ export class ReserveDocComponent implements OnInit {
           return;
         }
 
+        const usersInWod = await this.wodService.getUsersInWod(wod.id);
+
+        if (usersInWod.size === 12) {
+          this.confirmationService.confirm({
+            key: 'full-users-id',
+            message: Messages.WodFull,
+            icon: 'pi pi-info-circle',
+            header: 'Wod Completo',
+          });
+          this.loadingService.end();
+          return;
+        }
+
         await this.wodService.addUserWod({
           userId: this.user?.uid,
           wodId: wod.id,
@@ -85,10 +110,35 @@ export class ReserveDocComponent implements OnInit {
           userWodId: '',
           userName: this.userWod.name,
           lastName: this.userWod.lastName,
+          startDate: new Date(),
+          endDate: new Date(),
         });
         this.loadingService.end();
         this.router.navigate(['panel/usuario']);
       },
+    });
+  }
+
+  private async getUserData() {
+    const response: any = await this.userWodService.getUserById(this.user?.uid);
+    this.userWod = response.data();
+  }
+
+  private validateUser() {
+    this.confirmationService.confirm({
+      key: 'no-update-user-id',
+      message: Messages.UpdateDataUser,
+      icon: 'pi pi-info-circle',
+      header: 'Actualizar datos',
+    });
+  }
+
+  private pendingUser() {
+    this.confirmationService.confirm({
+      key: 'pending-user-id',
+      message: Messages.PendingUser,
+      icon: 'pi pi-info-circle',
+      header: 'Usuario pendiente por activar',
     });
   }
 }

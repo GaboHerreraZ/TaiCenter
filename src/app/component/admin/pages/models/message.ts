@@ -9,4 +9,12 @@ export class Message {
 
   public static readonly confirmNoAttend: string =
     '¿Desea confirmar la inasistencia de {0} al Wod?';
+
+  public static readonly canNotDeleteWod: string =
+    'No se puede eliminar el Wod, ya hay personas inscritas';
+
+  public static readonly activateUser: string =
+    'A continuación realizará la activación del usuario:';
+
+  public static readonly ActivateOk: string = 'Usuario activado correctamente';
 }

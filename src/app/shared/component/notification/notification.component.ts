@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { TypeMessage } from '../../enum/message';
+import { TypeMessage } from '../../models/constants';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({

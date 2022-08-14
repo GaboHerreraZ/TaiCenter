@@ -1,0 +1,74 @@
+<p class="text-style-principal">
+  {{ message }}
+</p>
+<form [formGroup]="form">
+  <div *ngIf="form" class="form-container">
+    <span class="p-float-label">
+      <input
+        formControlName="name"
+        id="email-input"
+        type="text"
+        pInputText
+        autocomplete="off"
+      />
+      <label for="float-input">Nombre</label>
+    </span>
+    <span class="p-float-label">
+      <input
+        formControlName="lastName"
+        id="email-input"
+        type="text"
+        pInputText
+        autocomplete="off"
+      />
+      <label for="float-input">Apellidos</label>
+    </span>
+    <span class="p-float-label">
+      <p-dropdown
+        inputId="dropdown"
+        [autoDisplayFirst]="false"
+        [options]="states"
+        formControlName="state"
+      ></p-dropdown>
+      <label for="float-input">Estado</label>
+    </span>
+    <span class="p-float-label">
+      <p-dropdown
+        inputId="dropdown"
+        [autoDisplayFirst]="false"
+        [options]="plans"
+        formControlName="plan"
+      ></p-dropdown>
+      <label for="float-input">Plan</label>
+    </span>
+    <span class="p-float-label">
+      <input
+        formControlName="wods"
+        id="email-input"
+        type="text"
+        pInputText
+        autocomplete="off"
+      />
+      <label for="float-input">Wods</label>
+    </span>
+    <span class="p-float-label">
+      <p-calendar formControlName="startDate"></p-calendar>
+      <label for="float-input">Fecha Inscripción</label>
+    </span>
+    <span class="p-float-label">
+      <p-calendar formControlName="endDate" [minDate]="minDate"></p-calendar>
+      <label for="float-input">Fecha Vigencia</label>
+    </span>
+  </div>
+  <div class="button-container">
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-primary"
+      label="Actualizar"
+      [disabled]="form.invalid"
+      (click)="save()"
+    ></button>
+  </div>
+</form>

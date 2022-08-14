@@ -37,4 +37,56 @@
     ></button>
   </ng-template>
 </p-confirmDialog>
+
+<p-confirmDialog #noUpdate key="no-update-user-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="noUpdate.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="noUpdate.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
+
+<p-confirmDialog #pending key="pending-user-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="pending.accept()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
+
+<p-confirmDialog #fullUser key="full-users-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="fullUser.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="fullUser.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
 <app-calendar (saveClass)="saveClass($event)"></app-calendar>

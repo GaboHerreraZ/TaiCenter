@@ -9,18 +9,9 @@ import {
   query,
   where,
   updateDoc,
-  endAt,
 } from '@angular/fire/firestore';
 import { UserDataWod } from '../models/user-data-wod.model';
-import {
-  addDays,
-  getDay,
-  getYear,
-  getMonth,
-  addHours,
-  format,
-  getDate,
-} from 'date-fns';
+import { getYear, getMonth, addHours, getDate } from 'date-fns';
 import { Attend, WodState } from '../component/calendar/models/constant';
 
 @Injectable({
@@ -54,6 +45,12 @@ export class WodService {
     return getDocs(q);
   }
 
+  getUsersInWod(wodId: string) {
+    const dbInstance = collection(this.fireStore, 'usersWods');
+    const q = query(dbInstance, where('wodId', '==', wodId));
+    return getDocs(q);
+  }
+
   async getUserWods(userId: string) {
     const usersDataWods: UserDataWod[] = [];
     const userWods = await this.getUserWodsByUserId(userId);
@@ -69,6 +66,8 @@ export class WodService {
         userWodId: userWod.id,
         userName: data['userName'],
         lastName: data['lastName'],
+        startDate: data['startDate'],
+        endDate: data['endDate'],
       });
     });
 
@@ -93,8 +92,6 @@ export class WodService {
     );
 
     let endDay = addHours(currentDay, 14);
-    endDay = addDays(endDay, 1); //TODO PENDIENTE REVISAR
-
     const dbInstance = collection(this.fireStore, 'usersWods');
     const q = query(
       dbInstance,

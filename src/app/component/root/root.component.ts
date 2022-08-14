@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Constants } from '../login/models/constant';
 
@@ -77,7 +78,11 @@ export class RootComponent implements OnInit {
 
   sidebar = false;
   user: User | null;
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private loadingService: LoadingService
+  ) {
     this.user = this.authService.currentUser();
   }
 
@@ -86,8 +91,10 @@ export class RootComponent implements OnInit {
   }
 
   logOut() {
+    this.loadingService.start();
     this.authService.logout();
     this.router.navigate(['inicio']);
+    this.loadingService.end();
   }
 
   private async getMenuUser() {

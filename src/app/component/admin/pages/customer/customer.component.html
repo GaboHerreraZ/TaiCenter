@@ -1,4 +1,14 @@
 <div class="container-customer">
+  <div class="color-container">
+    <span>
+      <p-colorPicker [(ngModel)]="colorEnd"></p-colorPicker>
+      <label> Subscripción vencida </label>
+    </span>
+    <span>
+      <p-colorPicker [(ngModel)]="colorPending"></p-colorPicker>
+      <label> Subscripción a punto de vencer</label>
+    </span>
+  </div>
   <p-table
     [columns]="cols"
     [value]="users"
@@ -29,20 +39,37 @@
           {{ rowData["lastName"] }}
         </td>
         <td>
-          {{ rowData["mote"] }}
-        </td>
-        <td>
-          {{ rowData["age"] }}
-        </td>
-        <td>
           {{ rowData["phoneNumber"] }}
         </td>
         <td>
           {{ rowData["plan"] }}
         </td>
-        <td>
+        <td
+          [ngClass]="
+            rowData['state'] === 'Pendiente'
+              ? 'pending-status'
+              : rowData['state'] === 'Activo'
+              ? 'ok-status '
+              : 'ko-status'
+          "
+        >
           {{ rowData["state"] }}
         </td>
+        <td>
+          {{ rowData["startDate"] | CustomDate }}
+        </td>
+        <td [dateColor]="rowData['endDate']">
+          {{ rowData["endDate"] | CustomDate }}
+        </td>
+        <button
+          pButton
+          pRipple
+          pTooltip="Gestionar usuario"
+          tooltipPosition="top"
+          icon="pi pi-cog"
+          class="p-button-rounded p-button-warning"
+          (click)="enableUser(rowData)"
+        ></button>
       </tr>
     </ng-template>
   </p-table>

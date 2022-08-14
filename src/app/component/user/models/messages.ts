@@ -8,4 +8,13 @@ export class Messages {
     'El Wod será cancelado, ¿Está seguro?';
   public static readonly ActivateWod: string =
     'El Wod se activará nuevamente, ¿Está seguro?';
+
+  public static readonly UpdateDataUser: string =
+    'Debe actualizar la información en "Mis Datos" antes de reservar un Wod';
+
+  public static readonly WodFull: string =
+    'El número de personas por WOD permitido está completo, seleccione otro';
+
+  public static readonly PendingUser: string =
+    'El usuario se encuentra pendiente de activación, por favor contacte el administrador para poder reservar clases';
 }

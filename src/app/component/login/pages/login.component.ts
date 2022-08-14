@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
-import { TypeMessage } from 'src/app/shared/enum/message';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { RegisterDocComponent } from '../../register/pages/register-doc.component';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Message } from './models/message';
 import { Constants } from '../models/constant';
+import { TypeMessage } from 'src/app/shared/models/constants';
 
 @Component({
   selector: 'app-login',
@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
     this.authService.loginGoogle().then((google) => {
       if (google.user.email === Constants.EmailAdmin) {
         this.router.navigate(['panel/administrador/configuracion-wods']);
+      } else {
+        this.router.navigate(['panel/usuario/normas-del-centro']);
       }
     });
   }

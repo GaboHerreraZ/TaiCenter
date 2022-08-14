@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { TypeMessage } from '../enum/message';
+import { TypeMessage } from '../models/constants';
 
 @Injectable({
   providedIn: 'root',

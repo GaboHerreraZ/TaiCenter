@@ -6,7 +6,6 @@ import { CalendarService } from '../../services/calendar.service';
 import flatpickr from 'flatpickr';
 import { Spanish } from 'flatpickr/dist/l10n/es';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { State, TypeMessage } from 'src/app/shared/enum/message';
 import { addDays } from 'date-fns';
 import { CalendarWodService } from 'src/app/shared/services/calendar-wod.service';
 import { Wod } from 'src/app/shared/models/wod.model';
@@ -14,6 +13,7 @@ import { Messages } from 'src/app/shared/models/message';
 import { LoadingService } from '../../../loading/shared/loading.service';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Days, WodColors, Wods } from '../../models/constant';
+import { State, TypeMessage } from 'src/app/shared/models/constants';
 
 @Component({
   selector: 'app-wod-editor',

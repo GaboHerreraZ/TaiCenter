@@ -5,7 +5,10 @@ export interface UserWod {
   phoneNumber: string;
   gender: string;
   mote: string;
-  remainingLessons: number;
+  remainingWods?: number;
   plan: string;
   state: string;
+  startDate: Date;
+  endDate: Date;
+  userId: string;
 }

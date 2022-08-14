@@ -3,7 +3,10 @@ import { UserDataWod } from 'src/app/shared/models/user-data-wod.model';
 import { WodService } from 'src/app/shared/services/wod-service.service';
 import * as _ from 'lodash';
 import { format } from 'date-fns';
-import { Wods } from 'src/app/shared/component/calendar/models/constant';
+import {
+  Wods,
+  WodState,
+} from 'src/app/shared/component/calendar/models/constant';
 import { ConfirmationService } from 'primeng/api';
 import { Message } from '../models/message';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
@@ -70,9 +73,11 @@ export class AttendanceWodComponent implements OnInit {
     const response = await this.wodService.getDaysWods();
     response.forEach((wods) => {
       const data: any = wods.data();
-      this.userWods.push({
-        ...data,
-      });
+      if (data.state === WodState.Activa) {
+        this.userWods.push({
+          ...data,
+        });
+      }
     });
 
     this.dataGrouped = _.groupBy(this.userWods, (x: UserDataWod) => x.wodId);

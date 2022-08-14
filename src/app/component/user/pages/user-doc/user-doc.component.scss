@@ -54,29 +54,6 @@ h4 {
   padding: 0 2rem;
 }
 
-.ok-status {
-  background: #c8e6c9;
-  color: #256029;
-  padding: 0.25em 0.5rem;
-}
-
-.ko-status {
-  background: #ffcdd2;
-  color: #c63737;
-  padding: 0.25em 0.5rem;
-}
-
-.pending-status {
-  background-color: #ffd8b2;
-  color: #805b36;
-  padding: 0.25em 0.5rem;
-}
-.done-status {
-  background-color: #c0bcb7;
-  color: #5a5856;
-  padding: 0.25em 0.5rem;
-}
-
 @media (max-width: 600px) {
   .register-container {
     grid-template-columns: 1fr;

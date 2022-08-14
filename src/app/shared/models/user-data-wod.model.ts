@@ -8,4 +8,6 @@ export interface UserDataWod {
   userWodId?: string;
   userName: string;
   lastName: string;
+  startDate?: Date;
+  endDate: Date;
 }

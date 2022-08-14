@@ -7,6 +7,7 @@ import {
 import { Routes } from '@angular/router';
 import { map, pipe } from 'rxjs';
 import { Constants } from '../login/models/constant';
+import { UserService } from '../user/services/user.service';
 import { RootComponent } from './root.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -44,6 +45,7 @@ export const AppHomeRoutes: Routes = [
         data: {
           authGuardPipe: redirectUnauthorizedToLogin,
         },
+        resolve: { datoUsuario: UserService },
       },
       {
         path: 'usuario/reservar-wod',
