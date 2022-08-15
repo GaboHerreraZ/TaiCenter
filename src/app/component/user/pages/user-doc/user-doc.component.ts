@@ -214,7 +214,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
       mote: [],
       remainingWods: [{ value: 0, disabled: true }],
       plan: [{ value: null, disabled: !this.newUser }, Validators.required],
-      state: [],
+      state: [{ value: null, disabled: true }],
       startDate: [new Date()],
       endDate: [new Date()],
     });

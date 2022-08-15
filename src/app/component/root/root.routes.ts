@@ -92,10 +92,21 @@ export const AppHomeRoutes: Routes = [
         },
       },
       {
-        path: 'administrador/clientes',
+        path: 'administrador/usuarios',
         loadChildren: () =>
           import('../admin/pages/customer/customer.module').then(
             (c) => c.CustomerModule
+          ),
+        canActivate: [AuthGuard],
+        data: {
+          authGuardPipe: accountAdmin,
+        },
+      },
+      {
+        path: 'administrador/notificaciones',
+        loadChildren: () =>
+          import('../admin/pages/notifications/notifications.module').then(
+            (c) => c.NotificationsModule
           ),
         canActivate: [AuthGuard],
         data: {

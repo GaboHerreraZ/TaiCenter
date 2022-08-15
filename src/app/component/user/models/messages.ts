@@ -17,4 +17,7 @@ export class Messages {
 
   public static readonly PendingUser: string =
     'El usuario se encuentra pendiente de activación, por favor contacte el administrador para poder reservar clases';
+
+  public static readonly WodOut: string =
+    'El Wod se encuentra cerrado, recuerda que puedes reservar hasta 1 hora antes de el inicio del wod';
 }

@@ -17,4 +17,10 @@ export class Message {
     'A continuación realizará la activación del usuario:';
 
   public static readonly ActivateOk: string = 'Usuario activado correctamente';
+
+  public static readonly NotificationOk: string =
+    'Notificación creada correctamente';
+
+  public static readonly NotificationDeleteOk: string =
+    'Notificación eliminada correctamente';
 }

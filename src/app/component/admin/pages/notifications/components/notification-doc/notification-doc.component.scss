@@ -1,0 +1,28 @@
+.button-container {
+  margin-top: 20px;
+  text-align: center;
+  button {
+    margin: 10px 20px;
+  }
+}
+
+.form-container {
+  display: grid;
+  grid-template-areas:
+    "type     "
+    "notification ";
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.type {
+  grid-area: type;
+}
+
+.state {
+  grid-area: state;
+}
+
+.notification {
+  grid-area: notification;
+}

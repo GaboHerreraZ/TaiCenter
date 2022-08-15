@@ -89,4 +89,7 @@
     ></button>
   </ng-template>
 </p-confirmDialog>
+<div class="container-messages">
+  <p-messages [(value)]="notifications" [enableService]="false"></p-messages>
+</div>
 <app-calendar (saveClass)="saveClass($event)"></app-calendar>

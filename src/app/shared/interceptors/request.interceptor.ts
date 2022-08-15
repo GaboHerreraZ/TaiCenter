@@ -18,13 +18,11 @@ export class RequestInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap((result) => {
-        console.log('mierda', result);
         /*this.notificationService.createMessage(TypeMessage.Success, [
           'Operación realizada correctamente',
         ]);*/
       }),
       catchError((requestError: HttpErrorResponse) => {
-        console.log('requestError', requestError);
         /*this.notificationService.createMessage(TypeMessage.Error, [
           'Se ha presentado un error realizando la operación',
         ]);*/

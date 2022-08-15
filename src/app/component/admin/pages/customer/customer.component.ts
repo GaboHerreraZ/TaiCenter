@@ -64,7 +64,7 @@ export class CustomerComponent implements OnInit {
   enableUser(user: UserWod) {
     const ref = this.dialogService.open(ManageCustomerComponent, {
       header: 'Gestionar Usuario',
-      width: '50%',
+      width: '80%',
       autoZIndex: true,
       data: {
         title: Message.activateUser,

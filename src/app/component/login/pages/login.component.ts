@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
   }
 
   loginFacebook() {
-    this.authService.loginFacebook();
+    this.authService.loginFacebook().then(() => {
+      this.router.navigate(['panel/usuario/normas-del-centro']);
+    });
   }
 
   async login() {

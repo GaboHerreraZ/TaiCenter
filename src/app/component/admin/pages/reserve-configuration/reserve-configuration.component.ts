@@ -67,7 +67,7 @@ export class ReserveConfigurationComponent implements OnInit {
 
   newEvent() {
     const ref = this.dialogService.open(WodEditorComponent, {
-      width: '70%',
+      width: '80%',
       header: 'Configurador de clases',
     });
     ref.onClose.subscribe(() => {

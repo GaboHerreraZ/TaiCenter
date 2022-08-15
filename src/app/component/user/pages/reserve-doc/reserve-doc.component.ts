@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CalendarWodService } from 'src/app/shared/services/calendar-wod.service';
 import { User } from '@angular/fire/auth';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, Message } from 'primeng/api';
 import { Messages } from '../../models/messages';
-import { format } from 'date-fns';
+import { addHours, format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { WodService } from 'src/app/shared/services/wod-service.service';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
@@ -16,15 +16,21 @@ import {
 import { UserService } from '../../services/user.service';
 import { UserWod } from '../../models/user.model';
 import { UserState } from 'src/app/shared/models/constants';
+import { NotificationWodService } from 'src/app/shared/services/notification-wod.service';
+import { from, map, Subject, takeUntil } from 'rxjs';
+import { NotificationWod } from 'src/app/shared/models/notification-wod.model';
 
 @Component({
   selector: 'app-reserve-doc',
   templateUrl: './reserve-doc.component.html',
   styleUrls: ['./reserve-doc.component.scss'],
 })
-export class ReserveDocComponent implements OnInit {
+export class ReserveDocComponent implements OnInit, OnDestroy {
   user: User | any;
   userWod: UserWod | any;
+
+  notifications: Message[];
+  unsubscribe = new Subject();
 
   constructor(
     private calendarWodService: CalendarWodService,
@@ -33,15 +39,19 @@ export class ReserveDocComponent implements OnInit {
     private wodService: WodService,
     private loadingService: LoadingService,
     private userWodService: UserService,
-    private router: Router
+    private router: Router,
+    private notificationsWod: NotificationWodService
   ) {
     this.user = this.authService.currentUser();
   }
 
   ngOnInit(): void {
-    console.log(11);
     this.getClassEvents();
     this.getUserData();
+    this.getNotifications();
+  }
+  ngOnDestroy(): void {
+    this.unsubscribe.next(null);
   }
 
   getClassEvents() {
@@ -49,7 +59,11 @@ export class ReserveDocComponent implements OnInit {
   }
 
   saveClass(event: any) {
-    console.log('this.userWod', this.userWod);
+    if (!this.validateTimeWod(event.event)) {
+      this.timeOut();
+      return;
+    }
+
     if (!this.userWod) {
       this.validateUser();
       return;
@@ -140,5 +154,39 @@ export class ReserveDocComponent implements OnInit {
       icon: 'pi pi-info-circle',
       header: 'Usuario pendiente por activar',
     });
+  }
+
+  private timeOut() {
+    this.confirmationService.confirm({
+      key: 'pending-user-id',
+      message: Messages.WodOut,
+      icon: 'pi pi-info-circle',
+      header: 'Wod Cerrado',
+    });
+  }
+
+  private validateTimeWod(event: any) {
+    const startWod = addHours(event.start, -1);
+    const currentDate = new Date();
+    return currentDate < startWod;
+  }
+
+  private getNotifications() {
+    this.loadingService.start();
+    from(this.notificationsWod.getNotifications())
+      .pipe(
+        takeUntil(this.unsubscribe),
+        map((notifications: any) => {
+          const notificationsData: Message[] = [];
+          notifications.forEach((n: any) => {
+            notificationsData.push({ ...n.data() });
+          });
+          return notificationsData;
+        })
+      )
+      .subscribe((result) => {
+        this.notifications = result;
+        this.loadingService.end();
+      });
   }
 }

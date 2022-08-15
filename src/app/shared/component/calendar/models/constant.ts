@@ -34,3 +34,18 @@ export enum WodColors {
   Gap = '#22c33d',
   Tabata = '#c0ad30',
 }
+
+export enum NotificationState {
+  Activa = 'Activa',
+  Cerrada = 'Cerrada',
+}
+
+export enum NotificationSeverity {
+  Info = 'info',
+  Atencion = 'warn',
+}
+
+export enum NotificationSummary {
+  Info = 'Información',
+  Atencion = 'Atención',
+}

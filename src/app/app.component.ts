@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
     private authService: AuthService
   ) {
     this.user = this.authService.currentUser();
-    console.log(this.user);
   }
 
   ngOnInit(): void {

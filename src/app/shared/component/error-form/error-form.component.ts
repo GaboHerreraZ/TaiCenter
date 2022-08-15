@@ -20,7 +20,6 @@ export class ErrorFormComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('this.form', this.form);
     this.form.valueChanges
       .pipe(
         filter(() => this.form.touched),

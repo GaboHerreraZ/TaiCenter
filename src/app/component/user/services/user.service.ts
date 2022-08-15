@@ -23,7 +23,6 @@ export class UserService {
 
   async resolve() {
     const user: any = this.authService.currentUser();
-    console.log(user);
     return await this.getUserById(user?.uid);
   }
 

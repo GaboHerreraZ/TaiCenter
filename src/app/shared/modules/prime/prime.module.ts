@@ -23,6 +23,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PanelModule } from 'primeng/panel';
 import { CalendarModule } from 'primeng/calendar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [],
@@ -51,6 +53,8 @@ import { CalendarModule } from 'primeng/calendar';
     ConfirmDialogModule,
     PanelModule,
     CalendarModule,
+    InputTextareaModule,
+    MessagesModule,
   ],
   exports: [
     MenubarModule,
@@ -77,6 +81,8 @@ import { CalendarModule } from 'primeng/calendar';
     ConfirmDialogModule,
     PanelModule,
     CalendarModule,
+    InputTextareaModule,
+    MessagesModule,
   ],
 })
 export class PrimeModule {}

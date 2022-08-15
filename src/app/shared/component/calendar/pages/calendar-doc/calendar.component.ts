@@ -144,7 +144,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
     } else {
       this.events = events;
     }
-    console.log('events', this.events);
     this.refresh.next();
   }
 

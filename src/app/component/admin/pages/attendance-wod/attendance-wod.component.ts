@@ -10,6 +10,7 @@ import {
 import { ConfirmationService } from 'primeng/api';
 import { Message } from '../models/message';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
+import { UserService } from 'src/app/component/user/services/user.service';
 
 @Component({
   selector: 'app-attendance-wod',
@@ -20,7 +21,8 @@ export class AttendanceWodComponent implements OnInit {
   constructor(
     private wodService: WodService,
     private confirmationService: ConfirmationService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private userService: UserService
   ) {}
 
   userWods: UserDataWod[] = [];
@@ -83,10 +85,9 @@ export class AttendanceWodComponent implements OnInit {
     this.dataGrouped = _.groupBy(this.userWods, (x: UserDataWod) => x.wodId);
     this.dataGroupedKeys = Object.keys(this.dataGrouped);
     this.loadingService.end();
-    console.log('ss', this.dataGrouped);
   }
 
-  confirmAttend(userDataWod: UserDataWod) {
+  async confirmAttend(userDataWod: UserDataWod) {
     this.confirmationService.confirm({
       key: 'confirm-id',
       message: Message.confirmAttend.replace(
@@ -98,6 +99,7 @@ export class AttendanceWodComponent implements OnInit {
       accept: async () => {
         this.loadingService.start();
         await this.saveConfirmAttend(userDataWod);
+        await this.restWodUser(userDataWod.userId);
         this.getDaysWod();
         this.loadingService.end();
       },
@@ -124,6 +126,17 @@ export class AttendanceWodComponent implements OnInit {
 
   private async saveConfirmAttend(userDataWod: UserDataWod) {
     await this.wodService.confirmWod(userDataWod?.userId, userDataWod.wodId);
+  }
+
+  private async restWodUser(userId?: string) {
+    const user = await this.userService.getUserById(`${userId}`);
+    const dataUser: any = user.data();
+    const newUser = {
+      ...dataUser,
+      remainingWods: dataUser.remainingWods - 1,
+    };
+
+    await this.userService.updateUser(newUser, `${userId}`);
   }
 
   private async saveNoConfirmAttend(userDataWod: UserDataWod) {

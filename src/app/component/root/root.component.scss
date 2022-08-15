@@ -60,3 +60,14 @@
     font-family: var(--font-family-secondary);
   }
 }
+
+@media (max-width: 600px) {
+  .header-menu-content {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+
+    label:nth-child(2) {
+      justify-self: flex-start;
+    }
+  }
+}

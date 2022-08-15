@@ -20,7 +20,7 @@ export class RootComponent implements OnInit {
       icon: 'pi pi-fw pi-user',
       command: () => {
         this.sidebar = false;
-        this.router.navigate(['panel/administrador/clientes']);
+        this.router.navigate(['panel/administrador/usuarios']);
       },
     },
     {
@@ -33,19 +33,19 @@ export class RootComponent implements OnInit {
     },
     {
       label: 'Configurar clases',
-      icon: 'pi pi-fw pi-check-square',
+      icon: 'pi pi-fw pi-cog',
       command: () => {
         this.sidebar = false;
         this.router.navigate(['panel/administrador/configuracion-wods']);
       },
     },
     {
-      label: 'Solicitudes incripción',
-      icon: 'pi pi-fw pi-user-plus',
-      routerLink: '/panel/administrador/configurar-clases',
-      badge: '5',
-      badgeStyleClass: 'green-badge',
-      command: () => (this.sidebar = false),
+      label: 'Notificaciones',
+      icon: 'pi pi-fw pi-comment',
+      command: () => {
+        this.sidebar = false;
+        this.router.navigate(['panel/administrador/notificaciones']);
+      },
     },
   ];
 
