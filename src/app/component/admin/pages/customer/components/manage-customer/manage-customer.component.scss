@@ -37,5 +37,10 @@
     .p-dialog .p-dialog-header .p-dialog-title {
       font-size: 1rem;
     }
+
+    .p-dialog-content {
+      overflow: auto;
+      overflow-y: auto;
+    }
   }
 }
