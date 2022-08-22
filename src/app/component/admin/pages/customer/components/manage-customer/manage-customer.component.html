@@ -52,11 +52,18 @@
       <label for="float-input">Wods</label>
     </span>
     <span class="p-float-label">
-      <p-calendar formControlName="startDate"></p-calendar>
+      <p-calendar
+        formControlName="startDate"
+        dateFormat="dd/mm/yy"
+      ></p-calendar>
       <label for="float-input">Fecha Inscripción</label>
     </span>
     <span class="p-float-label">
-      <p-calendar formControlName="endDate" [minDate]="minDate"></p-calendar>
+      <p-calendar
+        formControlName="endDate"
+        dateFormat="dd/mm/yy"
+        [minDate]="minDate"
+      ></p-calendar>
       <label for="float-input">Fecha Vigencia</label>
     </span>
   </div>

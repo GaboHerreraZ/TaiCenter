@@ -1,3 +1,24 @@
+::ng-deep {
+  .p-dialog .p-dialog-content {
+    padding: 20px 20px;
+  }
+
+  .p-calendar {
+    width: 100%;
+  }
+
+  /*.p-datepicker {
+    width: 100%;
+    top: 25% !important;
+    font-family: var(--font-family-principal);
+  }*/
+
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month,
+  .p-datepicker-year {
+    font-family: var(--font-family-principal);
+  }
+}
+
 .formContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -13,11 +34,6 @@
   font-family: var(--font-family-principal);
 }
 
-::ng-deep .p-dialog .p-dialog-content {
-  padding: 20px 20px;
-  overflow: hidden;
-}
-
 .button-container {
   margin-top: 20px;
   text-align: center;
@@ -29,6 +45,12 @@
   .formContainer {
     grid-template-columns: 1fr 1fr;
     gap: 25px;
+  }
+
+  ::ng-deep {
+    .p-datepicker {
+      top: 200px !important;
+    }
   }
 }
 

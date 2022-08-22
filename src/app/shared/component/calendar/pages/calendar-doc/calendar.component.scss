@@ -1,8 +1,25 @@
 .container-calendar {
   margin: 50px;
+  height: 600px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 ::ng-deep {
   .cal-event-title {
     color: black;
+  }
+
+  .cal-week-view {
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  ::ng-deep {
+    .cal-week-view {
+      display: inline-block;
+      width: auto;
+    }
   }
 }

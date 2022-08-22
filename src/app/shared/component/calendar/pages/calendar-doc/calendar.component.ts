@@ -56,7 +56,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.resizeCalendar();
     this.getEventsWods();
   }
 
@@ -126,10 +125,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   private assignEventsCalendar(events: any[]) {
-    const actions = this.getActionsByUser();
     this.events = [];
     if (events.length > 0) {
       events.forEach((e) => {
+        const actions = this.getActionsByUser(e.data.start.toDate());
         this.events.push({
           id: e.id,
           title: e.data.title,
@@ -147,8 +146,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.refresh.next();
   }
 
-  private getActionsByUser() {
-    return this.user?.email === Constants.EmailAdmin
+  private getActionsByUser(eventDate: Date) {
+    return this.user?.email === Constants.EmailAdmin && eventDate > new Date()
       ? [this.deleteActions]
       : [];
   }

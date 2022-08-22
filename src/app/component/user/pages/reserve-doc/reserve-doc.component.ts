@@ -59,18 +59,7 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   }
 
   saveClass(event: any) {
-    if (!this.validateTimeWod(event.event)) {
-      this.timeOut();
-      return;
-    }
-
-    if (!this.userWod) {
-      this.validateUser();
-      return;
-    }
-
-    if (this.userWod.state === UserState.Pendiente) {
-      this.pendingUser();
+    if (!this.validations(event)) {
       return;
     }
 
@@ -133,6 +122,30 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
     });
   }
 
+  private validations(event: any): boolean {
+    if (!this.validateTimeWod(event.event)) {
+      this.timeOut();
+      return false;
+    }
+
+    if (!this.userWod) {
+      this.validateUser();
+      return false;
+    }
+
+    if (this.userWod.state === UserState.Pendiente) {
+      this.pendingUser();
+      return false;
+    }
+
+    if (this.userWod.state === UserState.Inactivo) {
+      this.inactiveUser();
+      return false;
+    }
+
+    return true;
+  }
+
   private async getUserData() {
     const response: any = await this.userWodService.getUserById(this.user?.uid);
     this.userWod = response.data();
@@ -151,6 +164,15 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       key: 'pending-user-id',
       message: Messages.PendingUser,
+      icon: 'pi pi-info-circle',
+      header: 'Usuario pendiente por activar',
+    });
+  }
+
+  private inactiveUser() {
+    this.confirmationService.confirm({
+      key: 'pending-user-id',
+      message: Messages.InactiveUser,
       icon: 'pi pi-info-circle',
       header: 'Usuario pendiente por activar',
     });

@@ -14,6 +14,15 @@
   .p-calendar {
     width: 100%;
   }
+
+  .p-datepicker {
+    font-family: var(--font-family-principal);
+  }
+
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month,
+  .p-datepicker-year {
+    font-family: var(--font-family-principal);
+  }
 }
 
 .form-container {

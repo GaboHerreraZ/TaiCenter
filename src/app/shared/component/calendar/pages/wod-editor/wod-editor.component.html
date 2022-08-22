@@ -35,34 +35,23 @@
       <label for="dropdown">Día</label>
     </span>
     <span class="p-float-label">
-      <input
-        id="float-input"
-        type="text"
-        pInputText
-        mwlFlatpickr
-        [altInput]="true"
-        [convertModelValue]="true"
-        [enableTime]="true"
-        dateFormat="Y-m-dTH:i"
-        altFormat="F j, Y H:i"
+      <p-calendar
+        appendTo="body"
+        dateFormat="dd/mm/yy"
         formControlName="startDate"
-      />
+        [showTime]="true"
+        inputId="time"
+      ></p-calendar>
       <label for="float-input">Vigencia Inicio</label>
     </span>
     <span class="p-float-label">
-      <input
-        id="float-input"
-        type="text"
-        pInputText
-        mwlFlatpickr
-        [altInput]="true"
-        [convertModelValue]="true"
-        [enableTime]="true"
-        dateFormat="Y-m-dTH:i"
-        altFormat="F j, Y H:i"
-        [minDate]="minDateFechaFin"
+      <p-calendar
+        appendTo="body"
+        dateFormat="dd/mm/yy"
         formControlName="endDate"
-      />
+        [showTime]="true"
+        inputId="time"
+      ></p-calendar>
       <label for="float-input">Vigencia Fin</label>
     </span>
   </div>

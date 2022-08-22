@@ -58,7 +58,7 @@ export class ManageCustomerComponent implements OnInit, OnDestroy {
       state: [this.user.state, Validators.required],
       plan: [this.user.plan, Validators.required],
       startDate: [{ value: startDate.toDate(), disabled: true }],
-      endDate: [new Date(), Validators.required],
+      endDate: [this.user.endDate, Validators.required],
       wods: [{ value: this.user.remainingWods, disabled: true }],
     });
   }
