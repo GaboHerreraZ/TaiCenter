@@ -22,28 +22,35 @@ export enum CenterPlan {
   Avanzado = 'Avanzado',
   Semanal = 'Semanal',
   Quincenal = 'Quincenal',
+  Bono = 'Bono',
 }
 
 export enum CenterPlanWods {
   Basico = 12,
   Intermedio = 24,
-  Semanal = 6,
-  Quincenal = 12,
+  Semanal = 5,
+  Quincenal = 10,
   Avanzado = 999,
+  Bono = 10,
 }
 
 export const CenterWodsByPlan = [
   {
-    plan: CenterPlan.Basico,
-    wods: CenterPlanWods.Basico,
+    plan: CenterPlan.Bono,
+    wods: CenterPlanWods.Bono,
+  },
+  {
+    plan: CenterPlan.Semanal,
+    wods: CenterPlanWods.Semanal,
   },
   {
     plan: CenterPlan.Quincenal,
     wods: CenterPlanWods.Quincenal,
   },
+
   {
-    plan: CenterPlan.Semanal,
-    wods: CenterPlanWods.Semanal,
+    plan: CenterPlan.Basico,
+    wods: CenterPlanWods.Basico,
   },
   {
     plan: CenterPlan.Intermedio,

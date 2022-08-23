@@ -44,6 +44,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
   ];
 
   plans = [
+    CenterPlan.Bono,
     CenterPlan.Semanal,
     CenterPlan.Quincenal,
     CenterPlan.Basico,

@@ -21,6 +21,7 @@ export class ManageCustomerComponent implements OnInit, OnDestroy {
   user: UserWod;
   minDate = new Date();
   plans = [
+    CenterPlan.Bono,
     CenterPlan.Semanal,
     CenterPlan.Quincenal,
     CenterPlan.Basico,
@@ -58,7 +59,13 @@ export class ManageCustomerComponent implements OnInit, OnDestroy {
       state: [this.user.state, Validators.required],
       plan: [this.user.plan, Validators.required],
       startDate: [{ value: startDate.toDate(), disabled: true }],
-      endDate: [this.user.endDate, Validators.required],
+      endDate: [
+        {
+          value: this.user.endDate,
+          disabled: this.user.plan === CenterPlan.Bono,
+        },
+        Validators.required,
+      ],
       wods: [{ value: this.user.remainingWods, disabled: true }],
     });
   }

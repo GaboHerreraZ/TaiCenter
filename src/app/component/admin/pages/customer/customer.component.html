@@ -58,7 +58,10 @@
         <td>
           {{ rowData["startDate"] | CustomDate }}
         </td>
-        <td [dateColor]="rowData['endDate']">
+        <td [dateColor]="rowData['endDate']" *ngIf="rowData['plan'] !== 'Bono'">
+          {{ rowData["endDate"] | CustomDate }}
+        </td>
+        <td *ngIf="rowData['plan'] === 'Bono'">
           {{ rowData["endDate"] | CustomDate }}
         </td>
         <button
