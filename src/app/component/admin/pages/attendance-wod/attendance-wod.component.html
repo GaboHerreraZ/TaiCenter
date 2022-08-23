@@ -36,7 +36,9 @@
     ></button>
   </ng-template>
 </p-confirmDialog>
-
+<div class="container-messages" *ngIf="hasUserWods">
+  <p-messages [(value)]="notifications" [enableService]="false"></p-messages>
+</div>
 <div class="container-wods">
   <p-panel
     [header]="getHeaderName(dataGrouped[keys][0])"
@@ -79,7 +81,7 @@
           <td>
             {{ rowData["state"] }}
           </td>
-          <td>
+          <td *ngIf="isAdmin">
             <button
               pButton
               pRipple

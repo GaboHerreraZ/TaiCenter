@@ -18,7 +18,6 @@ import { UserWod } from '../../models/user.model';
 import { UserState } from 'src/app/shared/models/constants';
 import { NotificationWodService } from 'src/app/shared/services/notification-wod.service';
 import { from, map, Subject, takeUntil } from 'rxjs';
-import { NotificationWod } from 'src/app/shared/models/notification-wod.model';
 
 @Component({
   selector: 'app-reserve-doc',

@@ -74,6 +74,14 @@ export class RootComponent implements OnInit {
         this.router.navigate(['panel/usuario/reservar-wod']);
       },
     },
+    {
+      label: 'Asistencia Diaria',
+      icon: 'pi pi-fw pi-check-square',
+      command: () => {
+        this.sidebar = false;
+        this.router.navigate(['panel/usuario/asistencia-diaria']);
+      },
+    },
   ];
 
   sidebar = false;

@@ -71,7 +71,7 @@ export class ManageCustomerComponent implements OnInit, OnDestroy {
   }
 
   async save() {
-    const { endDate, state, plan } = this.form.value;
+    const { endDate, state, plan } = this.form.getRawValue();
     this.ref.close({ endDate, state, plan });
   }
 

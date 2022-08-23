@@ -6,7 +6,7 @@ import { CalendarService } from '../../services/calendar.service';
 import flatpickr from 'flatpickr';
 import { Spanish } from 'flatpickr/dist/l10n/es';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { addDays } from 'date-fns';
+import { addDays, addYears } from 'date-fns';
 import { CalendarWodService } from 'src/app/shared/services/calendar-wod.service';
 import { Wod } from 'src/app/shared/models/wod.model';
 import { Messages } from 'src/app/shared/models/message';
@@ -92,7 +92,7 @@ export class WodEditorComponent implements OnInit {
       secondaryColor: [{ value: '#f9fb79', disabled: true }],
       day: [RRule.MO],
       startDate: [this.minDateFechaInicio],
-      endDate: [null, Validators.required],
+      endDate: [{ value: null, disabled: true }, Validators.required],
     });
 
     this.changeFechaInicio();
@@ -158,7 +158,8 @@ export class WodEditorComponent implements OnInit {
 
   private changeFechaInicio() {
     this.form.controls['startDate'].valueChanges.subscribe((startDate) => {
-      this.minDateFechaFin = addDays(startDate, 7);
+      const endDate = addYears(startDate, 1);
+      this.form.patchValue({ endDate });
     });
   }
 

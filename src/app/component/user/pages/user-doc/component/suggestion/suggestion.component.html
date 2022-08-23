@@ -1,0 +1,29 @@
+<form [formGroup]="form">
+  <span class="p-float-label notification">
+    <textarea
+      formControlName="suggestion"
+      id="float-input"
+      pInputTextarea
+    ></textarea>
+    <label for="float-input">Sugerencia</label>
+  </span>
+</form>
+<div class="button-container">
+  <button
+    pButton
+    pRipple
+    label="Guardar"
+    icon="pi pi-check"
+    class="p-button-rounded btn-h btn-primary"
+    (click)="closeDialog()"
+    [disabled]="this.form.invalid"
+  ></button>
+  <button
+    pButton
+    pRipple
+    label="Cancelar"
+    icon="pi pi-times"
+    class="p-button-rounded btn-h btn-secondary"
+    (click)="cancelDialog()"
+  ></button>
+</div>

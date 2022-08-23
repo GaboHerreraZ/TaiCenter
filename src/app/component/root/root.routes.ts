@@ -70,6 +70,17 @@ export const AppHomeRoutes: Routes = [
         },
       },
       {
+        path: 'usuario/asistencia-diaria',
+        loadChildren: () =>
+          import('../admin/pages/attendance-wod/attendance-wod.module').then(
+            (c) => c.AttendanceWodModule
+          ),
+        canActivate: [AuthGuard],
+        data: {
+          authGuardPipe: redirectUnauthorizedToLogin,
+        },
+      },
+      {
         path: 'administrador/configuracion-wods',
         loadChildren: () =>
           import(

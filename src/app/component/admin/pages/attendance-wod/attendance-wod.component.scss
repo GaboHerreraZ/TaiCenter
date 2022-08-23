@@ -42,3 +42,28 @@
 button {
   margin-left: 10px;
 }
+
+.container-messages {
+  display: grid;
+  text-align: center;
+  justify-content: center;
+
+  h3 {
+    font-family: var(--font-family-secondary);
+  }
+
+  p {
+    font-family: var(--font-family-principal);
+  }
+}
+
+@media (max-width: 600px) {
+  ::ng-deep {
+    .p-message .p-message-wrapper {
+      display: grid;
+      align-items: center;
+      text-align: center;
+      padding: 0.5rem 0.5rem;
+    }
+  }
+}

@@ -11,6 +11,9 @@ import { ConfirmationService } from 'primeng/api';
 import { Message } from '../models/message';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
 import { UserService } from 'src/app/component/user/services/user.service';
+import { Constants } from 'src/app/component/login/models/constant';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-attendance-wod',
@@ -22,12 +25,26 @@ export class AttendanceWodComponent implements OnInit {
     private wodService: WodService,
     private confirmationService: ConfirmationService,
     private loadingService: LoadingService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private authService: AuthService
+  ) {
+    this.user = this.authService.currentUser();
+    this.isAdmin = this.getIsAdmin();
+  }
 
   userWods: UserDataWod[] = [];
   dataGrouped: any;
   dataGroupedKeys: any[] = [];
+  isAdmin: boolean = false;
+  user: User | null;
+  hasUserWods: boolean = false;
+  notifications: Message[] = [
+    {
+      severity: 'info',
+      summary: 'Info',
+      detail: 'No hay personas inscritas en ningún wod',
+    },
+  ];
 
   cols = [
     { field: 'userName', header: 'Nombre' },
@@ -42,7 +59,7 @@ export class AttendanceWodComponent implements OnInit {
 
   getHeaderName(userDataWod: UserDataWod) {
     const date = userDataWod.start.toDate();
-    return `${userDataWod.title} ${format(date, 'hh:mm:00')}`;
+    return `${userDataWod.title} ${format(date, 'H:mm:00')}`;
   }
 
   getClassHeader(userDataWod: UserDataWod) {
@@ -84,6 +101,7 @@ export class AttendanceWodComponent implements OnInit {
 
     this.dataGrouped = _.groupBy(this.userWods, (x: UserDataWod) => x.wodId);
     this.dataGroupedKeys = Object.keys(this.dataGrouped);
+    this.hasUserWods = this.dataGroupedKeys.length === 0;
     this.loadingService.end();
   }
 
@@ -141,5 +159,9 @@ export class AttendanceWodComponent implements OnInit {
 
   private async saveNoConfirmAttend(userDataWod: UserDataWod) {
     await this.wodService.confirmNoWod(userDataWod?.userId, userDataWod.wodId);
+  }
+
+  private getIsAdmin() {
+    return this.user?.email === Constants.EmailAdmin;
   }
 }

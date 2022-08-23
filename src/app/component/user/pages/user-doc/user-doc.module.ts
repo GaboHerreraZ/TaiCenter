@@ -5,9 +5,10 @@ import { RouterModule } from '@angular/router';
 import { PrimeModule } from 'src/app/shared/modules/prime/prime.module';
 import { CustomCommonModule } from 'src/app/shared/modules/custom-common/custom-common.module';
 import { ConfirmationService } from 'primeng/api';
+import { SuggestionComponent } from './component/suggestion/suggestion.component';
 
 @NgModule({
-  declarations: [UserDocComponent],
+  declarations: [UserDocComponent, SuggestionComponent],
   imports: [
     CommonModule,
     PrimeModule,
