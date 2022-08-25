@@ -1,6 +1,5 @@
 import {
   AuthGuard,
-  canActivate,
   customClaims,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
@@ -16,7 +15,7 @@ const accountAdmin = (next: any) =>
   pipe(
     customClaims,
     map((claims) => {
-      if (Constants.EmailAdmin.includes(claims.email)) {
+      if (!Constants.EmailAdmin.includes(claims.email)) {
         redirectUnauthorizedTo(['login']);
         return;
       }
