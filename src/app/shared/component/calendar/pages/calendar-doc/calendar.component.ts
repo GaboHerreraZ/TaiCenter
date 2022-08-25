@@ -147,7 +147,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   private getActionsByUser(eventDate: Date) {
-    return this.user?.email === Constants.EmailAdmin && eventDate > new Date()
+    const email = this.user?.email || '';
+    return Constants.EmailAdmin.includes(email) && eventDate > new Date()
       ? [this.deleteActions]
       : [];
   }

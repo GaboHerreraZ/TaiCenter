@@ -15,6 +15,7 @@ import { Wod } from '../models/wod.model';
 import { WodConfiguration } from '../models/wod-configuration.model';
 import { BehaviorSubject } from 'rxjs';
 import { addDays, getDate, getMonth, getYear } from 'date-fns';
+import { orderBy } from 'lodash';
 
 @Injectable({
   providedIn: 'root',

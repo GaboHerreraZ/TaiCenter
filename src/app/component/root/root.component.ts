@@ -106,7 +106,8 @@ export class RootComponent implements OnInit {
   }
 
   private async getMenuUser() {
-    const isAdmin = this.user?.email === Constants.EmailAdmin;
+    const email = this.user?.email || '';
+    const isAdmin = Constants.EmailAdmin.includes(email);
     this.items = isAdmin ? this.itemsAdmin : this.itemsUser;
     this.title = isAdmin
       ? 'Panel de configuración'

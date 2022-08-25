@@ -16,7 +16,7 @@ const accountAdmin = (next: any) =>
   pipe(
     customClaims,
     map((claims) => {
-      if (claims.email !== Constants.EmailAdmin) {
+      if (Constants.EmailAdmin.includes(claims.email)) {
         redirectUnauthorizedTo(['login']);
         return;
       }

@@ -162,6 +162,7 @@ export class AttendanceWodComponent implements OnInit {
   }
 
   private getIsAdmin() {
-    return this.user?.email === Constants.EmailAdmin;
+    const email = this.user?.email || '';
+    return Constants.EmailAdmin.includes(email);
   }
 }

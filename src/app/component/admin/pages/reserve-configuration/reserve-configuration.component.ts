@@ -61,6 +61,7 @@ export class ReserveConfigurationComponent implements OnInit {
   async getClasses(event: boolean) {
     if (event) {
       const response = await this.calendarWodService.getConfigurationWods();
+      console.log('response', response);
       this.recurringEvents = response;
     }
   }

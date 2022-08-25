@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
 
   loginGoogle() {
     this.authService.loginGoogle().then((google) => {
-      if (google.user.email === Constants.EmailAdmin) {
+      const email = google.user.email || '';
+      if (Constants.EmailAdmin.includes(email)) {
         this.router.navigate(['panel/administrador/configuracion-wods']);
       } else {
         this.router.navigate(['panel/usuario/normas-del-centro']);
