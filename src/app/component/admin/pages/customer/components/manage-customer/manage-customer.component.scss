@@ -43,6 +43,10 @@
   }
 
   ::ng-deep {
+    .p-dialog {
+      width: 100% !important;
+    }
+
     .p-dialog .p-dialog-header .p-dialog-title {
       font-size: 1rem;
     }
@@ -50,6 +54,13 @@
     .p-dialog-content {
       overflow: auto;
       overflow-y: auto;
+    }
+
+    .p-datepicker,
+    .p-datepicker .p-datepicker-header,
+    .p-datepicker .p-timepicker,
+    .p-datepicker .p-timepicker > div {
+      padding: 0;
     }
   }
 }

@@ -9,6 +9,10 @@
     color: black;
   }
 
+  mwl-calendar-week-view {
+    z-index: 0;
+  }
+
   .cal-week-view {
     display: inline-block;
     width: 100%;

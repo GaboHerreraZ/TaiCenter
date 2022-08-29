@@ -9,7 +9,6 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from '@angular/fire/auth';
-import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root',

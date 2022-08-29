@@ -16,6 +16,8 @@ export class CenterRuleComponent implements OnInit {
         'Habrá un máximo de 12 plazas por clase (CROSS, H.I.I.T, G.A.P).',
         'Cambio de zapatillas para el entrenamiento, uso de toalla y botella de agua individual.',
         'Las clases colectivas tendrán preferencia (vs entrenamiento libre) para el uso del material.',
+        'La inscripción autoriza la utilización de imagen de los clientes para publicidad en redes sociales.',
+        'Será obligatoria la autorización paterna si el cliente es menor de 18 años.',
       ],
     },
     {

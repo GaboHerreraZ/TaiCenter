@@ -18,3 +18,20 @@
 .container-table {
   margin: 50px;
 }
+
+@media (max-width: 600px) {
+  ::ng-deep {
+    .p-dialog {
+      width: 100% !important;
+    }
+
+    .p-datepicker {
+      padding: 0;
+    }
+    .p-datepicker .p-datepicker-header,
+    .p-datepicker .p-timepicker,
+    .p-datepicker .p-timepicker > div {
+      padding: 0;
+    }
+  }
+}

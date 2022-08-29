@@ -25,6 +25,11 @@ p {
   .p-button {
     font-size: 12px;
   }
+  ::ng-deep {
+    .p-dialog {
+      width: 80% !important;
+    }
+  }
 }
 
 ::ng-deep {
@@ -37,7 +42,9 @@ p {
     font-family: var(--font-family-secondary);
     width: 100%;
   }
-
+  .p-card {
+    margin-top: 10px;
+  }
   .p-card .p-card-content {
     padding: 0;
   }
