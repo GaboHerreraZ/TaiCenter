@@ -49,6 +49,7 @@ export class CustomerComponent implements OnInit {
   private async getUsers() {
     this.loadingService.start();
     const users = await this.userService.getUsers();
+    console.log('users', users);
     users.forEach((user) => {
       const data: any = user.data();
       const newDate: Date = data.endDate.toDate();
@@ -58,6 +59,7 @@ export class CustomerComponent implements OnInit {
         endDate: newDate,
       });
     });
+    console.log('ss', this.users);
     this.loadingService.end();
   }
 

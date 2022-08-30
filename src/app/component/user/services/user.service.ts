@@ -7,6 +7,7 @@ import {
   setDoc,
   query,
   getDocs,
+  orderBy,
 } from '@angular/fire/firestore';
 import { updateDoc } from '@firebase/firestore';
 import { UserState } from 'src/app/shared/models/constants';
@@ -28,7 +29,7 @@ export class UserService {
 
   getUsers() {
     const dbInstance = collection(this.fireStore, 'users');
-    const q = query(dbInstance);
+    const q = query(dbInstance, orderBy('endDate'));
     return getDocs(q);
   }
 

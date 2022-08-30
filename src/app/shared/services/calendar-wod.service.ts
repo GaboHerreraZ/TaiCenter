@@ -8,6 +8,7 @@ import {
   getDocs,
   query,
   where,
+  orderBy,
 } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
 import { RecurringWod } from '../models/recurring-wod.model';
@@ -15,7 +16,6 @@ import { Wod } from '../models/wod.model';
 import { WodConfiguration } from '../models/wod-configuration.model';
 import { BehaviorSubject } from 'rxjs';
 import { addDays, getDate, getMonth, getYear } from 'date-fns';
-import { orderBy } from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -69,7 +69,7 @@ export class CalendarWodService {
 
   async getConfigurationWods() {
     const dbInstance = collection(this.fireStore, 'wodConfiguration');
-    const q = query(dbInstance);
+    const q = query(dbInstance, orderBy('title'));
     const docs = await getDocs(q);
     const wodList: WodConfiguration[] = [];
     docs.forEach((d) => {

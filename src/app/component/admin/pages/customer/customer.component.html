@@ -10,6 +10,7 @@
     </span>
   </div>
   <p-table
+    *ngIf="users.length > 0"
     [columns]="cols"
     [value]="users"
     responsiveLayout="stack"
