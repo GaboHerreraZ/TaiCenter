@@ -10,6 +10,7 @@
     </span>
   </div>
   <p-table
+    #dt
     *ngIf="users.length > 0"
     [columns]="cols"
     [value]="users"
@@ -17,10 +18,20 @@
     styleClass="p-datatable-sm"
     [paginator]="true"
     [rows]="10"
+    [globalFilterFields]="['name', 'lastName']"
   >
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
         <h5 class="title-2 m-0">Personas Inscritas</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Buscar usuario"
+          />
+        </span>
       </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>

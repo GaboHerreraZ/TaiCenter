@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { addDays, format } from 'date-fns';
 import { DialogService } from 'primeng/dynamicdialog';
+import { Table } from 'primeng/table';
 import { mergeMap, of } from 'rxjs';
 import { UserWod } from 'src/app/component/user/models/user.model';
 import { UserService } from 'src/app/component/user/services/user.service';
@@ -16,6 +17,8 @@ import { ManageCustomerComponent } from './components/manage-customer/manage-cus
   styleUrls: ['./customer.component.scss'],
 })
 export class CustomerComponent implements OnInit {
+  @ViewChild('dt') dt: Table;
+
   cols = [
     { field: 'name', header: 'Nombre' },
     { field: 'lastName', header: 'Apellidos' },
@@ -49,7 +52,6 @@ export class CustomerComponent implements OnInit {
   private async getUsers() {
     this.loadingService.start();
     const users = await this.userService.getUsers();
-    console.log('users', users);
     users.forEach((user) => {
       const data: any = user.data();
       const newDate: Date = data.endDate.toDate();
@@ -59,8 +61,11 @@ export class CustomerComponent implements OnInit {
         endDate: newDate,
       });
     });
-    console.log('ss', this.users);
     this.loadingService.end();
+  }
+
+  applyFilterGlobal(event: any, stringVal: string) {
+    this.dt.filterGlobal((event.target as HTMLInputElement).value, stringVal);
   }
 
   enableUser(user: UserWod) {

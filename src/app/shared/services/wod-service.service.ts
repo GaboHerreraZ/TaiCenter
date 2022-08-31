@@ -9,6 +9,7 @@ import {
   query,
   where,
   updateDoc,
+  orderBy,
 } from '@angular/fire/firestore';
 import { UserDataWod } from '../models/user-data-wod.model';
 import { getYear, getMonth, addHours, getDate } from 'date-fns';
@@ -76,7 +77,11 @@ export class WodService {
 
   private getUserWodsByUserId(userId: string) {
     const dbInstance = collection(this.fireStore, 'usersWods');
-    const q = query(dbInstance, where('userId', '==', userId));
+    const q = query(
+      dbInstance,
+      where('userId', '==', userId),
+      orderBy('state')
+    );
     return getDocs(q);
   }
 
