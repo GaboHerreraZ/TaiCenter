@@ -27,6 +27,7 @@ export class CustomerComponent implements OnInit {
     { field: 'state', header: 'Estado' },
     { field: 'startDate', header: 'Fecha Inscripción' },
     { field: 'endDate', header: 'Fecha Vigencia' },
+    { field: 'terms', header: 'Autoriza' },
   ];
 
   users: UserWod[] = [];

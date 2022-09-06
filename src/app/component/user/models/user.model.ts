@@ -11,4 +11,5 @@ export interface UserWod {
   startDate: Date;
   endDate: Date;
   userId: string;
+  terms: boolean;
 }

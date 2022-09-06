@@ -218,6 +218,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
       state: [{ value: null, disabled: true }],
       startDate: [new Date()],
       endDate: [new Date()],
+      terms: [true],
     });
   }
 

@@ -7,6 +7,10 @@ p-divider {
   margin-bottom: 20px;
 }
 
+.terms {
+  display: flex;
+}
+
 .register-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -63,6 +67,29 @@ h4 {
 ::ng-deep {
   .p-card .p-card-body {
     padding: 0 2rem;
+  }
+
+  p-inputswitch {
+    line-height: 5rem;
+    text-align: center;
+    margin-right: 10px;
+  }
+
+  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: var(--color-text-principal);
+  }
+
+  .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover
+    .p-inputswitch-slider {
+    background: var(--color-text-principal);
+  }
+
+  .p-inputswitch.p-focus .p-inputswitch-slider {
+    box-shadow: 0 0 0 0.2rem var(--color-text-principal);
+  }
+
+  .p-inputswitch.p-focus .p-inputswitch-slider {
+    color: red;
   }
 }
 

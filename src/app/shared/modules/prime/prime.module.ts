@@ -27,6 +27,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { PaginatorModule } from 'primeng/paginator';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [],
@@ -59,6 +60,7 @@ import { PaginatorModule } from 'primeng/paginator';
     MessagesModule,
     MessageModule,
     PaginatorModule,
+    InputSwitchModule,
   ],
   exports: [
     MenubarModule,
@@ -89,6 +91,7 @@ import { PaginatorModule } from 'primeng/paginator';
     MessagesModule,
     MessageModule,
     PaginatorModule,
+    InputSwitchModule,
   ],
 })
 export class PrimeModule {}

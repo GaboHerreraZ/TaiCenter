@@ -29,7 +29,7 @@ export class UserService {
 
   getUsers() {
     const dbInstance = collection(this.fireStore, 'users');
-    const q = query(dbInstance, orderBy('endDate'));
+    const q = query(dbInstance, orderBy('state', 'desc'));
     return getDocs(q);
   }
 

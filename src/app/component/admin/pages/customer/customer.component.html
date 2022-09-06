@@ -76,6 +76,9 @@
         <td *ngIf="rowData['plan'] === 'Bono'">
           {{ rowData["endDate"] | CustomDate }}
         </td>
+        <td>
+          {{ rowData["terms"] ? "Si" : "No" }}
+        </td>
         <button
           pButton
           pRipple
