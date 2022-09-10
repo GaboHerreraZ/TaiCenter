@@ -20,7 +20,10 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     BrowserAnimationsModule,
     HotToastModule.forRoot(),
     LoadingModule,
-    RouterModule.forRoot(AppRoutes, { useHash: true }),
+    RouterModule.forRoot(AppRoutes, {
+      useHash: true,
+      anchorScrolling: 'enabled',
+    }),
     provideFirestore(() => getFirestore()),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

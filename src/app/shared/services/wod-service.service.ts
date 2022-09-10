@@ -12,7 +12,7 @@ import {
   orderBy,
 } from '@angular/fire/firestore';
 import { UserDataWod } from '../models/user-data-wod.model';
-import { getYear, getMonth, addHours, getDate } from 'date-fns';
+import { getYear, getMonth, addHours, getDate, addDays } from 'date-fns';
 import { Attend, WodState } from '../component/calendar/models/constant';
 
 @Injectable({
@@ -96,7 +96,7 @@ export class WodService {
       0
     );
 
-    let endDay = addHours(currentDay, 14);
+    let endDay = addDays(currentDay, 7);
     const dbInstance = collection(this.fireStore, 'usersWods');
     const q = query(
       dbInstance,

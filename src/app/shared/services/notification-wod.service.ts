@@ -7,6 +7,7 @@ import {
   getDocs,
   query,
   updateDoc,
+  orderBy,
 } from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
 import { NotificationWod } from '../models/notification-wod.model';
@@ -24,7 +25,7 @@ export class NotificationWodService {
 
   getNotifications() {
     const dbInstance = collection(this.fireStore, 'notificationsWod');
-    const q = query(dbInstance);
+    const q = query(dbInstance, orderBy('severity', 'desc'));
     return getDocs(q);
   }
 

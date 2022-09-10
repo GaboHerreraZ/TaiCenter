@@ -13,8 +13,23 @@
     width: 60%;
   }
   &-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
     text-align: center;
+    gap: 20px;
+
+    &-img {
+      width: 100%;
+    }
   }
+}
+
+.wod-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  padding: 10px 10px;
 }
 
 .content-secondary {
@@ -30,25 +45,76 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 40px;
   }
+
+  &-wods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+
+    .wod {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      img {
+        justify-self: center;
+        margin-top: 5px;
+        align-self: center;
+      }
+      .cross-img {
+        height: 90px;
+        width: 129px;
+      }
+
+      .hiit-img {
+        height: 110px;
+        width: 129px;
+      }
+
+      p {
+        font-family: var(--font-family-principal);
+      }
+    }
+  }
 }
 
-::ng-deep .p-card .p-card-content {
-  padding: 0;
-}
+:host {
+  ::ng-deep {
+    .p-card .p-card-body {
+      padding: 1rem;
+    }
 
-::ng-deep .p-card-title {
-  font-family: var(--font-family-secondary);
-  color: var(--color-text-principal);
-}
+    .p-card .p-card-content {
+      padding: 0;
+    }
 
-::ng-deep .p-card .p-card-subtitle {
-  font-family: var(--font-family-principal);
-  color: var(--color-text-content-secondary);
-}
+    .p-card-title {
+      font-family: var(--font-family-secondary);
+      color: var(--color-text-principal);
+    }
 
-::ng-deep .p-card-header img {
-  height: 90px;
-  width: 129px !important;
+    .p-card .p-card-subtitle {
+      font-family: var(--font-family-principal);
+      color: var(--color-text-content-secondary);
+    }
+
+    .p-button.p-button-icon-only.p-button-rounded {
+      justify-self: center;
+      margin-top: 20px;
+      border: 2px solid;
+      color: var(--color-text-principal);
+    }
+
+    .p-button:focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: 0 0 0 0.2rem var(--color-text-principal);
+    }
+
+    .p-button.p-button-outlined:enabled:hover {
+      background: rgba(33, 150, 243, 0.04);
+      color: var(--color-text-principal);
+      border: 1px solid;
+    }
+  }
 }
 
 .fs-50 {

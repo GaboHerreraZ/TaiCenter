@@ -3,6 +3,7 @@ import { UserDataWod } from 'src/app/shared/models/user-data-wod.model';
 import { WodService } from 'src/app/shared/services/wod-service.service';
 import * as _ from 'lodash';
 import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 import {
   Wods,
   WodState,
@@ -59,7 +60,9 @@ export class AttendanceWodComponent implements OnInit {
 
   getHeaderName(userDataWod: UserDataWod) {
     const date = userDataWod.start.toDate();
-    return `${userDataWod.title} ${format(date, 'H:mm:00')}`;
+    return `${userDataWod.title} ${format(date, 'dd MMMM yyyy H:mm:00', {
+      locale: es,
+    })}`;
   }
 
   getClassHeader(userDataWod: UserDataWod) {

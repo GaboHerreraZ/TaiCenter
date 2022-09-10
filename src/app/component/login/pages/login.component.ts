@@ -9,6 +9,8 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { Message } from './models/message';
 import { Constants } from '../models/constant';
 import { TypeMessage } from 'src/app/shared/models/constants';
+import { FirebaseError } from '@angular/fire/app';
+import { TypeError } from './models/constants';
 
 @Component({
   selector: 'app-login',
@@ -32,20 +34,30 @@ export class LoginComponent implements OnInit {
   }
 
   loginGoogle() {
-    this.authService.loginGoogle().then((google) => {
-      const email = google.user.email || '';
-      if (Constants.EmailAdmin.includes(email)) {
-        this.router.navigate(['panel/administrador/configuracion-wods']);
-      } else {
-        this.router.navigate(['panel/usuario/normas-del-centro']);
-      }
-    });
+    this.authService
+      .loginGoogle()
+      .then((google) => {
+        const email = google.user.email || '';
+        if (Constants.EmailAdmin.includes(email)) {
+          this.router.navigate(['panel/administrador/configuracion-wods']);
+        } else {
+          this.router.navigate(['panel/usuario/normas-del-centro']);
+        }
+      })
+      .catch((error: FirebaseError) => {
+        this.adminError(error);
+      });
   }
 
   loginFacebook() {
-    this.authService.loginFacebook().then(() => {
-      this.router.navigate(['panel/usuario/normas-del-centro']);
-    });
+    this.authService
+      .loginFacebook()
+      .then(() => {
+        this.router.navigate(['panel/usuario/normas-del-centro']);
+      })
+      .catch((error: FirebaseError) => {
+        this.adminError(error);
+      });
   }
 
   async login() {
@@ -57,7 +69,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['panel/usuario/normas-del-centro']);
         this.loadingService.end();
       })
-      .catch(() => {
+      .catch((error: FirebaseError) => {
+        this.adminError(error);
         this.loadingService.end();
       });
   }
@@ -91,5 +104,24 @@ export class LoginComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
     });
+  }
+
+  private adminError(error: FirebaseError) {
+    const errors = [
+      {
+        error: TypeError.InvalidEmail,
+        message: Message.InvalidEmail,
+      },
+      {
+        error: TypeError.WrongPassword,
+        message: Message.WrongPassword,
+      },
+    ];
+
+    const message = errors.find((e) => e.error === error.code)?.message;
+
+    if (message) {
+      this.notificacionService.createMessage(TypeMessage.Error, [message]);
+    }
   }
 }
