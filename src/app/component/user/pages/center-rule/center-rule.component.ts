@@ -1,41 +1,78 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
+import { RuleWodService } from 'src/app/shared/services/rule-wod.service';
+import { from, map, Subject, takeUntil } from 'rxjs';
+import { RuleWod } from 'src/app/shared/models/rule-wod.model';
+import * as _ from 'lodash';
+import { RuleType } from 'src/app/shared/component/calendar/models/constant';
 
 @Component({
   selector: 'app-center-rule',
   templateUrl: './center-rule.component.html',
   styleUrls: ['./center-rule.component.scss'],
 })
-export class CenterRuleComponent implements OnInit {
-  rules: any = [
+export class CenterRuleComponent implements OnInit, OnDestroy {
+  rulesWod: RuleWod[] = [];
+  unsubscribe = new Subject();
+  rules: any = [];
+  rulesTypes = [
     {
+      type: RuleType.Asistencia,
       title: 'ASISTENCIA',
-      information: [
-        'El número de clases contratadas de acuerdo al plan podrán ser usadas durante el mes.',
-        'Puedes anular la asistencia 1 hora antes, sino contará como realizada.',
-        'Sesión suelta 8€.',
-        'Habrá un máximo de 12 plazas por clase (CROSS, H.I.I.T, G.A.P).',
-        'Cambio de zapatillas para el entrenamiento, uso de toalla y botella de agua individual.',
-        'Las clases colectivas tendrán preferencia (vs entrenamiento libre) para el uso del material.',
-        'La inscripción autoriza la utilización de imagen de los clientes para publicidad en redes sociales.',
-        'Será obligatoria la autorización del padre, madre o tutor si el cliente es menor de 18 años.',
-        'Debe haber un mínimo de 3 personas inscritas para realizar las clases de los sábados.',
-      ],
     },
     {
+      type: RuleType.Nota,
       title: 'NOTA',
-      information: [
-        'Todas estas normas son de obligado cumplimiento por parte de los clientes y están sujetas a cambios.',
-      ],
     },
     {
-      title: 'ATENCIÓN',
-      information: [
-        'No habrá cambio de mensualidad ni retorno de cuota, (se debe estar al corriente de pago para acceder al centro)',
-      ],
+      type: RuleType.Atencion,
+      title: 'Atención',
     },
   ];
 
-  constructor() {}
+  constructor(
+    private ruleService: RuleWodService,
+    private loadingService: LoadingService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getRules();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next(null);
+  }
+
+  private getRules() {
+    this.loadingService.start();
+    from(this.ruleService.getRules())
+      .pipe(
+        takeUntil(this.unsubscribe),
+        map((rules: any) => {
+          const rulesData: RuleWod[] = [];
+          rules.forEach((n: any) => {
+            rulesData.push({ id: n.id, ...n.data() });
+          });
+          return rulesData;
+        })
+      )
+      .subscribe((result) => {
+        this.rulesWod = result;
+        this.groupByRules(result);
+        this.loadingService.end();
+      });
+  }
+
+  private groupByRules(rules: RuleWod[]) {
+    const dataGrouped = _.groupBy(rules, (x: RuleWod) => x.type);
+    const keys = Object.keys(dataGrouped);
+    keys.forEach((key) => {
+      const rulesData: string[] = [];
+      const title = this.rulesTypes.find((t) => t.type === key)?.title;
+      dataGrouped[key].forEach((rule) => {
+        rulesData.push(rule.rule);
+      });
+      this.rules.push({ title, information: rulesData });
+    });
+  }
 }

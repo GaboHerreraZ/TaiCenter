@@ -21,6 +21,11 @@ export class Message {
   public static readonly NotificationOk: string =
     'Notificación creada correctamente';
 
+  public static readonly NormaOk: string = 'Norma creada correctamente';
+
   public static readonly NotificationDeleteOk: string =
     'Notificación eliminada correctamente';
+
+  public static readonly NormaDeleteOk: string =
+    'Norma eliminada correctamente';
 }

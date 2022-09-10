@@ -1,0 +1,36 @@
+<form [formGroup]="form" class="form-container">
+  <span class="p-float-label">
+    <p-dropdown
+      inputId="dropdown"
+      [autoDisplayFirst]="false"
+      [options]="ruleTypes"
+      optionLabel="label"
+      optionValue="value"
+      formControlName="type"
+    ></p-dropdown>
+    <label for="float-input">Tipo</label>
+  </span>
+  <span class="p-float-label">
+    <textarea formControlName="rule" id="float-input" pInputTextarea></textarea>
+    <label for="float-input">Norma</label>
+  </span>
+</form>
+<div class="button-container">
+  <button
+    pButton
+    pRipple
+    label="Guardar"
+    icon="pi pi-check"
+    class="p-button-rounded btn-h btn-primary"
+    (click)="closeDialog()"
+    [disabled]="this.form.invalid"
+  ></button>
+  <button
+    pButton
+    pRipple
+    label="Cancelar"
+    icon="pi pi-times"
+    class="p-button-rounded btn-h btn-secondary"
+    (click)="cancelDialog()"
+  ></button>
+</div>

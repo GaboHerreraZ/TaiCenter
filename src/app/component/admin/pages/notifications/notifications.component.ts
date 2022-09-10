@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
-import { from, map, Observable, Subject, takeUntil } from 'rxjs';
+import { from, map, Subject, takeUntil } from 'rxjs';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
 import { TypeMessage } from 'src/app/shared/models/constants';
 import { NotificationWod } from 'src/app/shared/models/notification-wod.model';

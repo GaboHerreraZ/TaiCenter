@@ -49,3 +49,9 @@ export enum NotificationSummary {
   Info = 'Información',
   Atencion = 'Atención',
 }
+
+export enum RuleType {
+  Asistencia = 'Asistencia',
+  Nota = 'Nota',
+  Atencion = 'Atencion',
+}

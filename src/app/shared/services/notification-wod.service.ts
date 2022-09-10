@@ -29,15 +29,6 @@ export class NotificationWodService {
     return getDocs(q);
   }
 
-  updateNotification(notification: NotificationWod, notificationId: string) {
-    const notificationRef = doc(
-      this.fireStore,
-      'notificationsWod',
-      notificationId
-    );
-    return updateDoc(notificationRef, { ...notification });
-  }
-
   deletNotificationById(notificationId: string) {
     const docRef = doc(this.fireStore, 'notificationsWod', notificationId);
     return deleteDoc(docRef);

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import {
-  NotificationState,
   NotificationSeverity,
   NotificationSummary,
 } from 'src/app/shared/component/calendar/models/constant';
@@ -41,7 +40,7 @@ export class NotificationDocComponent implements OnInit {
   }
 
   cancelDialog() {
-    this.ref.close(true);
+    this.ref.close();
   }
 
   getForm() {

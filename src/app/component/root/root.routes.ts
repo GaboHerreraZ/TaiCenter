@@ -123,6 +123,17 @@ export const AppHomeRoutes: Routes = [
           authGuardPipe: accountAdmin,
         },
       },
+      {
+        path: 'administrador/normas-del-centro',
+        loadChildren: () =>
+          import('../admin/pages/rules/rules.module').then(
+            (c) => c.RulesModule
+          ),
+        canActivate: [AuthGuard],
+        data: {
+          authGuardPipe: accountAdmin,
+        },
+      },
     ],
   },
   {

@@ -47,6 +47,14 @@ export class RootComponent implements OnInit {
         this.router.navigate(['panel/administrador/notificaciones']);
       },
     },
+    {
+      label: 'Normas del centro',
+      icon: 'pi pi-fw pi-list',
+      command: () => {
+        this.sidebar = false;
+        this.router.navigate(['panel/administrador/normas-del-centro']);
+      },
+    },
   ];
 
   itemsUser: MenuItem[] = [
