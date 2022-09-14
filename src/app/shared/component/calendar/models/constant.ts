@@ -42,7 +42,7 @@ export enum NotificationState {
 
 export enum NotificationSeverity {
   Info = 'info',
-  Atencion = 'warn',
+  Atencion = 'error',
 }
 
 export enum NotificationSummary {

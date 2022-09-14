@@ -25,7 +25,7 @@ export class NotificationWodService {
 
   getNotifications() {
     const dbInstance = collection(this.fireStore, 'notificationsWod');
-    const q = query(dbInstance, orderBy('severity', 'desc'));
+    const q = query(dbInstance, orderBy('severity', 'asc'));
     return getDocs(q);
   }
 
