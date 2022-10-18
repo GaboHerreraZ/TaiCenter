@@ -102,6 +102,17 @@ export const AppHomeRoutes: Routes = [
         },
       },
       {
+        path: 'administrador/historico-personas-wod',
+        loadChildren: () =>
+          import('../admin/pages/historical-wod/historical-wod.module').then(
+            (c) => c.HistoricalWodModule
+          ),
+        canActivate: [AuthGuard],
+        data: {
+          authGuardPipe: accountAdmin,
+        },
+      },
+      {
         path: 'administrador/usuarios',
         loadChildren: () =>
           import('../admin/pages/customer/customer.module').then(
@@ -118,6 +129,15 @@ export const AppHomeRoutes: Routes = [
           import('../admin/pages/notifications/notifications.module').then(
             (c) => c.NotificationsModule
           ),
+        canActivate: [AuthGuard],
+        data: {
+          authGuardPipe: accountAdmin,
+        },
+      },
+      {
+        path: 'administrador/tarifas',
+        loadChildren: () =>
+          import('../admin/pages/rate/rate.module').then((c) => c.RateModule),
         canActivate: [AuthGuard],
         data: {
           authGuardPipe: accountAdmin,

@@ -1,3 +1,22 @@
+<p-confirmDialog #cd key="confirm-id">
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Aceptar"
+      class="p-button-rounded btn-h btn-primary"
+      (click)="cd.accept()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-rounded btn-h btn-secondary"
+      label="Cancelar"
+      (click)="cd.reject()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
 <div class="container-customer">
   <div class="color-container">
     <span>
@@ -82,11 +101,20 @@
         <button
           pButton
           pRipple
-          pTooltip="Gestionar usuario"
+          pTooltip="Gestionar Usuario"
           tooltipPosition="top"
           icon="pi pi-cog"
           class="p-button-rounded p-button-warning"
           (click)="enableUser(rowData)"
+        ></button>
+        <button
+          pButton
+          pRipple
+          pTooltip="Eliminar Usuario"
+          tooltipPosition="top"
+          icon="pi pi-trash"
+          class="p-button-rounded p-button-danger"
+          (click)="deleteUser(rowData)"
         ></button>
       </tr>
     </ng-template>

@@ -8,6 +8,7 @@ import {
   query,
   getDocs,
   orderBy,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { updateDoc } from '@firebase/firestore';
 import { UserState } from 'src/app/shared/models/constants';
@@ -47,5 +48,10 @@ export class UserService {
   getUserById(authId: string) {
     const userRef = doc(this.fireStore, 'users', authId);
     return getDoc(userRef);
+  }
+
+  deleteUserById(authId: string) {
+    const docRef = doc(this.fireStore, 'users', authId);
+    return deleteDoc(docRef);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { addDays, format } from 'date-fns';
+import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { mergeMap, of } from 'rxjs';
@@ -8,6 +9,7 @@ import { UserService } from 'src/app/component/user/services/user.service';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
 import { CenterWodsByPlan, TypeMessage } from 'src/app/shared/models/constants';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { WodService } from 'src/app/shared/services/wod-service.service';
 import { Message } from '../models/message';
 import { ManageCustomerComponent } from './components/manage-customer/manage-customer.component';
 
@@ -43,7 +45,9 @@ export class CustomerComponent implements OnInit {
     private userService: UserService,
     private loadingService: LoadingService,
     private dialogService: DialogService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private confirmationService: ConfirmationService,
+    private wodService: WodService
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +71,28 @@ export class CustomerComponent implements OnInit {
 
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt.filterGlobal((event.target as HTMLInputElement).value, stringVal);
+  }
+
+  deleteUser(user: UserWod) {
+    this.confirmationService.confirm({
+      key: 'confirm-id',
+      message: Message.confirmDeletedUser.replace(
+        '{0}',
+        `${user.name} ${user.lastName}`
+      ),
+      icon: 'pi pi-info-circle',
+      header: 'Confirmar Eliminación de Usuario de la Aplicación',
+      accept: async () => {
+        this.loadingService.start();
+        await this.wodService.deleteWodsUser(user.userId);
+        await this.userService.deleteUserById(user.userId);
+        this.loadingService.end();
+        this.notificationService.createMessage(TypeMessage.Success, [
+          Message.UserDeletedOk,
+        ]);
+        this.getUsers();
+      },
+    });
   }
 
   enableUser(user: UserWod) {

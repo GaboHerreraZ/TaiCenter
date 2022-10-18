@@ -24,11 +24,19 @@ export class RootComponent implements OnInit {
       },
     },
     {
-      label: 'Asistencia Diaria',
+      label: 'Asistencia',
       icon: 'pi pi-fw pi-check-square',
       command: () => {
         this.sidebar = false;
         this.router.navigate(['panel/administrador/asistencia-diaria']);
+      },
+    },
+    {
+      label: 'Histórico Asistencia',
+      icon: 'pi pi-fw pi-folder-open',
+      command: () => {
+        this.sidebar = false;
+        this.router.navigate(['panel/administrador/historico-personas-wod']);
       },
     },
     {
@@ -47,6 +55,14 @@ export class RootComponent implements OnInit {
         this.router.navigate(['panel/administrador/notificaciones']);
       },
     },
+    /* {
+      label: 'Tarifas',
+      icon: 'pi pi-fw pi-euro',
+      command: () => {
+        this.sidebar = false;
+        this.router.navigate(['panel/administrador/tarifas']);
+      },
+    },*/
     {
       label: 'Normas del centro',
       icon: 'pi pi-fw pi-list',

@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { PrimeModule } from '../../shared/modules/prime/prime.module';
 import { RouterModule, Routes } from '@angular/router';
 import { FooterModule } from '../footer/footer.module';
+import { CalendarDocModule } from 'src/app/shared/component/calendar/pages/calendar-doc/calendar.module';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     CommonModule,
     PrimeModule,
     FooterModule,
+    CalendarDocModule,
     RouterModule.forChild(routes),
   ],
   exports: [HomeComponent],

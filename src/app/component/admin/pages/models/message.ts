@@ -7,6 +7,9 @@ export class Message {
   public static readonly confirmAttend: string =
     '¿Desea confirmar la asistencia de {0} al Wod?';
 
+  public static readonly confirmDeletedUser: string =
+    'Toda información del usuario en la aplicación será eliminada, información personal, historial de wods, etc ¿Desea confirmar la eliminación de {0} de la aplicación?';
+
   public static readonly confirmNoAttend: string =
     '¿Desea confirmar la inasistencia de {0} al Wod?';
 
@@ -16,7 +19,10 @@ export class Message {
   public static readonly activateUser: string =
     'A continuación realizará la activación del usuario:';
 
-  public static readonly ActivateOk: string = 'Usuario activado correctamente';
+  public static readonly ActivateOk: string = 'Usuario Activado correctamente';
+
+  public static readonly UserDeletedOk: string =
+    'Usuario Eliminado correctamente';
 
   public static readonly NotificationOk: string =
     'Notificación creada correctamente';

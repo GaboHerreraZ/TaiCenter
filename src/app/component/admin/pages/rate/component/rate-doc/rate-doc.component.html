@@ -1,0 +1,67 @@
+<form [formGroup]="form" class="form-container">
+  <span class="p-float-label">
+    <input
+      formControlName="title"
+      id="title"
+      type="text"
+      pInputText
+      aria-describedby="title"
+    />
+    <label for="name">Titulo</label>
+  </span>
+  <span class="p-float-label">
+    <input
+      formControlName="subtitle"
+      id="subtitle"
+      type="text"
+      pInputText
+      aria-describedby="subtitle"
+    />
+    <label for="name">Subtitulo</label>
+  </span>
+  <span class="p-float-label">
+    <input
+      formControlName="description"
+      id="description"
+      type="text"
+      pInputText
+      aria-describedby="description"
+    />
+    <label for="name">Descripción</label>
+  </span>
+
+  <span class="p-float-label" style="width: 100%">
+    <p-inputNumber
+      formControlName="price"
+      mode="currency"
+      inputId="currency"
+      currency="EUR"
+      locale="de-DE"
+    >
+    </p-inputNumber>
+    <label for="currency">Tarifa</label>
+  </span>
+  <span class="p-float-label" style="width: 100%">
+    <p-inputNumber formControlName="wodsNumber" inputId="wods"> </p-inputNumber>
+    <label for="wods">Número de wods</label>
+  </span>
+</form>
+<div class="button-container">
+  <button
+    pButton
+    pRipple
+    label="Guardar"
+    icon="pi pi-check"
+    class="p-button-rounded btn-h btn-primary"
+    (click)="closeDialog()"
+    [disabled]="this.form.invalid"
+  ></button>
+  <button
+    pButton
+    pRipple
+    label="Cancelar"
+    icon="pi pi-times"
+    class="p-button-rounded btn-h btn-secondary"
+    (click)="cancelDialog()"
+  ></button>
+</div>

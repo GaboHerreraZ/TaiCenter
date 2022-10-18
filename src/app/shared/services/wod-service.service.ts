@@ -10,6 +10,7 @@ import {
   where,
   updateDoc,
   orderBy,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { UserDataWod } from '../models/user-data-wod.model';
 import { getYear, getMonth, addHours, getDate, addDays } from 'date-fns';
@@ -75,6 +76,18 @@ export class WodService {
     return usersDataWods;
   }
 
+  async deleteWodsUser(userId: string) {
+    const wods = await this.getUserWods(userId);
+    wods.forEach(async (wod) => {
+      await this.deleteWod(wod.userWodId || '');
+    });
+  }
+
+  private deleteWod(wodId: string) {
+    const docRef = doc(this.fireStore, 'usersWods', wodId);
+    return deleteDoc(docRef);
+  }
+
   private getUserWodsByUserId(userId: string) {
     const dbInstance = collection(this.fireStore, 'usersWods');
     const q = query(
@@ -102,6 +115,27 @@ export class WodService {
       dbInstance,
       where('start', '>=', currentDay),
       where('start', '<=', endDay)
+    );
+    return getDocs(q);
+  }
+
+  getHistoricalDaysWods() {
+    const currentDay = new Date(
+      getYear(new Date()),
+      getMonth(new Date()),
+      getDate(new Date()),
+      0,
+      0,
+      0,
+      0
+    );
+
+    let endDay = addDays(currentDay, -7);
+    const dbInstance = collection(this.fireStore, 'usersWods');
+    const q = query(
+      dbInstance,
+      where('start', '>=', endDay),
+      where('start', '<=', currentDay)
     );
     return getDocs(q);
   }
