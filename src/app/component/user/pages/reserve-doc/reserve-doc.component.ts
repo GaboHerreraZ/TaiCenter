@@ -122,6 +122,7 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   }
 
   private validations(event: any): boolean {
+    console.log('userWods', this.userWod);
     if (!this.validateTimeWod(event.event)) {
       this.timeOut();
       return false;
@@ -139,6 +140,11 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
 
     if (this.userWod.state === UserState.Inactivo) {
       this.inactiveUser();
+      return false;
+    }
+
+    if (this.userWod.remainingWods === 0) {
+      this.remainingWodsZero();
       return false;
     }
 
@@ -174,6 +180,15 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
       message: Messages.InactiveUser,
       icon: 'pi pi-info-circle',
       header: 'Usuario pendiente por activar',
+    });
+  }
+
+  private remainingWodsZero() {
+    this.confirmationService.confirm({
+      key: 'pending-user-id',
+      message: Messages.RemainingWodsZero,
+      icon: 'pi pi-info-circle',
+      header: 'Wods contratados completados',
     });
   }
 

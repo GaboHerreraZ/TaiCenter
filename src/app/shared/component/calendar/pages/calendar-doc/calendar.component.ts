@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from '@angular/fire/auth';
 import { Constants } from 'src/app/component/login/models/constant';
 import { LoadingService } from '../../../loading/shared/loading.service';
+import { format, formatDuration } from 'date-fns';
 
 @Component({
   selector: 'app-calendar',
@@ -125,6 +126,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   private assignEventsCalendar(events: any[]) {
+    console.log('events to show', events);
     this.events = [];
     if (events.length > 0) {
       events.forEach((e) => {

@@ -23,4 +23,7 @@ export class Messages {
 
   public static readonly WodOut: string =
     'El Wod se encuentra cerrado, recuerda que puedes reservar hasta 1 hora antes de el inicio del wod';
+
+  public static readonly RemainingWodsZero: string =
+    'No le quedan Wods disponibles';
 }

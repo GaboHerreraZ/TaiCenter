@@ -92,7 +92,7 @@ export class WodEditorComponent implements OnInit {
       secondaryColor: [{ value: '#f9fb79', disabled: true }],
       day: [RRule.MO],
       startDate: [this.minDateFechaInicio],
-      endDate: [{ value: null, disabled: true }, Validators.required],
+      endDate: [{ value: null, disabled: false }, Validators.required],
     });
 
     this.changeFechaInicio();
