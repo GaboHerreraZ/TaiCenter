@@ -41,6 +41,11 @@
   padding: 0 50px;
   margin-top: 50px;
 
+  .new-schedule {
+    height: 550px;
+    width: 700px;
+  }
+
   &-cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

@@ -15,14 +15,17 @@
       icon="pi pi-user"
       routerLink="/login"
     ></button>
-    <button
-      pButton
-      pRipple
-      type="button"
-      icon="pi pi-arrow-down"
-      class="p-button-rounded p-button-outlined"
-      (click)="move()"
-    ></button>
+    <div>
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-arrow-down"
+        class="p-button-rounded p-button-outlined"
+        (click)="move()"
+      ></button>
+      <p class="content-secondary">Conoce más</p>
+    </div>
   </div>
 </div>
 <!--<img src="../../../assets/img/cross.png" />
@@ -80,6 +83,10 @@
     </p-card>
   </div>
 </div>-->
+<div class="plan-container">
+  <h1 class="hard-title">Atención</h1>
+  <img src="../../../assets/img/new-schedule.jpeg" class="new-schedule" />
+</div>
 
 <div class="plan-container" id="tarifas">
   <h1 class="hard-title">Tarifas</h1>

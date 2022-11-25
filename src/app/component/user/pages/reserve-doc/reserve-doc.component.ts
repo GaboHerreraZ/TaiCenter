@@ -122,7 +122,6 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   }
 
   private validations(event: any): boolean {
-    console.log('userWods', this.userWod);
     if (!this.validateTimeWod(event.event)) {
       this.timeOut();
       return false;
