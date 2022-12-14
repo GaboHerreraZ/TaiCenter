@@ -93,6 +93,17 @@ h4 {
   }
 }
 
+.chart-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px 100px;
+  gap: 10px;
+}
+
+.chart {
+  justify-self: center;
+}
+
 @media (max-width: 600px) {
   .register-container {
     grid-template-columns: 1fr;
@@ -104,5 +115,16 @@ h4 {
 
   .p-button {
     font-size: 12px;
+  }
+
+  .chart-container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  ::ng-deep {
+    .p-card .p-card-body {
+      padding: 0 0;
+    }
   }
 }

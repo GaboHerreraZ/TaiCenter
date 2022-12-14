@@ -13,7 +13,7 @@ import {
   deleteDoc,
 } from '@angular/fire/firestore';
 import { UserDataWod } from '../models/user-data-wod.model';
-import { getYear, getMonth, addHours, getDate, addDays } from 'date-fns';
+import { getYear, getMonth, getDate, addDays } from 'date-fns';
 import { Attend, WodState } from '../component/calendar/models/constant';
 
 @Injectable({
@@ -89,11 +89,22 @@ export class WodService {
   }
 
   private getUserWodsByUserId(userId: string) {
+    const currentDay = new Date(
+      getYear(new Date()),
+      getMonth(new Date()),
+      getDate(new Date()),
+      7,
+      0,
+      0,
+      0
+    );
+
     const dbInstance = collection(this.fireStore, 'usersWods');
     const q = query(
       dbInstance,
       where('userId', '==', userId),
-      orderBy('state')
+      where('startDate', '>=', addDays(currentDay, -30)),
+      where('startDate', '<=', currentDay)
     );
     return getDocs(q);
   }

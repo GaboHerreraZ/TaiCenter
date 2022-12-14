@@ -29,6 +29,7 @@ import { MessageModule } from 'primeng/message';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { CarouselModule } from 'primeng/carousel';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [],
@@ -63,6 +64,7 @@ import { CarouselModule } from 'primeng/carousel';
     PaginatorModule,
     InputSwitchModule,
     CarouselModule,
+    ChartModule,
   ],
   exports: [
     MenubarModule,
@@ -95,6 +97,7 @@ import { CarouselModule } from 'primeng/carousel';
     PaginatorModule,
     InputSwitchModule,
     CarouselModule,
+    ChartModule,
   ],
 })
 export class PrimeModule {}

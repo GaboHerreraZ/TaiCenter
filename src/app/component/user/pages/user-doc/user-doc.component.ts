@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import {
   Attend,
+  WodColors,
+  Wods,
   WodState,
 } from 'src/app/shared/component/calendar/models/constant';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
@@ -18,7 +20,6 @@ import { addHours } from 'date-fns';
 import { UserWod } from '../../models/user.model';
 import {
   CenterPlan,
-  CenterPlanWods,
   CenterWodsByPlan,
   TypeMessage,
 } from 'src/app/shared/models/constants';
@@ -34,6 +35,11 @@ export class UserDocComponent implements OnInit, OnDestroy {
   authId: string;
   newUser = true;
   userWod: UserWod | any = null;
+
+  //chart configuration
+  dataWods: any;
+  dataAttend: any;
+  chartOptions: any;
 
   gender = [
     {
@@ -100,6 +106,48 @@ export class UserDocComponent implements OnInit, OnDestroy {
     this.assignForm(this.userWod);
     this.getWodsUser();
     this.planChanges();
+
+    this.dataWods = {
+      labels: [Wods.Cross, Wods.Hiit, Wods.Gap, Wods.OpenCenter, Wods.Tabata],
+      datasets: [
+        {
+          backgroundColor: [
+            WodColors.Cross,
+            WodColors.Hiit,
+            WodColors.Gap,
+            WodColors.OpenCenter,
+            WodColors.Tabata,
+          ],
+          hoverBackgroundColor: [
+            '#e8e9af',
+            '#bba619',
+            '#82eb94',
+            '#f06464',
+            '#bba619',
+          ],
+        },
+      ],
+    };
+
+    this.dataAttend = {
+      labels: [Attend.Si, Attend.No],
+      datasets: [
+        {
+          backgroundColor: ['#ce5505', '#000000'],
+          hoverBackgroundColor: ['#de732c', '#545252'],
+        },
+      ],
+    };
+
+    this.chartOptions = {
+      plugins: {
+        legend: {
+          labels: {
+            color: '#495057',
+          },
+        },
+      },
+    };
   }
 
   ngOnDestroy(): void {
@@ -224,6 +272,9 @@ export class UserDocComponent implements OnInit, OnDestroy {
 
   private async getWodsUser() {
     this.wods = await this.wodService.getUserWods(this.authId);
+    this.buildDataChart();
+    this.buildDataAttends();
+    this.wods = this.wods.filter((wod) => wod.attend === Attend.Pendiente);
     this.loading.end();
   }
 
@@ -234,5 +285,34 @@ export class UserDocComponent implements OnInit, OnDestroy {
         const wods = this.centerPlan.find((p) => p.plan === value)?.wods;
         this.formGroup.patchValue({ remainingWods: wods });
       });
+  }
+
+  private buildDataChart() {
+    const countTypeWods: number[] = [];
+    [Wods.Cross, Wods.Hiit, Wods.Gap, Wods.OpenCenter, Wods.Tabata].forEach(
+      (wodName) => {
+        const countWods =
+          this.wods.filter((wod) => wod.title === wodName)?.length || 0;
+        countTypeWods.push(countWods);
+      }
+    );
+    this.dataWods = {
+      ...this.dataWods,
+      datasets: [{ ...this.dataWods.datasets[0], data: countTypeWods }],
+    };
+  }
+
+  private buildDataAttends() {
+    const countTypeWods: number[] = [];
+    [Attend.Si, Attend.No].forEach((attendName) => {
+      const attendWods =
+        this.wods.filter((wod) => wod.attend === attendName)?.length || 0;
+      countTypeWods.push(attendWods);
+    });
+
+    this.dataAttend = {
+      ...this.dataAttend,
+      datasets: [{ ...this.dataAttend.datasets[0], data: countTypeWods }],
+    };
   }
 }
