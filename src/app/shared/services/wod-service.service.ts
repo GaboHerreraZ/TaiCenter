@@ -76,6 +76,29 @@ export class WodService {
     return usersDataWods;
   }
 
+  async getUserWodsHistorical(userId: string) {
+    const usersDataWods: UserDataWod[] = [];
+    const userWods = await this.getUserWodsHistoricalByUserId(userId);
+    userWods.forEach((userWod) => {
+      const data = userWod.data();
+      usersDataWods.push({
+        userId,
+        wodId: data['wodId'],
+        attend: data['attend'],
+        state: data['state'],
+        title: data['title'],
+        start: data['start'].toDate(),
+        userWodId: userWod.id,
+        userName: data['userName'],
+        lastName: data['lastName'],
+        startDate: data['startDate'],
+        endDate: data['endDate'],
+      });
+    });
+
+    return usersDataWods;
+  }
+
   async deleteWodsUser(userId: string) {
     const wods = await this.getUserWods(userId);
     wods.forEach(async (wod) => {
@@ -89,6 +112,27 @@ export class WodService {
   }
 
   private getUserWodsByUserId(userId: string) {
+    const currentDay = new Date(
+      getYear(new Date()),
+      getMonth(new Date()),
+      getDate(new Date()),
+      7,
+      0,
+      0,
+      0
+    );
+
+    const dbInstance = collection(this.fireStore, 'usersWods');
+    const q = query(
+      dbInstance,
+      where('userId', '==', userId),
+      where('startDate', '<=', addDays(currentDay, 30)),
+      where('startDate', '>=', currentDay)
+    );
+    return getDocs(q);
+  }
+
+  private getUserWodsHistoricalByUserId(userId: string) {
     const currentDay = new Date(
       getYear(new Date()),
       getMonth(new Date()),

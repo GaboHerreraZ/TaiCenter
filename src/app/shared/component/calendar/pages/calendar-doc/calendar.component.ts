@@ -126,7 +126,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   private assignEventsCalendar(events: any[]) {
-    console.log('events to show', events);
     this.events = [];
     if (events.length > 0) {
       events.forEach((e) => {

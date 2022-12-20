@@ -68,6 +68,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
   }
 
   wods: UserDataWod[] = [];
+  wodsChart: UserDataWod[] = [];
 
   cols: any[];
 
@@ -105,6 +106,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
 
     this.assignForm(this.userWod);
     this.getWodsUser();
+    this.getWodsUserHistorical();
     this.planChanges();
 
     this.dataWods = {
@@ -272,9 +274,14 @@ export class UserDocComponent implements OnInit, OnDestroy {
 
   private async getWodsUser() {
     this.wods = await this.wodService.getUserWods(this.authId);
+    this.wods = this.wods.filter((wod) => wod.attend === Attend.Pendiente);
+    this.loading.end();
+  }
+
+  private async getWodsUserHistorical() {
+    this.wodsChart = await this.wodService.getUserWodsHistorical(this.authId);
     this.buildDataChart();
     this.buildDataAttends();
-    this.wods = this.wods.filter((wod) => wod.attend === Attend.Pendiente);
     this.loading.end();
   }
 
@@ -292,7 +299,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
     [Wods.Cross, Wods.Hiit, Wods.Gap, Wods.OpenCenter, Wods.Tabata].forEach(
       (wodName) => {
         const countWods =
-          this.wods.filter((wod) => wod.title === wodName)?.length || 0;
+          this.wodsChart.filter((wod) => wod.title === wodName)?.length || 0;
         countTypeWods.push(countWods);
       }
     );
@@ -306,7 +313,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
     const countTypeWods: number[] = [];
     [Attend.Si, Attend.No].forEach((attendName) => {
       const attendWods =
-        this.wods.filter((wod) => wod.attend === attendName)?.length || 0;
+        this.wodsChart.filter((wod) => wod.attend === attendName)?.length || 0;
       countTypeWods.push(attendWods);
     });
 
