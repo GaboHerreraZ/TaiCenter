@@ -21,6 +21,7 @@ import { UserWod } from '../../models/user.model';
 import {
   CenterPlan,
   CenterWodsByPlan,
+  State,
   TypeMessage,
 } from 'src/app/shared/models/constants';
 import { Subject, takeUntil } from 'rxjs';
@@ -274,7 +275,10 @@ export class UserDocComponent implements OnInit, OnDestroy {
 
   private async getWodsUser() {
     this.wods = await this.wodService.getUserWods(this.authId);
-    this.wods = this.wods.filter((wod) => wod.attend === Attend.Pendiente);
+    this.wods = this.wods.filter((wod) => {
+      let wodState = wod.state as WodState;
+      return [WodState.Activa, WodState.Cancelada].includes(wodState);
+    });
     this.loading.end();
   }
 

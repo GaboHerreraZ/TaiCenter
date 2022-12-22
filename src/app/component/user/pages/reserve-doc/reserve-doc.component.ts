@@ -90,7 +90,6 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
         }
 
         const usersInWod = await this.wodService.getUsersInWod(wod.id);
-
         if (usersInWod.size === 12) {
           this.confirmationService.confirm({
             key: 'full-users-id',
