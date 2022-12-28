@@ -26,4 +26,7 @@ export class Messages {
 
   public static readonly RemainingWodsZero: string =
     'No le quedan Wods disponibles';
+
+  public static readonly monthlyFinished: string =
+    'Ha expirado su mensualidad, por favor contacte con el administrador para activar nuevamente la mensualidad';
 }

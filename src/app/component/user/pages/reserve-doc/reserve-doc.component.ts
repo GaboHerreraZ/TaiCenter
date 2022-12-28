@@ -4,7 +4,7 @@ import { CalendarWodService } from 'src/app/shared/services/calendar-wod.service
 import { User } from '@angular/fire/auth';
 import { ConfirmationService, Message } from 'primeng/api';
 import { Messages } from '../../models/messages';
-import { addHours, format } from 'date-fns';
+import { addDays, addHours, format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { WodService } from 'src/app/shared/services/wod-service.service';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
@@ -146,6 +146,11 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
       return false;
     }
 
+    if (!(event.event.start < addDays(this.userWod.endDate.toDate(), 1))) {
+      this.monthlyFinished();
+      return false;
+    }
+
     return true;
   }
 
@@ -187,6 +192,15 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
       message: Messages.RemainingWodsZero,
       icon: 'pi pi-info-circle',
       header: 'Wods contratados completados',
+    });
+  }
+
+  private monthlyFinished() {
+    this.confirmationService.confirm({
+      key: 'pending-user-id',
+      message: Messages.monthlyFinished,
+      icon: 'pi pi-info-circle',
+      header: 'Mensualidad Expirada',
     });
   }
 
