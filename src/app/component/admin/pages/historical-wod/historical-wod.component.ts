@@ -3,10 +3,7 @@ import { User } from '@angular/fire/auth';
 import { ConfirmationService } from 'primeng/api';
 import { Constants } from 'src/app/component/login/models/constant';
 import { UserService } from 'src/app/component/user/services/user.service';
-import {
-  Wods,
-  WodState,
-} from 'src/app/shared/component/calendar/models/constant';
+import { Wods } from 'src/app/shared/component/calendar/models/constant';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
 import { UserDataWod } from 'src/app/shared/models/user-data-wod.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -38,7 +35,9 @@ export class HistoricalWodComponent implements OnInit {
   constructor(
     private wodService: WodService,
     private loadingService: LoadingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private confirmationService: ConfirmationService,
+    private userService: UserService
   ) {
     this.user = this.authService.currentUser();
     this.isAdmin = this.getIsAdmin();
@@ -75,6 +74,39 @@ export class HistoricalWodComponent implements OnInit {
         break;
     }
     return className;
+  }
+  async confirmAttend(userDataWod: UserDataWod) {
+    this.confirmationService.confirm({
+      key: 'confirm-id',
+      message: Message.confirmAttend.replace(
+        '{0}',
+        `${userDataWod.userName} ${userDataWod.lastName}`
+      ),
+      icon: 'pi pi-info-circle',
+      header: 'Confirmar asistencia al wod',
+      accept: async () => {
+        this.loadingService.start();
+        await this.saveConfirmAttend(userDataWod);
+        await this.restWodUser(userDataWod.userId);
+        this.getDaysWod();
+        this.loadingService.end();
+      },
+    });
+  }
+
+  private async saveConfirmAttend(userDataWod: UserDataWod) {
+    await this.wodService.confirmWod(userDataWod?.userId, userDataWod.wodId);
+  }
+
+  private async restWodUser(userId?: string) {
+    const user = await this.userService.getUserById(`${userId}`);
+    const dataUser: any = user.data();
+    const newUser = {
+      ...dataUser,
+      remainingWods: dataUser.remainingWods - 1,
+    };
+
+    await this.userService.updateUser(newUser, `${userId}`);
   }
 
   private async getDaysWod() {

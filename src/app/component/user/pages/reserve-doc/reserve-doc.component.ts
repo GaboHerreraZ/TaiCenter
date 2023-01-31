@@ -15,7 +15,7 @@ import {
 } from 'src/app/shared/component/calendar/models/constant';
 import { UserService } from '../../services/user.service';
 import { UserWod } from '../../models/user.model';
-import { UserState } from 'src/app/shared/models/constants';
+import { UserState, CenterPlan } from 'src/app/shared/models/constants';
 import { NotificationWodService } from 'src/app/shared/services/notification-wod.service';
 import { from, map, Subject, takeUntil } from 'rxjs';
 
@@ -146,7 +146,10 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    if (!(event.event.start < addDays(this.userWod.endDate.toDate(), 1))) {
+    if (
+      !(event.event.start < addDays(this.userWod.endDate.toDate(), 1)) &&
+      this.userWod.plan !== CenterPlan.Bono
+    ) {
       this.monthlyFinished();
       return false;
     }
