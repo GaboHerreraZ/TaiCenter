@@ -1,0 +1,18 @@
+<div class="images-container" *ngIf="show">
+  <div *ngFor="let o of ocr">
+    <h3>{{ o.city }}</h3>
+    <p-galleria
+      [value]="o.urlImages"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions"
+      [containerStyle]="{ 'max-width': '100%' }"
+      [showThumbnails]="false"
+      [showItemNavigators]="true"
+      [showItemNavigatorsOnHover]="true"
+    >
+      <ng-template pTemplate="item" let-item>
+        <img [src]="item.url" style="width: 100%; display: block" />
+      </ng-template>
+    </p-galleria>
+  </div>
+</div>

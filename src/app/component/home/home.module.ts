@@ -5,6 +5,7 @@ import { PrimeModule } from '../../shared/modules/prime/prime.module';
 import { RouterModule, Routes } from '@angular/router';
 import { FooterModule } from '../footer/footer.module';
 import { CalendarDocModule } from 'src/app/shared/component/calendar/pages/calendar-doc/calendar.module';
+import { GalleryModule } from '../gallery/gallery.module';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     PrimeModule,
     FooterModule,
     CalendarDocModule,
+    GalleryModule,
     RouterModule.forChild(routes),
   ],
   exports: [HomeComponent],

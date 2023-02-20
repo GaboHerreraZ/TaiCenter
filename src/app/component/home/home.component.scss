@@ -140,6 +140,11 @@
   }
 }
 
+.gallery-description {
+  font-family: var(--font-family-principal);
+  font-size: 20px;
+}
+
 @media (max-width: 900px) {
   .plan-container {
     padding: 0 20px;
