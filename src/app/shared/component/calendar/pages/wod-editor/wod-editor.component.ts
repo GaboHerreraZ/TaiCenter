@@ -73,6 +73,18 @@ export class WodEditorComponent implements OnInit {
       primaryColor: WodColors.Tabata,
       secondaryColor: WodColors.Tabata,
     },
+    {
+      name: Wods.Halterofilia,
+      code: Wods.Halterofilia,
+      primaryColor: WodColors.Halterofilia,
+      secondaryColor: WodColors.Halterofilia,
+    },
+    {
+      name: Wods.Gymnastic,
+      code: Wods.Gymnastic,
+      primaryColor: WodColors.Gymnastic,
+      secondaryColor: WodColors.Gymnastic,
+    },
   ];
 
   @Output()

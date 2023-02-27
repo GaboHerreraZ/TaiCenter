@@ -69,12 +69,19 @@ export class HistoricalWodComponent implements OnInit {
       case Wods.Tabata:
         className = 'tabata';
         break;
+      case Wods.Halterofilia:
+        className = 'halterofilia';
+        break;
+      case Wods.Gymnastic:
+        className = 'gymnastic';
+        break;
       default:
         className = 'open-center';
         break;
     }
     return className;
   }
+
   async confirmAttend(userDataWod: UserDataWod) {
     this.confirmationService.confirm({
       key: 'confirm-id',

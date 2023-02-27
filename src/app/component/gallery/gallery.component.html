@@ -4,14 +4,18 @@
     <p-galleria
       [value]="o.urlImages"
       [circular]="true"
+      [autoPlay]="true"
       [responsiveOptions]="responsiveOptions"
       [containerStyle]="{ 'max-width': '100%' }"
       [showThumbnails]="false"
       [showItemNavigators]="true"
       [showItemNavigatorsOnHover]="true"
+      [transitionInterval]="4000"
     >
       <ng-template pTemplate="item" let-item>
-        <img [src]="item.url" style="width: 100%; display: block" />
+        <picture>
+          <img [src]="item.url" style="width: 100%; display: block" />
+        </picture>
       </ng-template>
     </p-galleria>
   </div>

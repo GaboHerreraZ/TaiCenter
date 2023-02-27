@@ -4,6 +4,8 @@ export enum Wods {
   OpenCenter = 'OPEN CENTER',
   Tabata = 'TABATA',
   Gap = 'G.A.P 45',
+  Halterofilia = 'HALTEROFILIA',
+  Gymnastic = 'GYMNASTIC',
 }
 
 export enum Days {
@@ -33,6 +35,8 @@ export enum WodColors {
   OpenCenter = '#df3434',
   Gap = '#22c33d',
   Tabata = '#c0ad30',
+  Halterofilia = '#cc6018',
+  Gymnastic = '#6E74EB',
 }
 
 export enum NotificationState {
