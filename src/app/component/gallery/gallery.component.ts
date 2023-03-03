@@ -46,11 +46,11 @@ export class GalleryComponent implements OnInit {
   }
 
   async getImagesByOcr() {
+    this.loadingService.start();
     await Promise.all(
       this.cities.map(async (city) => {
         this.ocr.push({ city, urlImages: [] });
         const images = await this.galleryService.getImagesByOcr(city);
-        this.loadingService.start();
         await Promise.all(
           images.items.map(async (item) => {
             const url = await getDownloadURL(item);

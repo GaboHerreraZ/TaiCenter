@@ -85,6 +85,12 @@ export class WodEditorComponent implements OnInit {
       primaryColor: WodColors.Gymnastic,
       secondaryColor: WodColors.Gymnastic,
     },
+    {
+      name: Wods.Endurance,
+      code: Wods.Endurance,
+      primaryColor: WodColors.Endurance,
+      secondaryColor: WodColors.Endurance,
+    },
   ];
 
   @Output()
@@ -145,6 +151,7 @@ export class WodEditorComponent implements OnInit {
     const classConfiguration = await this.calendarWodService.getWodsById(
       response.id
     );
+    this.loadingService.start();
     const events = this.createEvent(classConfiguration.data(), response.id);
     this.calendarWodService
       .addEventWod(events)
@@ -160,8 +167,8 @@ export class WodEditorComponent implements OnInit {
         this.notificationService.createMessage(TypeMessage.Error, [
           Messages.classesCreatedKo,
         ]);
-        this.loadingService.end();
       });
+    this.loadingService.end();
   }
 
   public cancelDialog() {

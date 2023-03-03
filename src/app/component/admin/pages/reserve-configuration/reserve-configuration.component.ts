@@ -120,7 +120,6 @@ export class ReserveConfigurationComponent implements OnInit {
       });
     }
     this.loadingService.end();
-
     return response;
   }
 }

@@ -6,6 +6,7 @@ export enum Wods {
   Gap = 'G.A.P 45',
   Halterofilia = 'HALTEROFILIA',
   Gymnastic = 'GYMNASTIC',
+  Endurance = 'ENDURANCE',
 }
 
 export enum Days {
@@ -37,6 +38,7 @@ export enum WodColors {
   Tabata = '#c0ad30',
   Halterofilia = '#cc6018',
   Gymnastic = '#6E74EB',
+  Endurance = '#b227f4',
 }
 
 export enum NotificationState {

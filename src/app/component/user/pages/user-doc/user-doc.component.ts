@@ -21,7 +21,6 @@ import { UserWod } from '../../models/user.model';
 import {
   CenterPlan,
   CenterWodsByPlan,
-  State,
   TypeMessage,
 } from 'src/app/shared/models/constants';
 import { Subject, takeUntil } from 'rxjs';
@@ -111,7 +110,16 @@ export class UserDocComponent implements OnInit, OnDestroy {
     this.planChanges();
 
     this.dataWods = {
-      labels: [Wods.Cross, Wods.Hiit, Wods.Gap, Wods.OpenCenter, Wods.Tabata],
+      labels: [
+        Wods.Cross,
+        Wods.Hiit,
+        Wods.Gap,
+        Wods.OpenCenter,
+        Wods.Tabata,
+        Wods.Halterofilia,
+        Wods.Gymnastic,
+        Wods.Endurance,
+      ],
       datasets: [
         {
           backgroundColor: [
@@ -120,6 +128,9 @@ export class UserDocComponent implements OnInit, OnDestroy {
             WodColors.Gap,
             WodColors.OpenCenter,
             WodColors.Tabata,
+            WodColors.Halterofilia,
+            WodColors.Gymnastic,
+            WodColors.Endurance,
           ],
           hoverBackgroundColor: [
             '#e8e9af',
@@ -127,6 +138,9 @@ export class UserDocComponent implements OnInit, OnDestroy {
             '#82eb94',
             '#f06464',
             '#bba619',
+            '#cc6018db',
+            '#756eeb',
+            '#ac27f4',
           ],
         },
       ],
