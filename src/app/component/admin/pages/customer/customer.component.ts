@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { addDays, format } from 'date-fns';
+import { addDays } from 'date-fns';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
@@ -12,6 +12,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { WodService } from 'src/app/shared/services/wod-service.service';
 import { Message } from '../models/message';
 import { ManageCustomerComponent } from './components/manage-customer/manage-customer.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer',
@@ -22,14 +23,26 @@ export class CustomerComponent implements OnInit {
   @ViewChild('dt') dt: Table;
 
   cols = [
-    { field: 'name', header: 'Nombre' },
-    { field: 'lastName', header: 'Apellidos' },
-    { field: 'phoneNumber', header: 'Movil' },
-    { field: 'plan', header: 'Plan' },
-    { field: 'state', header: 'Estado' },
-    { field: 'startDate', header: 'Fecha Inscripción' },
-    { field: 'endDate', header: 'Fecha Vigencia' },
-    { field: 'terms', header: 'Autoriza' },
+    { field: 'name', header: this.translateService.instant('user.name') },
+    {
+      field: 'lastName',
+      header: this.translateService.instant('user.lastName'),
+    },
+    {
+      field: 'phoneNumber',
+      header: this.translateService.instant('user.movil'),
+    },
+    { field: 'plan', header: this.translateService.instant('user.plan') },
+    { field: 'state', header: this.translateService.instant('user.state') },
+    {
+      field: 'startDate',
+      header: this.translateService.instant('core.suscriptionDate'),
+    },
+    {
+      field: 'endDate',
+      header: this.translateService.instant('core.suscriptionExpiration'),
+    },
+    { field: 'terms', header: this.translateService.instant('core.terms') },
   ];
 
   users: UserWod[] = [];
@@ -47,7 +60,8 @@ export class CustomerComponent implements OnInit {
     private dialogService: DialogService,
     private notificationService: NotificationService,
     private confirmationService: ConfirmationService,
-    private wodService: WodService
+    private wodService: WodService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -76,19 +90,18 @@ export class CustomerComponent implements OnInit {
   deleteUser(user: UserWod) {
     this.confirmationService.confirm({
       key: 'confirm-id',
-      message: Message.confirmDeletedUser.replace(
-        '{0}',
-        `${user.name} ${user.lastName}`
-      ),
+      message: this.translateService
+        .instant(`message.${Message.confirmDeletedUser}`)
+        .replace('{0}', `${user.name} ${user.lastName}`),
       icon: 'pi pi-info-circle',
-      header: 'Confirmar Eliminación de Usuario de la Aplicación',
+      header: this.translateService.instant('message.confirmUserDelete'),
       accept: async () => {
         this.loadingService.start();
         await this.wodService.deleteWodsUser(user.userId);
         await this.userService.deleteUserById(user.userId);
         this.loadingService.end();
         this.notificationService.createMessage(TypeMessage.Success, [
-          Message.UserDeletedOk,
+          this.translateService.instant(`message.${Message.UserDeletedOk}`),
         ]);
         this.getUsers();
       },
@@ -97,11 +110,11 @@ export class CustomerComponent implements OnInit {
 
   enableUser(user: UserWod) {
     const ref = this.dialogService.open(ManageCustomerComponent, {
-      header: 'Gestionar Usuario',
+      header: this.translateService.instant('core.handleUser'),
       width: '80%',
       autoZIndex: true,
       data: {
-        title: Message.activateUser,
+        title: this.translateService.instant(`message.${Message.activateUser}`),
         activateUser: true,
         user: user,
       },
@@ -131,7 +144,7 @@ export class CustomerComponent implements OnInit {
     )?.wods;
     await this.userService.updateUser(user, user.userId);
     this.notificationService.createMessage(TypeMessage.Success, [
-      Message.ActivateOk,
+      this.translateService.instant(`message.${Message.ActivateOk}`),
     ]);
     this.users = [];
     this.loadingService.end();

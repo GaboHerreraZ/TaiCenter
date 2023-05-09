@@ -3,7 +3,7 @@
     <button
       pButton
       pRipple
-      label="Aceptar"
+      label="{{ 'core.accept' }}"
       class="p-button-rounded btn-h btn-primary"
       (click)="cd.accept()"
     ></button>
@@ -12,7 +12,7 @@
       pRipple
       type="button"
       class="p-button-rounded btn-h btn-secondary"
-      label="Cancelar"
+      label="{{ 'core.cancel' | translate }}"
       (click)="cd.reject()"
     ></button>
   </ng-template>
@@ -21,11 +21,11 @@
   <div class="color-container">
     <span>
       <p-colorPicker [(ngModel)]="colorEnd"></p-colorPicker>
-      <label> Suscripción vencida </label>
+      <label> {{ "core.expirationSuscribe" | translate }} </label>
     </span>
     <span>
       <p-colorPicker [(ngModel)]="colorPending"></p-colorPicker>
-      <label> Suscripción a punto de vencer</label>
+      <label> {{ "core.expirationSuscribeNear" | translate }}</label>
     </span>
   </div>
   <p-table
@@ -41,7 +41,7 @@
   >
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-        <h5 class="title-2 m-0">Personas Inscritas</h5>
+        <h5 class="title-2 m-0">{{ "core.suscribeUser" | translate }}</h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
@@ -101,7 +101,7 @@
         <button
           pButton
           pRipple
-          pTooltip="Gestionar Usuario"
+          pTooltip="{{ 'core.handleUser' | translate }}"
           tooltipPosition="top"
           icon="pi pi-cog"
           class="p-button-rounded p-button-warning"
@@ -110,7 +110,7 @@
         <button
           pButton
           pRipple
-          pTooltip="Eliminar Usuario"
+          pTooltip="{{ 'core.deleteUser' | translate }}"
           tooltipPosition="top"
           icon="pi pi-trash"
           class="p-button-rounded p-button-danger"

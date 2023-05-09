@@ -5,6 +5,7 @@ import { MenuItem } from 'primeng/api';
 import { LoadingService } from 'src/app/shared/component/loading/shared/loading.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Constants } from '../login/models/constant';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class RootComponent implements OnInit {
   items: MenuItem[] = [];
   itemsAdmin: MenuItem[] = [
     {
-      label: 'Usuarios',
+      label: this.translateService.instant('menu.users'),
       icon: 'pi pi-fw pi-user',
       command: () => {
         this.sidebar = false;
@@ -24,7 +25,7 @@ export class RootComponent implements OnInit {
       },
     },
     {
-      label: 'Asistencia',
+      label: this.translateService.instant('core.attendance'),
       icon: 'pi pi-fw pi-check-square',
       command: () => {
         this.sidebar = false;
@@ -32,7 +33,7 @@ export class RootComponent implements OnInit {
       },
     },
     {
-      label: 'Histórico Asistencia',
+      label: this.translateService.instant('menu.attendanceHistorical'),
       icon: 'pi pi-fw pi-folder-open',
       command: () => {
         this.sidebar = false;
@@ -40,7 +41,7 @@ export class RootComponent implements OnInit {
       },
     },
     {
-      label: 'Configurar clases',
+      label: this.translateService.instant('menu.wodConfiguration'),
       icon: 'pi pi-fw pi-cog',
       command: () => {
         this.sidebar = false;
@@ -48,7 +49,7 @@ export class RootComponent implements OnInit {
       },
     },
     {
-      label: 'Notificaciones',
+      label: this.translateService.instant('menu.notifications'),
       icon: 'pi pi-fw pi-comment',
       command: () => {
         this.sidebar = false;
@@ -64,7 +65,7 @@ export class RootComponent implements OnInit {
       },
     },*/
     {
-      label: 'Normas del centro',
+      label: this.translateService.instant('core.centerRules'),
       icon: 'pi pi-fw pi-list',
       command: () => {
         this.sidebar = false;
@@ -75,7 +76,7 @@ export class RootComponent implements OnInit {
 
   itemsUser: MenuItem[] = [
     {
-      label: 'Normas del centro',
+      label: this.translateService.instant('core.centerRules'),
       icon: 'pi pi-fw pi-book',
       command: () => {
         this.sidebar = false;
@@ -83,7 +84,7 @@ export class RootComponent implements OnInit {
       },
     },
     {
-      label: 'Mis Datos',
+      label: this.translateService.instant('menu.userInformation'),
       icon: 'pi pi-fw pi-user',
       command: () => {
         this.sidebar = false;
@@ -91,7 +92,7 @@ export class RootComponent implements OnInit {
       },
     },
     {
-      label: 'Reservar clases',
+      label: this.translateService.instant('menu.bookWod'),
       icon: 'pi pi-fw pi-check-square',
       command: () => {
         this.sidebar = false;
@@ -99,7 +100,7 @@ export class RootComponent implements OnInit {
       },
     },
     {
-      label: 'Asistencia Diaria',
+      label: this.translateService.instant('menu.attendance'),
       icon: 'pi pi-fw pi-check-square',
       command: () => {
         this.sidebar = false;
@@ -113,7 +114,8 @@ export class RootComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private translateService: TranslateService
   ) {
     this.user = this.authService.currentUser();
   }
@@ -134,7 +136,7 @@ export class RootComponent implements OnInit {
     const isAdmin = Constants.EmailAdmin.includes(email);
     this.items = isAdmin ? this.itemsAdmin : this.itemsUser;
     this.title = isAdmin
-      ? 'Panel de configuración'
-      : 'Gestiona tus clases y reservas';
+      ? this.translateService.instant('core.adminPanel')
+      : this.translateService.instant('core.userPanel');
   }
 }

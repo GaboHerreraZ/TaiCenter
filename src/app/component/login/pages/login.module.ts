@@ -6,6 +6,7 @@ import { PrimeModule } from 'src/app/shared/modules/prime/prime.module';
 import { RegisterDocComponent } from '../../register/pages/register-doc.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CustomCommonModule } from 'src/app/shared/modules/custom-common/custom-common.module';
+import { CustomTranslateModule } from 'src/app/shared/modules/translate/translate.module';
 
 const LoginRoutes: Routes = [
   {

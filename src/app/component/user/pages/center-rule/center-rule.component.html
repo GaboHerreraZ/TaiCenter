@@ -1,5 +1,5 @@
 <div class="container-reserve" *ngIf="rules.length > 0">
-  <h1>Normas del centro</h1>
+  <h1>{{ "core.centerRules" | translate }}</h1>
   <p-card>
     <div *ngFor="let rule of rules">
       <h3>{{ rule.title }}!!</h3>

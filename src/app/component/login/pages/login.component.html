@@ -12,7 +12,7 @@
                 type="email"
                 pInputText
               />
-              <label for="float-input">Email</label>
+              <label for="float-input">{{ "core.email" | translate }}</label>
             </span>
             <span class="p-float-label">
               <input
@@ -21,14 +21,16 @@
                 type="password"
                 pInputText
               />
-              <label for="float-input">Contraseña</label>
+              <label for="float-input">{{
+                "login.password" | translate
+              }}</label>
             </span>
             <button
               pButton
               pRipple
               type="button"
               class="p-button-rounded btn-h btn-primary"
-              label="Acceder"
+              label="{{ 'core.access' | translate }}"
               icon="pi pi-user"
               (click)="login()"
             ></button>
@@ -37,7 +39,7 @@
               pRipple
               type="button"
               class="p-button-rounded btn-h btn-secondary"
-              label="Registrarse"
+              label="{{ 'login.register' | translate }}"
               icon="pi pi-user-edit"
               (click)="registrarse()"
             ></button>

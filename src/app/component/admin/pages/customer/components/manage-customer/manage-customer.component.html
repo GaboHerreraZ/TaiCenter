@@ -11,7 +11,7 @@
         pInputText
         autocomplete="off"
       />
-      <label for="float-input">Nombre</label>
+      <label for="float-input">{{ "user.name" | translate }}</label>
     </span>
     <span class="p-float-label">
       <input
@@ -21,7 +21,7 @@
         pInputText
         autocomplete="off"
       />
-      <label for="float-input">Apellidos</label>
+      <label for="float-input">{{ "user.lastName" | translate }}</label>
     </span>
     <span class="p-float-label">
       <p-dropdown
@@ -30,7 +30,7 @@
         [options]="states"
         formControlName="state"
       ></p-dropdown>
-      <label for="float-input">Estado</label>
+      <label for="float-input">{{ "user.state" | translate }}</label>
     </span>
     <span class="p-float-label">
       <p-dropdown
@@ -39,24 +39,24 @@
         [options]="plans"
         formControlName="plan"
       ></p-dropdown>
-      <label for="float-input">Plan</label>
+      <label for="float-input">{{ "user.plan" | translate }}</label>
     </span>
     <span class="p-float-label">
       <input
         formControlName="wods"
-        id="email-input"
+        id="wod-input"
         type="text"
         pInputText
         autocomplete="off"
       />
-      <label for="float-input">Wods</label>
+      <label for="float-input">{{ "user.wod" | translate }}s</label>
     </span>
     <span class="p-float-label">
       <p-calendar
         formControlName="startDate"
         dateFormat="dd/mm/yy"
       ></p-calendar>
-      <label for="float-input">Fecha Inscripción</label>
+      <label for="float-input">{{ "core.suscriptionDate" | translate }}</label>
     </span>
     <span class="p-float-label">
       <p-calendar
@@ -64,7 +64,9 @@
         dateFormat="dd/mm/yy"
         [minDate]="minDate"
       ></p-calendar>
-      <label for="float-input">Fecha Vigencia</label>
+      <label for="float-input">{{
+        "core.suscriptionExpiration" | translate
+      }}</label>
     </span>
   </div>
   <div class="button-container">
@@ -73,7 +75,7 @@
       pRipple
       type="button"
       class="p-button-rounded btn-h btn-primary"
-      label="Actualizar"
+      label="{{ 'core.update' | translate }}"
       [disabled]="form.invalid"
       (click)="save()"
     ></button>

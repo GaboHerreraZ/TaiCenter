@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FooterModule } from '../footer/footer.module';
 import { CalendarDocModule } from 'src/app/shared/component/calendar/pages/calendar-doc/calendar.module';
 import { GalleryModule } from '../gallery/gallery.module';
+import { LangModule } from 'src/app/shared/component/lang/lang.module';
+import { CustomTranslateModule } from 'src/app/shared/modules/translate/translate.module';
 
 const routes: Routes = [
   {
@@ -18,7 +20,9 @@ const routes: Routes = [
   declarations: [HomeComponent],
   imports: [
     CommonModule,
+    CustomTranslateModule,
     PrimeModule,
+    LangModule,
     FooterModule,
     CalendarDocModule,
     GalleryModule,

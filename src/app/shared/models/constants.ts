@@ -21,7 +21,7 @@ export enum CenterPlan {
   Intermedio = 'Intermedio',
   Avanzado = 'Avanzado',
   Semanal = 'Semanal',
-  Quincenal = 'Quincenal',
+  Quincenal = '1/2 Mes',
   Bono = 'Bono',
 }
 
@@ -59,5 +59,76 @@ export const CenterWodsByPlan = [
   {
     plan: CenterPlan.Avanzado,
     wods: CenterPlanWods.Avanzado,
+  },
+];
+
+export const CalendarLangs = [
+  {
+    lang: 'es',
+    translation: {
+      dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+      monthNames: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ],
+      monthNamesShort: [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Abr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dic',
+      ],
+    },
+  },
+  {
+    lang: 'va',
+    translation: {
+      dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+      monthNames: [
+        'Enerillo',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ],
+      monthNamesShort: [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Abr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dic',
+      ],
+    },
   },
 ];

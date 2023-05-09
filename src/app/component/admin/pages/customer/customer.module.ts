@@ -7,6 +7,7 @@ import { CustomCommonModule } from 'src/app/shared/modules/custom-common/custom-
 import { ManageCustomerComponent } from './components/manage-customer/manage-customer.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
+import { CustomTranslateModule } from 'src/app/shared/modules/translate/translate.module';
 
 @NgModule({
   declarations: [CustomerComponent, ManageCustomerComponent],
@@ -14,6 +15,7 @@ import { ConfirmationService } from 'primeng/api';
     CommonModule,
     PrimeModule,
     CustomCommonModule,
+    CustomTranslateModule,
     RouterModule.forChild([{ path: '', component: CustomerComponent }]),
   ],
   providers: [DialogService, ConfirmationService],

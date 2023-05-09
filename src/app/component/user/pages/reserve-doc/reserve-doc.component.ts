@@ -18,6 +18,7 @@ import { UserWod } from '../../models/user.model';
 import { UserState, CenterPlan } from 'src/app/shared/models/constants';
 import { NotificationWodService } from 'src/app/shared/services/notification-wod.service';
 import { from, map, Subject, takeUntil } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reserve-doc',
@@ -39,7 +40,8 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
     private loadingService: LoadingService,
     private userWodService: UserService,
     private router: Router,
-    private notificationsWod: NotificationWodService
+    private notificationsWod: NotificationWodService,
+    private translateService: TranslateService
   ) {
     this.user = this.authService.currentUser();
   }
@@ -65,10 +67,13 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
     const wod = event.event;
     this.confirmationService.confirm({
       key: 'reserve-id',
-      message: Messages.ReserveConfirm.replace('{0}', wod.title).replace(
-        '{1}',
-        format(wod.start, 'dd MMMM yyyy hh:mm:00', { locale: es })
-      ),
+      message: this.translateService
+        .instant(`message.${Messages.ReserveConfirm}`)
+        .replace('{0}', wod.title)
+        .replace(
+          '{1}',
+          format(wod.start, 'dd MMMM yyyy hh:mm:00', { locale: es })
+        ),
       icon: 'pi pi-info-circle',
       header: 'Confirmación',
       accept: async () => {
@@ -81,7 +86,9 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
         if (existeWod.size > 0) {
           this.confirmationService.confirm({
             key: 'exist-id',
-            message: Messages.WodReservered,
+            message: this.translateService.instant(
+              `message.${Messages.WodReservered}`
+            ),
             icon: 'pi pi-info-circle',
             header: 'Wod Reservado',
           });
@@ -93,7 +100,9 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
         if (usersInWod.size === 12) {
           this.confirmationService.confirm({
             key: 'full-users-id',
-            message: Messages.WodFull,
+            message: this.translateService.instant(
+              `message.${Messages.WodFull}`
+            ),
             icon: 'pi pi-info-circle',
             header: 'Wod Completo',
           });
@@ -165,7 +174,9 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   private validateUser() {
     this.confirmationService.confirm({
       key: 'no-update-user-id',
-      message: Messages.UpdateDataUser,
+      message: this.translateService.instant(
+        `message.${Messages.UpdateDataUser}`
+      ),
       icon: 'pi pi-info-circle',
       header: 'Actualizar datos',
     });
@@ -174,7 +185,7 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   private pendingUser() {
     this.confirmationService.confirm({
       key: 'pending-user-id',
-      message: Messages.PendingUser,
+      message: this.translateService.instant(`message.${Messages.PendingUser}`),
       icon: 'pi pi-info-circle',
       header: 'Usuario pendiente por activar',
     });
@@ -183,7 +194,9 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   private inactiveUser() {
     this.confirmationService.confirm({
       key: 'pending-user-id',
-      message: Messages.InactiveUser,
+      message: this.translateService.instant(
+        `message.${Messages.InactiveUser}`
+      ),
       icon: 'pi pi-info-circle',
       header: 'Usuario pendiente por activar',
     });
@@ -192,7 +205,9 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   private remainingWodsZero() {
     this.confirmationService.confirm({
       key: 'pending-user-id',
-      message: Messages.RemainingWodsZero,
+      message: this.translateService.instant(
+        `message.${Messages.RemainingWodsZero}`
+      ),
       icon: 'pi pi-info-circle',
       header: 'Wods contratados completados',
     });
@@ -201,7 +216,9 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   private monthlyFinished() {
     this.confirmationService.confirm({
       key: 'pending-user-id',
-      message: Messages.monthlyFinished,
+      message: this.translateService.instant(
+        `message.${Messages.monthlyFinished}`
+      ),
       icon: 'pi pi-info-circle',
       header: 'Mensualidad Expirada',
     });
@@ -210,7 +227,7 @@ export class ReserveDocComponent implements OnInit, OnDestroy {
   private timeOut() {
     this.confirmationService.confirm({
       key: 'pending-user-id',
-      message: Messages.WodOut,
+      message: this.translateService.instant(`message.${Messages.WodOut}`),
       icon: 'pi pi-info-circle',
       header: 'Wod Cerrado',
     });

@@ -14,11 +14,7 @@ export class BreadcrumbComponent implements OnInit {
   items$: Observable<MenuItem[]>;
   readonly home = { icon: 'pi pi-home', url: '#/panel/persona' };
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private breadCrumbService: BreadcrumbService
-  ) {}
+  constructor(private breadCrumbService: BreadcrumbService) {}
 
   ngOnInit(): void {
     this.items$ = this.breadCrumbService

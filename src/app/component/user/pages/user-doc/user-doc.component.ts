@@ -24,6 +24,7 @@ import {
   TypeMessage,
 } from 'src/app/shared/models/constants';
 import { Subject, takeUntil } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user',
@@ -84,7 +85,8 @@ export class UserDocComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private confirmationService: ConfirmationService,
     private wodService: WodService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translateService: TranslateService
   ) {
     this.authId = this.authService.currentUser()?.uid || '';
     this.route.data.subscribe((data: any) => {
@@ -98,10 +100,13 @@ export class UserDocComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.formGroup = this.getForm();
     this.cols = [
-      { field: 'title', header: 'Wod' },
-      { field: 'start', header: 'Fecha' },
-      { field: 'attend', header: 'Asistió' },
-      { field: 'state', header: 'Estado' },
+      { field: 'title', header: this.translateService.instant('user.wod') },
+      { field: 'start', header: this.translateService.instant('user.date') },
+      {
+        field: 'attend',
+        header: this.translateService.instant('user.attended'),
+      },
+      { field: 'state', header: this.translateService.instant('user.state') },
     ];
 
     this.assignForm(this.userWod);
@@ -198,7 +203,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
       .then(() => {
         this.loading.end();
         this.notificationService.createMessage(TypeMessage.Success, [
-          Messages.UserData,
+          this.translateService.instant(`message.${Messages.UserData}`),
         ]);
         this.formGroup.controls['plan'].disable();
       })
@@ -214,7 +219,7 @@ export class UserDocComponent implements OnInit, OnDestroy {
       .then(() => {
         this.loading.end();
         this.notificationService.createMessage(TypeMessage.Success, [
-          Messages.UserData,
+          this.translateService.instant(`message.${Messages.UserData}`),
         ]);
       })
       .catch(() => {
@@ -225,9 +230,9 @@ export class UserDocComponent implements OnInit, OnDestroy {
   activar(row: UserDataWod) {
     this.confirmationService.confirm({
       key: 'activar-id',
-      message: Messages.ActivateWod,
+      message: this.translateService.instant(`message.${Messages.ActivateWod}`),
       icon: 'pi pi-info-circle',
-      header: 'Confirmación',
+      header: this.translateService.instant('core.confirmation'),
       accept: async () => {
         this.loading.start();
         row.state = WodState.Activa;
@@ -247,9 +252,9 @@ export class UserDocComponent implements OnInit, OnDestroy {
   cancel(row: UserDataWod) {
     this.confirmationService.confirm({
       key: 'cancel-id',
-      message: Messages.WodCanceled,
+      message: this.translateService.instant(`message.${Messages.WodCanceled}`),
       icon: 'pi pi-info-circle',
-      header: 'Confirmación',
+      header: this.translateService.instant('core.confirmation'),
       accept: async () => {
         this.loading.start();
         row.state = WodState.Cancelada;
@@ -314,13 +319,22 @@ export class UserDocComponent implements OnInit, OnDestroy {
 
   private buildDataChart() {
     const countTypeWods: number[] = [];
-    [Wods.Cross, Wods.Hiit, Wods.Gap, Wods.OpenCenter, Wods.Tabata].forEach(
-      (wodName) => {
-        const countWods =
-          this.wodsChart.filter((wod) => wod.title === wodName)?.length || 0;
-        countTypeWods.push(countWods);
-      }
-    );
+    [
+      Wods.Cross,
+      Wods.Hiit,
+      Wods.Gap,
+      Wods.OpenCenter,
+      Wods.Tabata,
+      Wods.Halterofilia,
+      Wods.Gymnastic,
+      Wods.Endurance,
+    ].forEach((wodName) => {
+      const countWods =
+        this.wodsChart.filter(
+          (wod) => wod.title === wodName && wod.attend === Attend.Si
+        )?.length || 0;
+      countTypeWods.push(countWods);
+    });
     this.dataWods = {
       ...this.dataWods,
       datasets: [{ ...this.dataWods.datasets[0], data: countTypeWods }],

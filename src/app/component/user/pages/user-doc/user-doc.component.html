@@ -3,7 +3,7 @@
     <button
       pButton
       pRipple
-      label="Aceptar"
+      label="{{ 'core.accept' | translate }}"
       class="p-button-rounded btn-h btn-primary"
       (click)="cd.accept()"
     ></button>
@@ -12,7 +12,7 @@
       pRipple
       type="button"
       class="p-button-rounded btn-h btn-secondary"
-      label="Cancelar"
+      label="{{ 'core.cancel' | translate }}"
       (click)="cd.reject()"
     ></button>
   </ng-template>
@@ -23,7 +23,7 @@
     <button
       pButton
       pRipple
-      label="Aceptar"
+      label="{{ 'core.accept' | translate }}"
       class="p-button-rounded btn-h btn-primary"
       (click)="activarWod.accept()"
     ></button>
@@ -32,36 +32,23 @@
       pRipple
       type="button"
       class="p-button-rounded btn-h btn-secondary"
-      label="Cancelar"
+      label="{{ 'core.cancel' | translate }}"
       (click)="activarWod.reject()"
     ></button>
   </ng-template>
 </p-confirmDialog>
 <div class="container-user">
-  <h5 class="hard-title s-25">Bienvenid@ {{ userName }}</h5>
+  <h5 class="hard-title s-25">
+    {{ "user.welcome" | translate }} {{ userName }}
+  </h5>
   <p-card>
     <p class="text-style-principal">
-      Mantén actualizada tu información, así podremos conocerte mejor
+      {{ "user.description" | translate }}
     </p>
     <div class="register-container">
-      <!--<div class="perfil">
-        <figure>
-          <img class="img-size" [src]="imageUrl" />
-        </figure>
-        <label class="perfil-label text-style-principal">
-          <input
-            type="file"
-            name="file"
-            #fileInput
-            (change)="myUploader(fileInput)"
-          />
-          Actualizar foto
-        </label>
-      </div>-->
       <form [formGroup]="formGroup">
-        <!-- <app-error-form [form]="formGroup"></app-error-form>-->
         <p-divider layout="horizontal">
-          <h4 class="title-2">Datos Personales</h4>
+          <h4 class="title-2">{{ "user.informationTitle" | translate }}</h4>
         </p-divider>
         <div class="form-personal">
           <span class="p-float-label">
@@ -73,7 +60,7 @@
               autocomplete="off"
               aria-describedby="name"
             />
-            <label for="name">Nombre</label>
+            <label for="name">{{ "user.name" | translate }}</label>
           </span>
           <span class="p-float-label">
             <input
@@ -83,7 +70,7 @@
               pInputText
               autocomplete="off"
             />
-            <label for="float-input">Apellidos</label>
+            <label for="float-input">{{ "user.lastName" | translate }}</label>
           </span>
           <span class="p-float-label">
             <input
@@ -93,7 +80,7 @@
               autocomplete="off"
               formControlName="age"
             />
-            <label for="float-input">Edad</label>
+            <label for="float-input">{{ "user.age" | translate }}</label>
           </span>
           <span class="p-float-label">
             <input
@@ -103,7 +90,7 @@
               pInputText
               autocomplete="off"
             />
-            <label for="float-input">Teléfono</label>
+            <label for="float-input">{{ "user.movil" | translate }}</label>
           </span>
           <span class="p-float-label">
             <p-dropdown
@@ -113,7 +100,7 @@
               optionLabel="name"
               formControlName="gender"
             ></p-dropdown>
-            <label for="dropdown">Género</label>
+            <label for="dropdown">{{ "user.gender" | translate }}</label>
           </span>
           <span class="p-float-label">
             <input
@@ -122,7 +109,7 @@
               type="text"
               pInputText
             />
-            <label for="float-input">Alias</label>
+            <label for="float-input">{{ "user.alias" | translate }}</label>
           </span>
           <span class="p-float-label">
             <p-dropdown
@@ -131,7 +118,7 @@
               [options]="plans"
               formControlName="plan"
             ></p-dropdown>
-            <label for="float-input">Plan</label>
+            <label for="float-input">{{ "user.plan" | translate }}</label>
           </span>
           <span class="p-float-label">
             <input
@@ -140,7 +127,7 @@
               type="number"
               pInputText
             />
-            <label for="float-input">Wods restantes</label>
+            <label for="float-input">{{ "user.leftWods" | translate }}</label>
           </span>
           <span class="p-float-label">
             <input
@@ -149,15 +136,13 @@
               type="text"
               pInputText
             />
-            <label for="float-input">Estado</label>
+            <label for="float-input">{{ "user.state" | translate }}</label>
           </span>
         </div>
         <div class="terms">
           <p-inputSwitch formControlName="terms"></p-inputSwitch>
           <h5 class="text-style-principal">
-            Autorizo a este centro a utilizar mi imagen en fotografías y videos
-            de las actividades realizadas, con fines publicitarios en medios
-            como redes sociales, carteles, buzoneo, televisión, etc.
+            {{ "user.authorize" | translate }}
           </h5>
         </div>
         <div class="form-button">
@@ -166,7 +151,7 @@
             pRipple
             type="button"
             class="p-button-rounded btn-h btn-primary"
-            label="Guardar"
+            label="{{ 'core.save' | translate }}"
             [disabled]="formGroup.invalid"
             (click)="saveUpdateUser()"
           ></button>
@@ -183,7 +168,7 @@
     >
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
-          <h5 class="title-2 m-0">Historial de wods reservados</h5>
+          <h5 class="title-2 m-0">{{ "user.attendanceRecord" | translate }}</h5>
         </div>
       </ng-template>
       <ng-template pTemplate="header" let-columns>
@@ -230,7 +215,7 @@
             <button
               pButton
               pRipple
-              pTooltip="Cancelar wod"
+              pTooltip="{{ 'core.cancel' | translate }} wod"
               icon="pi pi-times"
               *ngIf="rowData['state'] === 'Activa' && validateTimeWod(rowData)"
               class="p-button-rounded p-button-warning"
@@ -239,7 +224,7 @@
             <button
               pButton
               pRipple
-              pTooltip="Activar wod"
+              pTooltip="{{ 'core.activate' | translate }} wod"
               icon="pi pi-check"
               *ngIf="
                 rowData['state'] === 'Cancelada' && validateTimeWod(rowData)
@@ -252,10 +237,10 @@
       </ng-template>
     </p-table>
     <div class="statistics-container">
-      <h5 class="hard-title s-25">Histórico de Entrenamiento Último Mes</h5>
+      <h5 class="hard-title s-25">{{ "user.titleHistorical" | translate }}</h5>
       <div class="chart-container">
         <div class="chart">
-          <h5 class="hard-title">Wods del Mes</h5>
+          <h5 class="hard-title">{{ "user.wodTitleMonth" | translate }}</h5>
           <p-chart
             type="pie"
             [data]="dataWods"
@@ -265,7 +250,7 @@
           ></p-chart>
         </div>
         <div class="chart">
-          <h5 class="hard-title">Asistencias del Mes</h5>
+          <h5 class="hard-title">{{ "user.attendanceMonth" | translate }}</h5>
           <p-chart
             type="pie"
             [data]="dataAttend"
