@@ -130,7 +130,7 @@ export class WodService {
     const q = query(
       dbInstance,
       where('userId', '==', userId),
-      where('startDate', '>=', currentDay)
+      where('start', '>=', currentDay)
     );
     return getDocs(q);
   }
